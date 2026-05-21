@@ -1,356 +1,384 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MiMoDAO — AI-Powered DAO Governance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--accent:#6c5ce7;--accent2:#a29bfe;--text:#e2e2e2;--muted:#888;--green:#00b894;--red:#e17055;--yellow:#fdcb6e;--blue:#74b9ff;--radius:12px;--glow:0 0 20px rgba(108,92,231,0.15)}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-.container{max-width:1000px;margin:0 auto;padding:16px}
-.header{text-align:center;padding:40px 0 24px;position:relative}
-.header::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(108,92,231,0.08) 0%,transparent 70%);pointer-events:none}
-.logo{font-size:42px;margin-bottom:8px}
-.title{font-size:32px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
-.subtitle{color:var(--muted);font-size:14px}
-.badges{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
-.badge{background:var(--card);border:1px solid var(--border);padding:4px 12px;border-radius:20px;font-size:11px;color:var(--accent2);display:flex;align-items:center;gap:4px}
-.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green)}
-.tabs{display:flex;gap:4px;margin:24px 0 20px;background:var(--card);border-radius:var(--radius);padding:4px;border:1px solid var(--border)}
-.tab{flex:1;padding:10px 16px;border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s}
-.tab.active{background:var(--accent);color:#fff;box-shadow:var(--glow)}
-.tab:hover:not(.active){color:var(--text);background:rgba(108,92,231,0.1)}
-.panel{display:none}.panel.active{display:block}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;transition:border-color .2s}
-.card:hover{border-color:rgba(108,92,231,0.3)}
-.card-title{font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-select,input,textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:12px 16px;border-radius:8px;font-size:14px;font-family:inherit;transition:border-color .2s}
-select:focus,input:focus,textarea:focus{outline:none;border-color:var(--accent)}
-textarea{min-height:120px;resize:vertical;line-height:1.6}
-label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.btn{padding:12px 24px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
-.btn-primary{background:linear-gradient(135deg,var(--accent),#5a4bd1);color:#fff;box-shadow:var(--glow)}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(108,92,231,0.3)}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.btn-secondary{background:var(--bg);color:var(--text);border:1px solid var(--border)}
-.btn-secondary:hover{border-color:var(--accent)}
-.btn-sm{padding:8px 16px;font-size:12px}
-.proposal-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;cursor:pointer;transition:all .2s}
-.proposal-card:hover{border-color:var(--accent);transform:translateY(-1px)}
-.proposal-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.proposal-title{font-size:15px;font-weight:600;margin-bottom:6px}
-.proposal-meta{display:flex;gap:12px;flex-wrap:wrap}
-.proposal-meta span{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
-.status{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;text-transform:uppercase}
-.status-active{background:rgba(0,184,148,0.15);color:var(--green)}
-.status-closed{background:rgba(136,136,136,0.15);color:var(--muted)}
-.status-pending{background:rgba(253,203,110,0.15);color:var(--yellow)}
-.analysis-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:12px;line-height:1.7;font-size:14px}
-.analysis-section{margin-bottom:16px}
-.analysis-section:last-child{margin-bottom:0}
-.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--accent2);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.risk-meter{height:8px;background:var(--border);border-radius:4px;overflow:hidden;margin:8px 0}
-.risk-fill{height:100%;border-radius:4px;transition:width .5s}
+:root{
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --radius:16px;--radius-sm:10px;--radius-xs:8px;
+  --transition:all .3s cubic-bezier(.4,0,.2,1);
+  --shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+  --shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+  --shadow-xl:0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);
+}
+[data-theme="dark"]{
+  --bg:#09090b;--bg2:#18181b;--bg3:#27272a;
+  --card:#111113;--card-hover:#1a1a1f;
+  --border:#27272a;--border-hover:#3f3f46;
+  --text:#fafafa;--text2:#a1a1aa;--text3:#71717a;
+  --accent:#8b5cf6;--accent-hover:#7c3aed;--accent-glow:rgba(139,92,246,.15);--accent-text:#fff;
+  --green:#22c55e;--green-bg:rgba(34,197,94,.12);
+  --red:#ef4444;--red-bg:rgba(239,68,68,.12);
+  --yellow:#eab308;--yellow-bg:rgba(234,179,8,.12);
+  --blue:#3b82f6;--blue-bg:rgba(59,130,246,.12);
+  --purple:#a78bfa;--purple-bg:rgba(167,139,250,.12);
+  --surface:rgba(255,255,255,.03);
+  --glass:rgba(17,17,19,.8);
+  --input-bg:#09090b;
+}
+[data-theme="light"]{
+  --bg:#fafafa;--bg2:#f4f4f5;--bg3:#e4e4e7;
+  --card:#ffffff;--card-hover:#f8f8fa;
+  --border:#e4e4e7;--border-hover:#d4d4d8;
+  --text:#09090b;--text2:#52525b;--text3:#a1a1aa;
+  --accent:#7c3aed;--accent-hover:#6d28d9;--accent-glow:rgba(124,58,237,.1);--accent-text:#fff;
+  --green:#16a34a;--green-bg:rgba(22,163,74,.08);
+  --red:#dc2626;--red-bg:rgba(220,38,38,.08);
+  --yellow:#ca8a04;--yellow-bg:rgba(202,138,4,.08);
+  --blue:#2563eb;--blue-bg:rgba(37,99,235,.08);
+  --purple:#7c3aed;--purple-bg:rgba(124,58,237,.08);
+  --surface:rgba(0,0,0,.02);
+  --glass:rgba(255,255,255,.85);
+  --input-bg:#fff;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 10px 15px -3px rgba(0,0,0,.05),0 4px 6px -2px rgba(0,0,0,.03);
+  --shadow-xl:0 20px 25px -5px rgba(0,0,0,.06),0 10px 10px -5px rgba(0,0,0,.03);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Layout */
+.app{display:flex;flex-direction:column;min-height:100vh}
+.container{max-width:960px;margin:0 auto;padding:0 20px;width:100%}
+.main{flex:1;padding:20px 0 40px}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:var(--glass);border-bottom:1px solid var(--border);transition:var(--transition)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--text);white-space:nowrap}
+.nav-logo span{font-size:22px}
+.nav-actions{display:flex;align-items:center;gap:8px}
+
+/* Theme Toggle */
+.theme-btn{width:40px;height:40px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:var(--transition);flex-shrink:0}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+
+/* Hero */
+.hero{text-align:center;padding:48px 0 32px;position:relative}
+.hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;opacity:.6}
+.hero-icon{font-size:52px;margin-bottom:12px;display:block;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-size:clamp(28px,5vw,42px);font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:8px}
+.hero p{color:var(--text2);font-size:15px;max-width:500px;margin:0 auto}
+.hero-badges{display:flex;gap:8px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+.h-badge{background:var(--bg2);border:1px solid var(--border);padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:5px;transition:var(--transition)}
+.h-badge:hover{border-color:var(--accent);color:var(--accent)}
+.h-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+/* Tabs */
+.tabs-wrap{position:sticky;top:56px;z-index:40;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:var(--glass);padding:12px 0;border-bottom:1px solid var(--border);transition:var(--transition)}
+.tabs{display:flex;gap:4px;background:var(--bg2);border-radius:var(--radius-sm);padding:4px;border:1px solid var(--border)}
+.tab{flex:1;padding:10px 16px;border:none;background:transparent;color:var(--text3);font-size:13px;font-weight:600;border-radius:var(--radius-xs);cursor:pointer;transition:var(--transition);font-family:var(--font);white-space:nowrap}
+.tab.active{background:var(--accent);color:var(--accent-text);box-shadow:0 2px 8px var(--accent-glow)}
+.tab:hover:not(.active){color:var(--text);background:var(--surface)}
+
+/* Panel */
+.panel{display:none;animation:fadeUp .3s ease}
+.panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Card */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;transition:var(--transition);box-shadow:var(--shadow)}
+.card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-lg)}
+.card-title{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+
+/* Badge */
+.badge-free{background:var(--green-bg);color:var(--green);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.3px}
+
+/* Form */
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:12px;color:var(--text3);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+select,input[type="text"],textarea{width:100%;background:var(--input-bg);border:1px solid var(--border);color:var(--text);padding:12px 14px;border-radius:var(--radius-xs);font-size:14px;font-family:var(--font);transition:var(--transition);outline:none}
+select:hover,input[type="text"]:hover,textarea:hover{border-color:var(--border-hover)}
+select:focus,input[type="text"]:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+textarea{min-height:130px;resize:vertical;line-height:1.6}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2371717a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+
+/* Button */
+.btn{padding:11px 22px;border:none;border-radius:var(--radius-xs);font-size:14px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font);display:inline-flex;align-items:center;gap:6px;line-height:1}
+.btn-primary{background:var(--accent);color:var(--accent-text);box-shadow:0 2px 8px var(--accent-glow)}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 4px 16px var(--accent-glow)}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+.btn-sm{padding:8px 14px;font-size:12px}
+.btn-group{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+
+/* Proposal Card */
+.p-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow)}
+.p-card:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+.p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.p-title{font-size:14px;font-weight:600;margin-bottom:8px;line-height:1.4}
+.p-meta{display:flex;gap:14px;flex-wrap:wrap}
+.p-meta span{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:4px}
+
+/* Status */
+.status{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;flex-shrink:0}
+.s-active{background:var(--green-bg);color:var(--green)}
+.s-closed{background:var(--surface);color:var(--text3)}
+.s-pending{background:var(--yellow-bg);color:var(--yellow)}
+
+/* Vote Bar */
+.vbar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin:6px 0}
+.vfill{height:100%;border-radius:3px;transition:width .6s ease}
+.vfill-f{background:var(--green)}.vfill-a{background:var(--red)}.vfill-ab{background:var(--yellow)}
+.vstat{display:flex;justify-content:space-between;font-size:11px;color:var(--text3)}
+
+/* Analysis */
+.a-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;margin-top:14px;line-height:1.7;font-size:14px}
+.a-section{margin-bottom:16px}.a-section:last-child{margin-bottom:0}
+.a-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+
+/* Score Grid */
+.scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin:14px 0}
+.score{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-xs);padding:14px 10px;text-align:center;transition:var(--transition)}
+.score:hover{border-color:var(--accent)}
+.score-n{font-size:26px;font-weight:800;line-height:1;margin-bottom:4px}
+.score-l{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+
+/* Risk Meter */
+.risk-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin:8px 0}
+.risk-fill{height:100%;border-radius:4px;transition:width .5s ease}
 .risk-low{background:var(--green)}.risk-med{background:var(--yellow)}.risk-high{background:var(--red)}
-.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;margin:2px 4px 2px 0}
-.tag-green{background:rgba(0,184,148,0.15);color:var(--green)}
-.tag-red{background:rgba(225,112,85,0.15);color:var(--red)}
-.tag-yellow{background:rgba(253,203,110,0.15);color:var(--yellow)}
-.tag-blue{background:rgba(116,185,255,0.15);color:var(--blue)}
-.tag-purple{background:rgba(108,92,231,0.15);color:var(--accent2)}
-.dao-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
-.dao-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .2s}
-.dao-item:hover{border-color:var(--accent);transform:translateY(-1px)}
-.dao-name{font-size:15px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
-.dao-name img{width:24px;height:24px;border-radius:50%}
-.dao-members{font-size:12px;color:var(--muted)}
-.loading{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;padding:12px 0}
-.spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+
+/* Tags */
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.tag{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;transition:var(--transition)}
+.tag-green{background:var(--green-bg);color:var(--green)}
+.tag-red{background:var(--red-bg);color:var(--red)}
+.tag-yellow{background:var(--yellow-bg);color:var(--yellow)}
+.tag-blue{background:var(--blue-bg);color:var(--blue)}
+.tag-purple{background:var(--purple-bg);color:var(--purple)}
+
+/* DAO Grid */
+.dao-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.dao{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow);display:flex;align-items:center;gap:14px}
+.dao:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+.dao-img{width:40px;height:40px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;object-fit:cover}
+.dao-info{flex:1;min-width:0}
+.dao-name{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dao-stat{font-size:12px;color:var(--text3)}
+
+/* Loading */
+.loading{display:flex;align-items:center;gap:10px;color:var(--text3);font-size:13px;padding:20px 0;justify-content:center}
+.spinner{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.empty{text-align:center;padding:40px 20px;color:var(--muted)}
-.empty-icon{font-size:40px;margin-bottom:12px}
-.footer{text-align:center;padding:24px 0;color:var(--muted);font-size:11px}
-.footer a{color:var(--accent2);text-decoration:none}
-.toast{position:fixed;bottom:20px;right:20px;background:var(--accent);color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;transform:translateY(100px);opacity:0;transition:all .3s;z-index:100}
+
+/* Empty */
+.empty{text-align:center;padding:48px 20px;color:var(--text3)}
+.empty-icon{font-size:48px;margin-bottom:12px;opacity:.5}
+
+/* Writer Output */
+.w-out{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:16px;line-height:1.8;font-size:14px;white-space:pre-wrap}
+
+/* Footer */
+.footer{text-align:center;padding:32px 0;color:var(--text3);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
+.footer a{color:var(--accent)}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--accent);color:var(--accent-text);padding:12px 20px;border-radius:var(--radius-xs);font-size:13px;font-weight:600;transform:translateY(100px);opacity:0;transition:var(--transition);z-index:100;box-shadow:var(--shadow-xl)}
 .toast.show{transform:translateY(0);opacity:1}
-.vote-bar{height:8px;background:var(--bg);border-radius:4px;overflow:hidden;margin:8px 0}
-.vote-fill{height:100%;border-radius:4px;transition:width .5s}
-.vote-for{background:var(--green)}.vote-against{background:var(--red)}.vote-abs{background:var(--yellow)}
-.vote-stats{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
-.writer-output{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:16px;line-height:1.8;font-size:14px}
-.writer-output h2{color:var(--accent2);margin:16px 0 8px;font-size:16px;border-bottom:1px solid var(--border);padding-bottom:8px}
-.writer-output h2:first-child{margin-top:0}
-.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:12px 0}
-.score-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center}
-.score-num{font-size:24px;font-weight:700;margin-bottom:2px}
-.score-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-.free-tag{background:rgba(0,184,148,0.12);color:var(--green);font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;margin-left:8px;vertical-align:middle}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--text3)}
+
+/* Mobile */
+@media(max-width:640px){
+  .container{padding:0 14px}
+  .hero{padding:32px 0 24px}
+  .hero-icon{font-size:40px}
+  .tabs{flex-wrap:wrap}
+  .tab{font-size:12px;padding:8px 12px}
+  .scores{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+  .dao-grid{grid-template-columns:1fr}
+  .p-meta{gap:8px}
+  .nav-inner{height:50px}
+  .btn-group{flex-direction:column}
+  .btn-group .btn{width:100%;justify-content:center}
+}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <div class="logo">🏛️</div>
-    <h1 class="title">MiMoDAO</h1>
-    <p class="subtitle">AI-Powered DAO Governance Intelligence — 100% Free</p>
-    <div class="badges">
-      <span class="badge">No API Key</span>
-      <span class="badge">Zero Dependencies</span>
-      <span class="badge">100% Free</span>
-      <span class="badge">Single File</span>
-    </div>
-  </div>
-
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('analyzer')">🔍 Proposal Analyzer</button>
-    <button class="tab" onclick="switchTab('writer')">✍️ AI Writer</button>
-    <button class="tab" onclick="switchTab('explore')">🌐 DAO Explorer</button>
-  </div>
-
-  <!-- Analyzer -->
-  <div id="analyzer" class="panel active">
-    <div class="card">
-      <div class="card-title">🏛️ Select DAO <span class="free-tag">FREE</span></div>
-      <select id="daoSelect" onchange="loadProposals()">
-        <option value="">— Choose a DAO —</option>
-        <option value="ens.eth">ENS (Ethereum Name Service)</option>
-        <option value="uniswap">Uniswap</option>
-        <option value="aave.eth">Aave</option>
-        <option value="lido-snapshot.eth">Lido</option>
-        <option value="arbitrumfoundation.eth">Arbitrum</option>
-        <option value="opcollective.eth">Optimism</option>
-        <option value="gitcoindao.eth">Gitcoin</option>
-        <option value="safe.eth">Safe</option>
-        <option value="curve.eth">Curve</option>
-        <option value="makerdao.eth">MakerDAO</option>
-        <option value="dydxgov.eth">dYdX</option>
-        <option value="sushigov.eth">Sushi</option>
-        <option value="compound-governance.eth">Compound</option>
-        <option value="nouns.eth">Nouns</option>
-        <option value="morpho.eth">Morpho</option>
-      </select>
-    </div>
-    <div id="proposalsList"></div>
-    <div id="analysisResult"></div>
-  </div>
-
-  <!-- Writer -->
-  <div id="writer" class="panel">
-    <div class="card">
-      <div class="card-title">✍️ Describe Your Proposal Idea <span class="free-tag">FREE</span></div>
-      <label>DAO Name</label>
-      <input type="text" id="writerDao" placeholder="e.g. Uniswap, Aave, ENS..." style="margin-bottom:12px" />
-      <label>Your Idea (plain language)</label>
-      <textarea id="writerIdea" placeholder="e.g. I want to propose allocating 500K UNI from treasury for a developer grants program over 6 months, focusing on cross-chain bridges and new pool types."></textarea>
-      <label style="margin-top:12px">Proposal Type</label>
-      <select id="writerType" style="margin-bottom:12px">
-        <option value="general">General Governance</option>
-        <option value="treasury">Treasury / Funding</option>
-        <option value="technical">Technical Upgrade</option>
-        <option value="partnership">Partnership / Integration</option>
-        <parameter name="content"><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MiMoDAO — AI-Powered DAO Governance</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--accent:#6c5ce7;--accent2:#a29bfe;--text:#e2e2e2;--muted:#888;--green:#00b894;--red:#e17055;--yellow:#fdcb6e;--blue:#74b9ff;--radius:12px;--glow:0 0 20px rgba(108,92,231,0.15)}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-.container{max-width:1000px;margin:0 auto;padding:16px}
-.header{text-align:center;padding:40px 0 24px;position:relative}
-.header::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(108,92,231,0.08) 0%,transparent 70%);pointer-events:none}
-.logo{font-size:42px;margin-bottom:8px}
-.title{font-size:32px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
-.subtitle{color:var(--muted);font-size:14px}
-.badges{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
-.badge{background:var(--card);border:1px solid var(--border);padding:4px 12px;border-radius:20px;font-size:11px;color:var(--accent2);display:flex;align-items:center;gap:4px}
-.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green)}
-.tabs{display:flex;gap:4px;margin:24px 0 20px;background:var(--card);border-radius:var(--radius);padding:4px;border:1px solid var(--border)}
-.tab{flex:1;padding:10px 16px;border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s}
-.tab.active{background:var(--accent);color:#fff;box-shadow:var(--glow)}
-.tab:hover:not(.active){color:var(--text);background:rgba(108,92,231,0.1)}
-.panel{display:none}.panel.active{display:block}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;transition:border-color .2s}
-.card:hover{border-color:rgba(108,92,231,0.3)}
-.card-title{font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-select,input,textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:12px 16px;border-radius:8px;font-size:14px;font-family:inherit;transition:border-color .2s}
-select:focus,input:focus,textarea:focus{outline:none;border-color:var(--accent)}
-textarea{min-height:120px;resize:vertical;line-height:1.6}
-label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.btn{padding:12px 24px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
-.btn-primary{background:linear-gradient(135deg,var(--accent),#5a4bd1);color:#fff;box-shadow:var(--glow)}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(108,92,231,0.3)}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.btn-secondary{background:var(--bg);color:var(--text);border:1px solid var(--border)}
-.btn-secondary:hover{border-color:var(--accent)}
-.btn-sm{padding:8px 16px;font-size:12px}
-.proposal-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;cursor:pointer;transition:all .2s}
-.proposal-card:hover{border-color:var(--accent);transform:translateY(-1px)}
-.proposal-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.proposal-title{font-size:15px;font-weight:600;margin-bottom:6px}
-.proposal-meta{display:flex;gap:12px;flex-wrap:wrap}
-.proposal-meta span{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
-.status{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;text-transform:uppercase}
-.status-active{background:rgba(0,184,148,0.15);color:var(--green)}
-.status-closed{background:rgba(136,136,136,0.15);color:var(--muted)}
-.status-pending{background:rgba(253,203,110,0.15);color:var(--yellow)}
-.analysis-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:12px;line-height:1.7;font-size:14px}
-.analysis-section{margin-bottom:16px}.analysis-section:last-child{margin-bottom:0}
-.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--accent2);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.risk-meter{height:8px;background:var(--border);border-radius:4px;overflow:hidden;margin:8px 0}
-.risk-fill{height:100%;border-radius:4px;transition:width .5s}
-.risk-low{background:var(--green)}.risk-med{background:var(--yellow)}.risk-high{background:var(--red)}
-.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;margin:2px 4px 2px 0}
-.tag-green{background:rgba(0,184,148,0.15);color:var(--green)}
-.tag-red{background:rgba(225,112,85,0.15);color:var(--red)}
-.tag-yellow{background:rgba(253,203,110,0.15);color:var(--yellow)}
-.tag-blue{background:rgba(116,185,255,0.15);color:var(--blue)}
-.tag-purple{background:rgba(108,92,231,0.15);color:var(--accent2)}
-.dao-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
-.dao-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .2s}
-.dao-item:hover{border-color:var(--accent);transform:translateY(-1px)}
-.dao-name{font-size:15px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
-.dao-name img{width:24px;height:24px;border-radius:50%}
-.dao-members{font-size:12px;color:var(--muted)}
-.loading{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;padding:12px 0}
-.spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.empty{text-align:center;padding:40px 20px;color:var(--muted)}.empty-icon{font-size:40px;margin-bottom:12px}
-.footer{text-align:center;padding:24px 0;color:var(--muted);font-size:11px}.footer a{color:var(--accent2);text-decoration:none}
-.toast{position:fixed;bottom:20px;right:20px;background:var(--accent);color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;transform:translateY(100px);opacity:0;transition:all .3s;z-index:100}.toast.show{transform:translateY(0);opacity:1}
-.vote-bar{height:8px;background:var(--bg);border-radius:4px;overflow:hidden;margin:8px 0}
-.vote-fill{height:100%;border-radius:4px;transition:width .5s}
-.vote-for{background:var(--green)}.vote-against{background:var(--red)}.vote-abs{background:var(--yellow)}
-.vote-stats{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
-.writer-output{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:16px;line-height:1.8;font-size:14px;white-space:pre-wrap}
-.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:12px 0}
-.score-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center}
-.score-num{font-size:24px;font-weight:700;margin-bottom:2px}.score-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-.free-tag{background:rgba(0,184,148,0.12);color:var(--green);font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;margin-left:8px;vertical-align:middle}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-</style>
-</head>
-<body>
-<div class="container">
-  <div class="header">
-    <div class="logo">🏛️</div>
-    <h1 class="title">MiMoDAO</h1>
-    <p class="subtitle">AI-Powered DAO Governance Intelligence — 100% Free, No API Key</p>
-    <div class="badges">
-      <span class="badge">No API Key</span>
-      <span class="badge">Zero Dependencies</span>
-      <span class="badge">100% Free</span>
-      <span class="badge">Single File</span>
-    </div>
-  </div>
-
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('analyzer')">🔍 Proposal Analyzer</button>
-    <button class="tab" onclick="switchTab('writer')">✍️ AI Writer</button>
-    <button class="tab" onclick="switchTab('explore')">🌐 DAO Explorer</button>
-  </div>
-
-  <!-- Analyzer -->
-  <div id="analyzer" class="panel active">
-    <div class="card">
-      <div class="card-title">🏛️ Select DAO <span class="free-tag">FREE</span></div>
-      <select id="daoSelect" onchange="loadProposals()">
-        <option value="">— Choose a DAO —</option>
-        <option value="ens.eth">ENS (Ethereum Name Service)</option>
-        <option value="uniswap">Uniswap</option>
-        <option value="aave.eth">Aave</option>
-        <option value="lido-snapshot.eth">Lido</option>
-        <option value="arbitrumfoundation.eth">Arbitrum</option>
-        <option value="opcollective.eth">Optimism</option>
-        <option value="gitcoindao.eth">Gitcoin</option>
-        <option value="safe.eth">Safe</option>
-        <option value="curve.eth">Curve</option>
-        <option value="makerdao.eth">MakerDAO</option>
-        <option value="dydxgov.eth">dYdX</option>
-        <option value="sushigov.eth">Sushi</option>
-        <option value="compound-governance.eth">Compound</option>
-        <option value="nouns.eth">Nouns</option>
-        <option value="morpho.eth">Morpho</option>
-      </select>
-    </div>
-    <div id="proposalsList"></div>
-    <div id="analysisResult"></div>
-  </div>
-
-  <!-- Writer -->
-  <div id="writer" class="panel">
-    <div class="card">
-      <div class="card-title">✍️ Describe Your Proposal Idea <span class="free-tag">FREE</span></div>
-      <label>DAO Name</label>
-      <input type="text" id="writerDao" placeholder="e.g. Uniswap, Aave, ENS..." style="margin-bottom:12px" />
-      <label>Your Idea (plain language)</label>
-      <textarea id="writerIdea" placeholder="e.g. I want to propose allocating 500K UNI from treasury for a developer grants program over 6 months, focusing on cross-chain bridges and new pool types."></textarea>
-      <label style="margin-top:12px">Proposal Type</label>
-      <select id="writerType" style="margin-bottom:12px">
-        <option value="general">General Governance</option>
-        <option value="treasury">Treasury / Funding</option>
-        <option value="technical">Technical Upgrade</option>
-        <option value="partnership">Partnership / Integration</option>
-        <option value="parameter">Parameter Change</option>
-      </select>
-      <div style="display:flex;gap:8px;margin-top:12px">
-        <button class="btn btn-primary" onclick="generateProposal()">📄 Generate Proposal</button>
-        <button class="btn btn-secondary" onclick="clearWriter()">Clear</button>
+<div class="app">
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="nav-logo"><span>🏛️</span> MiMoDAO</div>
+      <div class="nav-actions">
+        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button>
       </div>
     </div>
-    <div id="writerOutput"></div>
-  </div>
+  </nav>
 
-  <!-- Explorer -->
-  <div id="explore" class="panel">
-    <div class="card">
-      <div class="card-title">🌐 Top DAOs on Snapshot <span class="free-tag">FREE</span></div>
-      <p style="font-size:13px;color:var(--muted)">Click a DAO to analyze its latest proposals</p>
-    </div>
-    <div id="daoGrid" class="dao-grid">
-      <div class="loading"><div class="spinner"></div> Loading DAOs...</div>
-    </div>
-  </div>
+  <main class="main">
+    <div class="container">
+      <!-- Hero -->
+      <div class="hero">
+        <span class="hero-icon">🏛️</span>
+        <h1>MiMoDAO</h1>
+        <p>AI-Powered DAO Governance Intelligence — Analyze proposals, generate governance documents, explore top DAOs.</p>
+        <div class="hero-badges">
+          <span class="h-badge"><span class="dot"></span> No API Key</span>
+          <span class="h-badge"><span class="dot"></span> 100% Free</span>
+          <span class="h-badge">Zero Dependencies</span>
+          <span class="h-badge">Single File</span>
+        </div>
+      </div>
 
-  <div class="footer">
-    Built with 🧠 AI Intelligence &nbsp;|&nbsp; <a href="https://snapshot.org" target="_blank">Snapshot</a> &nbsp;|&nbsp; <a href="https://github.com/huolinger010/mimodao" target="_blank">GitHub</a>
-  </div>
+      <!-- Tabs -->
+      <div class="tabs-wrap">
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'analyzer')">🔍 Proposal Analyzer</button>
+          <button class="tab" onclick="switchTab(this,'writer')">✍️ AI Writer</button>
+          <button class="tab" onclick="switchTab(this,'explore')">🌐 DAO Explorer</button>
+        </div>
+      </div>
+
+      <!-- Analyzer Panel -->
+      <div id="analyzer" class="panel active">
+        <div class="card">
+          <div class="card-title">🏛️ Select DAO <span class="badge-free">FREE</span></div>
+          <div class="form-group">
+            <select id="daoSelect" onchange="loadProposals()">
+              <option value="">— Choose a DAO —</option>
+              <option value="ens.eth">ENS (Ethereum Name Service)</option>
+              <option value="uniswap">Uniswap</option>
+              <option value="aave.eth">Aave</option>
+              <option value="lido-snapshot.eth">Lido</option>
+              <option value="arbitrumfoundation.eth">Arbitrum</option>
+              <option value="opcollective.eth">Optimism</option>
+              <option value="gitcoindao.eth">Gitcoin</option>
+              <option value="safe.eth">Safe</option>
+              <option value="curve.eth">Curve</option>
+              <option value="makerdao.eth">MakerDAO</option>
+              <option value="dydxgov.eth">dYdX</option>
+              <option value="sushigov.eth">Sushi</option>
+              <option value="compound-governance.eth">Compound</option>
+              <option value="nouns.eth">Nouns</option>
+              <option value="morpho.eth">Morpho</option>
+            </select>
+          </div>
+        </div>
+        <div id="proposalsList"></div>
+        <div id="analysisResult"></div>
+      </div>
+
+      <!-- Writer Panel -->
+      <div id="writer" class="panel">
+        <div class="card">
+          <div class="card-title">✍️ Generate a DAO Proposal <span class="badge-free">FREE</span></div>
+          <div class="form-group">
+            <label class="form-label">DAO Name</label>
+            <input type="text" id="writerDao" placeholder="e.g. Uniswap, Aave, ENS..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Idea (plain language)</label>
+            <textarea id="writerIdea" placeholder="e.g. Allocate 500K UNI from treasury for developer grants over 6 months, focusing on cross-chain bridges and new pool types."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Proposal Type</label>
+            <select id="writerType">
+              <option value="general">General Governance</option>
+              <option value="treasury">Treasury / Funding</option>
+              <option value="technical">Technical Upgrade</option>
+              <option value="partnership">Partnership / Integration</option>
+              <option value="parameter">Parameter Change</option>
+            </select>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="generateProposal()">📄 Generate Proposal</button>
+            <button class="btn btn-ghost" onclick="clearWriter()">Clear</button>
+          </div>
+        </div>
+        <div id="writerOutput"></div>
+      </div>
+
+      <!-- Explorer Panel -->
+      <div id="explore" class="panel">
+        <div class="card">
+          <div class="card-title">🌐 Top DAOs on Snapshot <span class="badge-free">FREE</span></div>
+          <p style="font-size:13px;color:var(--text2)">Click a DAO to analyze its latest proposals</p>
+        </div>
+        <div id="daoGrid" class="dao-grid">
+          <div class="loading"><div class="spinner"></div> Loading DAOs...</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      Built with 🧠 AI Intelligence &nbsp;·&nbsp; <a href="https://snapshot.org" target="_blank">Snapshot</a> &nbsp;·&nbsp; <a href="https://github.com/huolinger010/mimodao" target="_blank">GitHub</a> &nbsp;·&nbsp; © 2026 MiMoDAO
+    </div>
+  </footer>
 </div>
+
 <div id="toast" class="toast"></div>
 
 <script>
-const SNAPSHOT = 'https://hub.snapshot.org/graphql';
+const SNAPSHOT='https://hub.snapshot.org/graphql';
+
+// ─── Theme ───
+function toggleTheme(){
+  const html=document.documentElement;
+  const cur=html.getAttribute('data-theme');
+  const next=cur==='dark'?'light':'dark';
+  html.setAttribute('data-theme',next);
+  localStorage.setItem('mimo-theme',next);
+  document.getElementById('themeBtn').textContent=next==='dark'?'🌙':'☀️';
+}
+(function(){
+  const t=localStorage.getItem('mimo-theme')||'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('themeBtn').textContent=t==='dark'?'🌙':'☀️';
+})();
 
 // ─── Toast ───
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
 
 // ─── Tabs ───
-function switchTab(n){
+function switchTab(el,name){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById(n).classList.add('active');
-  if(n==='explore')loadTopDAOs();
+  el.classList.add('active');
+  document.getElementById(name).classList.add('active');
+  if(name==='explore')loadTopDAOs();
 }
-function switchTabDirect(n){
+function switchTabDirect(name){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>{if(t.textContent.toLowerCase().includes(n==='analyzer'?'proposal':n==='writer'?'writer':'dao'))t.classList.add('active')});
-  document.getElementById(n).classList.add('active');
+  const tabs=document.querySelectorAll('.tab');
+  const map={analyzer:0,writer:1,explore:2};
+  tabs[map[name]].classList.add('active');
+  document.getElementById(name).classList.add('active');
 }
 
-// ─── Snapshot API ───
+// ─── API ───
 async function gql(q,v={}){
   const r=await fetch(SNAPSHOT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q,variables:v})});
-  const d=await r.json();return d.data;
+  return(await r.json()).data;
 }
-function esc(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''}
+function esc(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):''}
 
-// ─── Load Proposals ───
+// ─── Proposals ───
 async function loadProposals(){
   const space=document.getElementById('daoSelect').value;
   if(!space)return;
@@ -361,283 +389,128 @@ async function loadProposals(){
     const d=await gql(`query($s:String!){proposals(first:10,space:$s,orderBy:"created",orderDirection:desc){id title body state created end choices scores scores_total author link}}`,{s:space});
     if(!d.proposals||!d.proposals.length){list.innerHTML='<div class="empty"><div class="empty-icon">📭</div>No proposals found</div>';return}
     list.innerHTML=d.proposals.map(p=>{
-      const sc=p.state==='active'?'status-active':p.state==='pending'?'status-pending':'status-closed';
+      const sc=p.state==='active'?'s-active':p.state==='pending'?'s-pending':'s-closed';
       const dt=new Date(p.created*1000).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
       const end=new Date(p.end*1000).toLocaleDateString('en-US',{month:'short',day:'numeric'});
       const tv=p.scores_total||0;
-      return`<div class="proposal-card" onclick='analyzeProposal(${JSON.stringify({...p,body:(p.body||"").slice(0,3000)}).replace(/'/g,"&#39;")})'>
-        <div class="proposal-header"><div style="flex:1"><div class="proposal-title">${esc(p.title)}</div>
-        <div class="proposal-meta"><span>📅 ${dt}</span><span>⏰ ${end}</span><span>🗳️ ${tv.toLocaleString()} votes</span><span>👤 ${p.author?p.author.slice(0,6)+'...'+p.author.slice(-4):'—'}</span></div></div>
-        <span class="status ${sc}">${p.state}</span></div>
-        ${tv?renderBars(p.choices,p.scores,tv):''}</div>`;
+      const pData=JSON.stringify({...p,body:(p.body||'').slice(0,3000)}).replace(/'/g,'&#39;');
+      return`<div class="p-card" onclick='analyzeProposal(${pData})'><div class="p-head"><div style="flex:1;min-width:0"><div class="p-title">${esc(p.title)}</div><div class="p-meta"><span>📅 ${dt}</span><span>⏰ Ends ${end}</span><span>🗳️ ${tv.toLocaleString()} votes</span><span>👤 ${p.author?p.author.slice(0,6)+'…'+p.author.slice(-4):'—'}</span></div></div><span class="status ${sc}">${p.state}</span></div>${tv?renderBars(p.choices,p.scores,tv):''}</div>`;
     }).join('');
   }catch(e){list.innerHTML=`<div class="empty">⚠️ ${esc(e.message)}</div>`}
 }
 
 function renderBars(ch,scores,tot){
   if(!tot)return '';
-  const top=ch.map((c,i)=>({n:c,s:scores[i]||0})).sort((a,b)=>b.s-a.s).slice(0,3);
-  return top.map(v=>{const p=((v.s/tot)*100).toFixed(1);
-    return`<div class="vote-bar"><div class="vote-fill vote-for" style="width:${p}%"></div></div><div class="vote-stats"><span>${esc(v.n)}</span><span>${p}%</span></div>`}).join('');
+  return ch.map((c,i)=>({n:c,s:scores[i]||0})).sort((a,b)=>b.s-a.s).slice(0,3).map(v=>{
+    const p=((v.s/tot)*100).toFixed(1);
+    return`<div class="vbar"><div class="vfill vfill-f" style="width:${p}%"></div></div><div class="vstat"><span>${esc(v.n)}</span><span>${p}%</span></div>`;
+  }).join('');
 }
 
-// ─── Smart Analysis (NO API KEY) ───
+// ─── Analysis ───
 function analyzeProposal(p){
   const r=document.getElementById('analysisResult');
   r.innerHTML='<div class="card"><div class="loading"><div class="spinner"></div> Analyzing...</div></div>';
   setTimeout(()=>{
     const body=p.body||'';
     const text=(p.title+' '+body).toLowerCase();
-    const analysis=smartAnalyze(p,body,text);
-    r.innerHTML=`<div class="card">
-      <div class="card-title">🧠 Analysis: ${esc(p.title)}</div>
-      ${renderScores(analysis.scores)}
-      ${renderRisk(analysis.risk)}
-      ${renderTags(analysis.tags)}
-      <div class="analysis-box">${analysis.insight}</div>
-      <div style="margin-top:12px;display:flex;gap:8px">
-        <button class="btn btn-sm btn-secondary" onclick="copyAnalysis()">📋 Copy</button>
-        <button class="btn btn-sm btn-secondary" onclick="document.getElementById('analysisResult').innerHTML=''">✕ Close</button>
-      </div>
+    const a=smartAnalyze(p,body,text);
+    r.innerHTML=`<div class="card"><div class="card-title">🧠 Analysis: ${esc(p.title)}</div>
+      <div class="scores">${Object.entries(a.scores).map(([k,v])=>{const l={complexity:'Complexity',financial:'Financial',security:'Security',governance:'Governance',technical:'Technical',urgency:'Urgency',sentiment:'Sentiment'}[k];const c=v>70?'var(--red)':v>40?'var(--yellow)':'var(--green)';return`<div class="score"><div class="score-n" style="color:${c}">${v}</div><div class="score-l">${l}</div></div>`}).join('')}</div>
+      <div class="a-section"><div class="a-label">⚠️ Risk: ${a.risk.level.toUpperCase()}</div><div class="risk-bar"><div class="risk-fill risk-${a.risk.level}" style="width:${a.risk.pct}%"></div></div><div style="font-size:12px;color:var(--text3)">${a.risk.pct}/100</div></div>
+      ${a.tags.length?`<div class="tags">${a.tags.map(t=>`<span class="tag tag-${t.c}">${t.t}</span>`).join('')}</div>`:''}
+      <div class="a-box">${a.insight}</div>
+      <div class="btn-group"><button class="btn btn-sm btn-ghost" onclick="copyBox('#analysisResult .a-box')">📋 Copy</button><button class="btn btn-sm btn-ghost" onclick="document.getElementById('analysisResult').innerHTML=''">✕ Close</button></div>
     </div>`;
   },300);
 }
 
 function smartAnalyze(p,body,text){
-  const scores={};
-  const tags=[];
-  let risk=0;
-  // Complexity
+  const scores={};const tags=[];let risk=0;
   const wc=body.split(/\s+/).length;
   scores.complexity=wc>800?90:wc>400?70:wc>200?50:30;
-  // Financial impact
   const hasMoney=/\b(treasury|fund|allocat|grant|budget|usd|eth|uni|token|million|thousand|spend|payment|compensat)\b/i.test(body);
-  scores.financial=hasMoney?85:20;
-  if(hasMoney)tags.push({t:'Treasury Impact',c:'yellow'});
-  // Security
+  scores.financial=hasMoney?85:20;if(hasMoney)tags.push({t:'Treasury Impact',c:'yellow'});
   const hasSec=/\b(security|audit|vuln|exploit|hack|risk|safe|protect|multisig|timelock)\b/i.test(text);
-  scores.security=hasSec?80:15;
-  if(hasSec)tags.push({t:'Security Related',c:'red'});risk+=hasSec?20:0;
-  // Governance
-  const hasGov=/\b(vote|quorum|governance|delegate|council|committee|constitutional)\b/i.test(text);
-  scores.governance=hasGov?75:25;
-  if(hasGov)tags.push({t:'Governance',c:'purple'});
-  // Technical
-  const hasTech=/\b(contract|upgrade|deploy|migration|parameter|threshold|implementation)\b/i.test(text);
-  scores.technical=hasTech?80:20;
-  if(hasTech)tags.push({t:'Technical Change',c:'blue'});
-  // Urgency
-  const hasUrg=/\b(urgent|emergency|immediate|critical|asap|time.sensitive)\b/i.test(text);
-  scores.urgency=hasUrg?90:20;
-  if(hasUrg)tags.push({t:'Urgent',c:'red'});risk+=hasUrg?15:0;
-  // Sentiment
-  const pos=(text.match(/\b(improve|enhance|grow|benefit|increase|strengthen|support|positive|success)\b/g)||[]).length;
-  const neg=(text.match(/\b(risk|concern|problem|issue|fail|loss|threat|vulnerability|decrease)\b/g)||[]).length;
+  scores.security=hasSec?80:15;if(hasSec)tags.push({t:'Security',c:'red'});risk+=hasSec?20:0;
+  const hasGov=/\b(vote|quorum|governance|delegate|council|committee)\b/i.test(text);
+  scores.governance=hasGov?75:25;if(hasGov)tags.push({t:'Governance',c:'purple'});
+  const hasTech=/\b(contract|upgrade|deploy|migration|parameter|threshold)\b/i.test(text);
+  scores.technical=hasTech?80:20;if(hasTech)tags.push({t:'Technical',c:'blue'});
+  const hasUrg=/\b(urgent|emergency|immediate|critical|asap)\b/i.test(text);
+  scores.urgency=hasUrg?90:20;if(hasUrg)tags.push({t:'Urgent',c:'red'});risk+=hasUrg?15:0;
+  const pos=(text.match(/\b(improve|enhance|grow|benefit|increase|strengthen|support|success)\b/g)||[]).length;
+  const neg=(text.match(/\b(risk|concern|problem|issue|fail|loss|threat|vulnerability)\b/g)||[]).length;
   scores.sentiment=Math.min(100,Math.max(0,50+(pos-neg)*10));
-  // Risk
-  risk+=scores.financial>60?15:0;
-  risk+=scores.technical>60?10:0;
-  const riskPct=Math.min(100,risk);
-  const riskLvl=riskPct>60?'high':riskPct>30?'med':'low';
-  // State tags
-  if(p.state==='active')tags.push({t:'Active Voting',c:'green'});
-  if(p.state==='closed')tags.push({t:'Closed',c:'muted'});
-  // Participation
-  const tv=p.scores_total||0;
-  if(tv>10000)tags.push({t:'High Participation',c:'green'});
-  // Build insight
-  let insight='';
-  // Summary
-  const sentences=body.split(/[.!?]+/).filter(s=>s.trim().length>20).slice(0,3);
-  insight+=`📋 SUMMARY\n${sentences.length?sentences.join('. ')+'.':'No detailed description provided.'}\n\n`;
-  // Key metrics
-  insight+=`📊 KEY METRICS\n• Total votes: ${tv.toLocaleString()}\n• Choices: ${(p.choices||[]).join(', ')}\n• Voting period: ${new Date(p.created*1000).toLocaleDateString()} → ${new Date(p.end*1000).toLocaleDateString()}\n\n`;
-  // Scores breakdown
-  insight+=`📈 ANALYSIS SCORES\n`;
-  for(const[k,v]of Object.entries(scores)){
-    const label={complexity:'Complexity',financial:'Financial Impact',security:'Security',governance:'Governance',technical:'Technical',urgency:'Urgency',sentiment:'Sentiment'}[k];
-    const bar='█'.repeat(Math.round(v/10))+'░'.repeat(10-Math.round(v/10));
-    insight+=`• ${label}: ${bar} ${v}/100\n`;
-  }
-  insight+='\n';
-  // Risk
-  insight+=`⚠️ RISK ASSESSMENT: ${riskLvl.toUpperCase()} (${riskPct}/100)\n`;
-  if(riskPct>60) insight+='This proposal carries significant risk. Careful review of implementation details and potential failure modes is recommended.\n\n';
-  else if(riskPct>30) insight+='Moderate risk level. Standard due diligence recommended before voting.\n\n';
-  else insight+='Low risk profile. This proposal appears straightforward with minimal downside.\n\n';
-  // Recommendation
-  insight+='💡 RECOMMENDATION\n';
-  const overall=(scores.sentiment+scores.governance+scores.financial)/3;
-  if(p.state==='closed'){
-    insight+='This proposal has already been decided. Review the results above for historical context.';
-  }else if(overall>65&&riskPct<40){
-    insight+='🟢 FAVORABLE — This proposal shows positive indicators with manageable risk. Consider voting FOR.';
-  }else if(riskPct>60||scores.sentiment<30){
-    insight+='🔴 CAUTION — Elevated risk or negative sentiment detected. Review carefully before voting.';
-  }else{
-    insight+='🟡 NEUTRAL — Mixed signals. Review the specific details and your position within the DAO before deciding.';
-  }
-  return{scores,risk:{level:riskLvl,pct:riskPct},tags,insight};
+  risk+=scores.financial>60?15:0;risk+=scores.technical>60?10:0;
+  const rp=Math.min(100,risk);const rl=rp>60?'high':rp>30?'med':'low';
+  if(p.state==='active')tags.push({t:'Active',c:'green'});
+  if((p.scores_total||0)>10000)tags.push({t:'High Participation',c:'green'});
+  let ins='';
+  const sents=body.split(/[.!?]+/).filter(s=>s.trim().length>20).slice(0,3);
+  ins+=`📋 <strong style="color:var(--accent)">Summary</strong>\n${sents.length?sents.join('. ')+'.':'No detailed description provided.'}\n\n`;
+  ins+=`📊 <strong style="color:var(--accent)">Key Metrics</strong>\n• Total votes: ${(p.scores_total||0).toLocaleString()}\n• Choices: ${(p.choices||[]).join(', ')}\n• Period: ${new Date(p.created*1000).toLocaleDateString()} → ${new Date(p.end*1000).toLocaleDateString()}\n\n`;
+  ins+=`📈 <strong style="color:var(--accent)">Score Breakdown</strong>\n`;
+  for(const[k,v]of Object.entries(scores)){const l={complexity:'Complexity',financial:'Financial',security:'Security',governance:'Governance',technical:'Technical',urgency:'Urgency',sentiment:'Sentiment'}[k];const bar='█'.repeat(Math.round(v/10))+'░'.repeat(10-Math.round(v/10));ins+=`• ${l}: ${bar} ${v}/100\n`}
+  ins+=`\n⚠️ <strong style="color:var(--accent)">Risk Assessment</strong>: ${rl.toUpperCase()} (${rp}/100)\n`;
+  if(rp>60)ins+='Significant risk. Careful review recommended.\n\n';
+  else if(rp>30)ins+='Moderate risk. Standard due diligence.\n\n';
+  else ins+='Low risk. Straightforward proposal.\n\n';
+  ins+=`💡 <strong style="color:var(--accent)">Recommendation</strong>\n`;
+  const ov=(scores.sentiment+scores.governance+scores.financial)/3;
+  if(p.state==='closed')ins+='Already decided. Review results for context.';
+  else if(ov>65&&rp<40)ins+='🟢 FAVORABLE — Positive indicators, manageable risk. Consider voting FOR.';
+  else if(rp>60||scores.sentiment<30)ins+='🔴 CAUTION — Elevated risk or negative sentiment. Review carefully.';
+  else ins+='🟡 NEUTRAL — Mixed signals. Review details before deciding.';
+  return{scores,risk:{level:rl,pct:rp},tags,insight:ins};
 }
 
-function renderScores(scores){
-  return`<div class="score-grid">${Object.entries(scores).map(([k,v])=>{
-    const label={complexity:'Complexity',financial:'Financial',security:'Security',governance:'Governance',technical:'Technical',urgency:'Urgency',sentiment:'Sentiment'}[k]||k;
-    const color=v>70?'var(--red)':v>40?'var(--yellow)':'var(--green)';
-    return`<div class="score-item"><div class="score-num" style="color:${color}">${v}</div><div class="score-label">${label}</div></div>`;
-  }).join('')}</div>`;
-}
-function renderRisk(r){
-  return`<div class="analysis-section"><div class="section-label">⚠️ Risk Level: ${r.level.toUpperCase()}</div><div class="risk-meter"><div class="risk-fill risk-${r.level}" style="width:${r.pct}%"></div></div><div style="font-size:12px;color:var(--muted)">${r.pct}/100</div></div>`;
-}
-function renderTags(tags){
-  if(!tags.length)return'';
-  return`<div style="margin:12px 0">${tags.map(t=>`<span class="tag tag-${t.c==='muted'?'yellow':t.c}">${t.t}</span>`).join('')}</div>`;
-}
-
-// ─── Writer (NO API KEY) ───
+// ─── Writer ───
 function generateProposal(){
   const dao=document.getElementById('writerDao').value.trim();
   const idea=document.getElementById('writerIdea').value.trim();
   const type=document.getElementById('writerType').value;
-  if(!dao||!idea){toast('Please fill in DAO name and idea');return}
+  if(!dao||!idea){toast('Fill in DAO name and idea');return}
   const out=document.getElementById('writerOutput');
-  out.innerHTML='<div class="card"><div class="loading"><div class="spinner"></div> Generating proposal...</div></div>';
-  setTimeout(()=>{
-    const proposal=buildProposal(dao,idea,type);
-    out.innerHTML=`<div class="card"><div class="card-title">📄 Generated Proposal</div><div class="writer-output">${proposal}</div><div style="margin-top:12px;display:flex;gap:8px"><button class="btn btn-sm btn-primary" onclick="copyWriter()">📋 Copy</button><button class="btn btn-sm btn-secondary" onclick="clearWriter()">✕ Clear</button></div></div>`;
-  },400);
+  out.innerHTML='<div class="card"><div class="loading"><div class="spinner"></div> Generating...</div></div>';
+  setTimeout(()=>{out.innerHTML=`<div class="card"><div class="card-title">📄 Generated Proposal</div><div class="w-out">${buildProposal(dao,idea,type)}</div><div class="btn-group"><button class="btn btn-sm btn-primary" onclick="copyBox('#writerOutput .w-out')">📋 Copy</button><button class="btn btn-sm btn-ghost" onclick="clearWriter()">✕ Clear</button></div></div>`},400);
 }
 
 function buildProposal(dao,idea,type){
-  const title=extractTitle(idea,type);
+  const tl={general:'General Governance',treasury:'Treasury / Funding',technical:'Technical Upgrade',partnership:'Partnership / Integration',parameter:'Parameter Change'};
+  const words=idea.split(/\s+/).slice(0,10).join(' ');
+  const prefix={general:'Proposal:',treasury:'Funding:',technical:'Technical:',partnership:'Partnership:',parameter:'Parameter Change:'}[type];
   const now=new Date().toISOString().split('T')[0];
-  let p=`# ${title}\n\n`;
-  p+=`**DAO:** ${dao}\n`;
-  p+=`**Type:** ${typeLabels[type]}\n`;
-  p+=`**Date:** ${now}\n`;
-  p+=`**Status:** Draft\n\n`;
-  p+=`---\n\n`;
-  p+=`## Summary\n\n${buildSummary(idea)}\n\n`;
-  p+=`## Motivation\n\n${buildMotivation(idea,type)}\n\n`;
-  p+=`## Specification\n\n${buildSpec(idea,type)}\n\n`;
-  if(type==='treasury') p+=`## Budget\n\n${buildBudget(idea)}\n\n`;
-  p+=`## Timeline\n\n${buildTimeline(type)}\n\n`;
-  p+=`## Success Metrics\n\n${buildMetrics(type)}\n\n`;
-  p+=`## Risks & Mitigations\n\n${buildRisks(type)}\n\n`;
-  p+=`---\n\n*Generated by MiMoDAO — AI-Powered DAO Governance*\n`;
+  let p=`# ${prefix} ${words}\n\nDAO: ${dao}  ·  Type: ${tl[type]}  ·  Date: ${now}  ·  Status: Draft\n\n---\n\n`;
+  p+=`## Summary\n\n${idea.split(/[.!?]+/).filter(s=>s.trim().length>10).slice(0,2).join('. ')||idea.slice(0,200)}.\n\n`;
+  const mvs={general:'The DAO governance process must evolve to meet community needs. This proposal addresses a key gap and strengthens the protocol.',treasury:'Effective treasury management is critical to sustainability. This proposal outlines a strategic resource allocation generating returns while supporting growth.',technical:'Technical upgrades are necessary to maintain competitiveness. This addresses specific requirements identified through community feedback.',partnership:'Strategic partnerships expand reach and capabilities. This collaboration brings mutual benefits and creates value for stakeholders.',parameter:'Protocol parameters must reflect current conditions. These adjustments improve efficiency, reduce risk, and align incentives.'};
+  p+=`## Motivation\n\n${mvs[type]}\n\n`;
+  p+=`## Specification\n\nThe implementation follows these phases:\n\n1. **Planning** — Define requirements, assemble working group, establish channels.\n2. **Development** — Execute core implementation with regular community updates.\n3. **Deployment** — Deploy with monitoring, gather feedback, iterate.\n4. **Evaluation** — Measure outcomes, publish transparent report.\n\n`;
+  if(type==='treasury'){const amt=idea.match(/(\d[\d,]*)\s*(usd|eth|uni|dai|usdc)/i);p+=`## Budget\n\n| Category | Allocation |\n|---|---|\n| Direct Funding | ${amt?amt[0]:'[TBD]'} |\n| Operations | 10% |\n| Contingency | 10% |\n\nMulti-sig with milestone-based releases.\n\n`}
+  const tm={general:'Week 1-2: Discussion\nWeek 3: Snapshot vote\nWeek 4-6: Implementation\nWeek 7-8: Review\nWeek 9+: Evaluation',treasury:'Week 1-2: Budget review\nWeek 3: Vote\nMonth 1-3: Core implementation\nMonth 4: Mid-review\nMonth 5-6: Completion',technical:'Week 1-2: Spec review\nWeek 3: Audit\nWeek 4-5: Testnet\nWeek 6: Community testing\nWeek 7: Mainnet\nWeek 8: Monitoring',partnership:'Week 1-2: Due diligence\nWeek 3: Community discussion\nWeek 4: Vote\nMonth 2: Activation\nMonth 3-6: Execution\nMonth 6: Review',parameter:'Week 1: Analysis\nWeek 2: Discussion\nWeek 3: Vote\nWeek 4: Update\nWeek 5-8: Monitoring'};
+  p+=`## Timeline\n\n${tm[type]}\n\n`;
+  const mets={general:['Engagement rate +20%','Proposal participation','Time to execution','Stakeholder satisfaction'],treasury:['ROI >1.5x','Grants funded','Ecosystem TVL growth','Treasury diversification'],technical:['Gas cost -15%','Success rate >99.5%','Developer adoption','Zero critical bugs'],partnership:['New users +1000','Cross-protocol TVL','Initiative completion','Community sentiment'],parameter:['Capital efficiency +10%','Risk stability','User retention','Revenue impact']};
+  p+=`## Success Metrics\n\n${mets[type].map(m=>`• ${m}`).join('\n')}\n\n`;
+  const risks={general:[{r:'Disagreement',m:'Extended discussion, iterative feedback'},{r:'Delays',m:'Clear milestones, dedicated PM'}],treasury:[{r:'Fund misuse',m:'Multi-sig, transparent reporting'},{r:'Market downturn',m:'Diversified allocation'}],technical:[{r:'Vulnerability',m:'Audit, bug bounty, staged rollout'},{r:'Breaking changes',m:'Compatibility testing'}],partnership:[{r:'Underperformance',m:'KPI milestones, exit clauses'},{r:'Reputation risk',m:'Due diligence, community vetting'}],parameter:[{r:'Unintended effects',m:'Simulation, gradual adjustment'},{r:'Pushback',m:'Transparent analysis, education'}]};
+  p+=`## Risks & Mitigations\n\n${risks[type].map(r=>`• **Risk:** ${r.r}\n  **Mitigation:** ${r.m}`).join('\n\n')}\n\n---\n\n*Generated by MiMoDAO*`;
   return p;
 }
-
-const typeLabels={general:'General Governance',treasury:'Treasury / Funding',technical:'Technical Upgrade',partnership:'Partnership / Integration',parameter:'Parameter Change'};
-
-function extractTitle(idea,type){
-  const words=idea.split(/\s+/).slice(0,10).join(' ');
-  const prefix={general:'Proposal:',treasury:'Funding Proposal:',technical:'Technical Proposal:',partnership:'Partnership Proposal:',parameter:'Parameter Change:'}[type];
-  return`${prefix} ${words}`;
-}
-
-function buildSummary(idea){
-  const sentences=idea.split(/[.!?]+/).filter(s=>s.trim().length>10);
-  if(sentences.length>=2)return`${sentences[0].trim()}. ${sentences[1].trim()}.`;
-  return`${idea.slice(0,200)}${idea.length>200?'...':''}. This proposal aims to improve the protocol through strategic initiative.`;
-}
-
-function buildMotivation(idea,type){
-  const mvs={
-    general:`The DAO governance process must evolve to meet the growing needs of our community. This proposal addresses a key gap in our current operations and presents an opportunity to strengthen the protocol's position in the ecosystem.\n\nBy implementing this initiative, we can improve community engagement, increase operational efficiency, and create long-term value for token holders.`,
-    treasury:`Effective treasury management is critical to the long-term sustainability of the protocol. This proposal outlines a strategic allocation of resources that will generate returns for the DAO while supporting ecosystem growth.\n\nThe requested funds will be deployed according to clear milestones with accountability measures to ensure responsible use of DAO resources.`,
-    technical:`As the protocol evolves, technical upgrades are necessary to maintain competitiveness, security, and efficiency. This proposal addresses specific technical requirements that have been identified through community feedback and technical analysis.\n\nImplementing these changes will improve protocol performance, reduce gas costs, and enhance the developer experience.`,
-    partnership:`Strategic partnerships are essential for expanding the protocol's reach and capabilities. This proposal outlines a collaboration that will bring mutual benefits to both parties and create value for the DAO's stakeholders.\n\nThe partnership will increase protocol adoption, bring new users, and strengthen our position in the DeFi ecosystem.`,
-    parameter:`Protocol parameters must be periodically reviewed and adjusted to reflect current market conditions and community needs. This proposal recommends specific parameter changes that have been analyzed for their impact on protocol health.\n\nThe proposed adjustments will improve capital efficiency, reduce risk, and better align incentives across stakeholders.`
-  };
-  return mvs[type]||mvs.general;
-}
-
-function buildSpec(idea,type){
-  let spec=`The following implementation plan outlines the key components of this proposal:\n\n`;
-  const points=extractKeyPoints(idea);
-  points.forEach((p,i)=>{spec+=`${i+1}. **${p.title}**: ${p.desc}\n`});
-  spec+=`\nAll implementation will follow established DAO processes with community review periods at each milestone.`;
-  return spec;
-}
-
-function extractKeyPoints(idea){
-  const words=idea.split(/\s+/);
-  const points=[];
-  if(words.length>10){
-    points.push({title:'Phase 1: Planning',desc:'Define detailed requirements, assemble working group, and establish communication channels with stakeholders.'});
-    points.push({title:'Phase 2: Development',desc:'Execute core implementation with regular progress updates to the community. Conduct internal testing and peer review.'});
-    points.push({title:'Phase 3: Deployment',desc:'Deploy to production with monitoring in place. Gather community feedback and iterate as needed.'});
-    points.push({title:'Phase 4: Evaluation',desc:'Measure outcomes against defined success metrics. Publish transparent report to the DAO.'});
-  }else{
-    points.push({title:'Implementation',desc:idea});
-  }
-  return points;
-}
-
-function buildBudget(idea){
-  const hasAmount=idea.match(/(\d[\d,]*)\s*(usd|eth|uni|dai|usdc|token)/i);
-  const amount=hasAmount?hasAmount[0]:'[AMOUNT TBD]';
-  return`| Category | Allocation | Description |\n|---|---|---|\n| Direct Funding | ${amount} | Core initiative budget |\n| Operational Costs | 10% | Overhead, tooling, coordination |\n| Contingency | 10% | Buffer for unexpected costs |\n\n**Total Requested:** ${amount} + 20% overhead\n\n**Disbursement:** Multi-sig wallet with milestone-based releases. Each tranche requires completion verification before the next release.`;
-}
-
-function buildTimeline(type){
-  const timelines={
-    general:`• **Week 1-2:** Community discussion and feedback period\n• **Week 3:** Snapshot vote\n• **Week 4-6:** Implementation begins\n• **Week 7-8:** Review and adjustment\n• **Week 9+:** Ongoing evaluation`,
-    treasury:`• **Week 1-2:** Proposal discussion and budget review\n• **Week 3:** Snapshot vote\n• **Month 1:** First tranche release, Phase 1 kickoff\n• **Month 2-3:** Core implementation\n• **Month 4:** Mid-point review and second tranche\n• **Month 5-6:** Completion and final report`,
-    technical:`• **Week 1-2:** Technical specification review\n• **Week 3:** Security audit initiation\n• **Week 4-5:** Testnet deployment\n• **Week 6:** Community testing period\n• **Week 7:** Mainnet deployment\n• **Week 8:** Post-deployment monitoring`,
-    partnership:`• **Week 1-2:** Due diligence and term negotiation\n• **Week 3:** Community discussion\n• **Week 4:** Snapshot vote\n• **Month 2:** Partnership activation\n• **Month 3-6:** Joint initiatives execution\n• **Month 6:** Partnership review`,
-    parameter:`• **Week 1:** Analysis presentation to community\n• **Week 2:** Discussion period\n• **Week 3:** Snapshot vote\n• **Week 4:** Parameter update via governance\n• **Week 5-8:** Monitoring period with weekly reports`
-  };
-  return timelines[type]||timelines.general;
-}
-
-function buildMetrics(type){
-  const metrics={
-    general:['Community engagement rate (target: +20%)','Proposal participation rate','Time to execution','Stakeholder satisfaction survey'],
-    treasury:['ROI on allocated funds (target: >1.5x)','Number of grants/projects funded','Ecosystem growth metrics (TVL, users)','Treasury diversification ratio'],
-    technical:['Gas cost reduction (target: -15%)','Transaction success rate (target: >99.5%)','Developer adoption of new features','Zero critical bugs post-deployment'],
-    partnership:['New users from partnership (target: +1000)','Cross-protocol TVL increase','Joint initiative completion rate','Community sentiment score'],
-    parameter:['Capital efficiency improvement (target: +10%)','Risk metric stability','User retention rate','Protocol revenue impact']
-  };
-  return(metrics[type]||metrics.general).map(m=>`• ${m}`).join('\n');
-}
-
-function buildRisks(type){
-  const risks={
-    general:[{r:'Community disagreement',m:'Extended discussion period, incorporate feedback iteratively'},{r:'Execution delays',m:'Clear milestones with buffer time, dedicated project manager'},{r:'Scope creep',m:'Strict adherence to approved specification, separate proposals for extensions'}],
-    treasury:[{r:'Fund misuse',m:'Multi-sig with milestone-based releases, transparent reporting'},{r:'Market downturn',m:'Diversified allocation, hedging strategies'},{r:'Under-delivery',m:'Clawback mechanisms, performance-based tranches'}],
-    technical:[{r:'Smart contract vulnerability',m:'Professional audit, bug bounty program, staged rollout'},{r:'Breaking changes',m:'Backward compatibility testing, migration scripts'},{r:'Network congestion',m:'Gas-optimized implementation, off-peak deployment'}],
-    partnership:[{r:'Partner underperformance',m:'KPI-based milestones with exit clauses'},{r:'Reputation risk',m:'Due diligence, community vetting period'},{r:'Misaligned incentives',m:'Clear governance framework, regular alignment meetings'}],
-    parameter:[{r:'Unintended consequences',m:'Simulation testing, gradual adjustment with monitoring'},{r:'Adverse market conditions',m:'Emergency parameter revert mechanism'},{r:'Stakeholder pushback',m:'Transparent analysis, community education campaign']}
-  };
-  return(risks[type]||risks.general).map(r=>`• **Risk:** ${r.r}\n  **Mitigation:** ${r.m}`).join('\n\n');
-}
-
 function clearWriter(){document.getElementById('writerDao').value='';document.getElementById('writerIdea').value='';document.getElementById('writerOutput').innerHTML=''}
 
-// ─── DAO Explorer ───
+// ─── Explorer ───
 async function loadTopDAOs(){
   const grid=document.getElementById('daoGrid');
   grid.innerHTML='<div class="loading"><div class="spinner"></div> Loading top DAOs...</div>';
   try{
     const d=await gql(`{spaces(first:30,orderBy:"followers",orderDirection:desc){id name followers members network}}`);
     if(!d.spaces){grid.innerHTML='<div class="empty">No DAOs found</div>';return}
-    grid.innerHTML=d.spaces.map(s=>`<div class="dao-item" onclick="selectDao('${s.id}')"><div class="dao-name"><img src="https://cdn.stamp.fyi/space/${s.id}?s=48" onerror="this.style.display='none'"/>${esc(s.name||s.id)}</div><div class="dao-members">👥 ${(s.members||0).toLocaleString()} members · ⭐ ${(s.followers||0).toLocaleString()} followers</div></div>`).join('');
+    grid.innerHTML=d.spaces.map(s=>`<div class="dao" onclick="selectDao('${s.id}')"><img class="dao-img" src="https://cdn.stamp.fyi/space/${s.id}?s=80" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2220%22 fill=%22%2327272a%22/%3E%3Ctext x=%2220%22 y=%2225%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2216%22%3E🏛️%3C/text%3E%3C/svg%3E'"/><div class="dao-info"><div class="dao-name">${esc(s.name||s.id)}</div><div class="dao-stat">👥 ${(s.members||0).toLocaleString()} · ⭐ ${(s.followers||0).toLocaleString()}</div></div></div>`).join('');
   }catch(e){grid.innerHTML=`<div class="empty">⚠️ ${esc(e.message)}</div>`}
 }
-
-function selectDao(id){
-  const sel=document.getElementById('daoSelect');
-  sel.value=id;
-  switchTabDirect('analyzer');
-  loadProposals();
-}
+function selectDao(id){document.getElementById('daoSelect').value=id;switchTabDirect('analyzer');loadProposals()}
 
 // ─── Copy ───
-function copyAnalysis(){const b=document.querySelector('#analysisResult .analysis-box');if(b)navigator.clipboard.writeText(b.innerText).then(()=>toast('Copied!'))}
-function copyWriter(){const b=document.querySelector('#writerOutput .writer-output');if(b)navigator.clipboard.writeText(b.innerText).then(()=>toast('Copied!'))}
+function copyBox(sel){const b=document.querySelector(sel);if(b)navigator.clipboard.writeText(b.innerText).then(()=>toast('Copied!'))}
 </script>
 </body>
 </html>
