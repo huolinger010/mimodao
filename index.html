@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiMoDAO — AI-Powered DAO Governance</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--accent:#6c5ce7;--accent2:#a29bfe;--text:#e2e2e2;--muted:#888;--green:#00b894;--red:#e17055;--yellow:#fdcb6e;--radius:12px;--glow:0 0 20px rgba(108,92,231,0.15)}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+.container{max-width:1000px;margin:0 auto;padding:16px}
+
+/* Header */
+.header{text-align:center;padding:40px 0 24px;position:relative}
+.header::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(108,92,231,0.08) 0%,transparent 70%);pointer-events:none}
+.logo{font-size:42px;margin-bottom:8px}
+.title{font-size:32px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.subtitle{color:var(--muted);font-size:14px}
+.badges{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.badge{background:var(--card);border:1px solid var(--border);padding:4px 12px;border-radius:20px;font-size:11px;color:var(--accent2);display:flex;align-items:center;gap:4px}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+/* Tabs */
+.tabs{display:flex;gap:4px;margin:24px 0 20px;background:var(--card);border-radius:var(--radius);padding:4px;border:1px solid var(--border)}
+.tab{flex:1;padding:10px 16px;border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s}
+.tab.active{background:var(--accent);color:#fff;box-shadow:var(--glow)}
+.tab:hover:not(.active){color:var(--text);background:rgba(108,92,231,0.1)}
+
+/* Panel */
+.panel{display:none}
+.panel.active{display:block}
+
+/* Card */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;transition:border-color .2s}
+.card:hover{border-color:var(--accent)}
+.card-title{font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+
+/* Select & Input */
+select,input,textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:12px 16px;border-radius:8px;font-size:14px;font-family:inherit;transition:border-color .2s}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+textarea{min-height:120px;resize:vertical;line-height:1.6}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+
+/* Button */
+.btn{padding:12px 24px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#5a4bd1);color:#fff;box-shadow:var(--glow)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(108,92,231,0.3)}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.btn-secondary{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--accent)}
+.btn-sm{padding:8px 16px;font-size:12px}
+
+/* Proposal Card */
+.proposal-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;cursor:pointer;transition:all .2s}
+.proposal-card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.proposal-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.proposal-title{font-size:15px;font-weight:600;margin-bottom:6px}
+.proposal-meta{display:flex;gap:12px;flex-wrap:wrap}
+.proposal-meta span{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.status{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;text-transform:uppercase}
+.status-active{background:rgba(0,184,148,0.15);color:var(--green)}
+.status-closed{background:rgba(136,136,136,0.15);color:var(--muted)}
+.status-pending{background:rgba(253,203,110,0.15);color:var(--yellow)}
+
+/* Analysis Result */
+.analysis-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:12px;line-height:1.7;font-size:14px;white-space:pre-wrap}
+.analysis-box h3{color:var(--accent2);margin:12px 0 4px;font-size:14px}
+
+/* DAO Grid */
+.dao-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.dao-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .2s}
+.dao-item:hover{border-color:var(--accent);transform:translateY(-1px)}
+.dao-name{font-size:15px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.dao-name img{width:24px;height:24px;border-radius:50%}
+.dao-members{font-size:12px;color:var(--muted)}
+
+/* Loading */
+.loading{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;padding:12px 0}
+.spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Empty State */
+.empty{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-icon{font-size:40px;margin-bottom:12px}
+
+/* Footer */
+.footer{text-align:center;padding:24px 0;color:var(--muted);font-size:11px}
+.footer a{color:var(--accent2);text-decoration:none}
+
+/* Toast */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--accent);color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;transform:translateY(100px);opacity:0;transition:all .3s;z-index:100}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* API Key */
+.api-key-bar{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;display:flex;gap:8px;align-items:center}
+.api-key-bar input{flex:1;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px;font-size:13px;font-family:inherit}
+.api-key-bar input:focus{outline:none;border-color:var(--accent)}
+.key-status{font-size:11px;padding:4px 10px;border-radius:12px;font-weight:600}
+.key-ok{background:rgba(0,184,148,0.15);color:var(--green)}
+.key-missing{background:rgba(225,112,85,0.15);color:var(--red)}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+/* Writer Output */
+.writer-output{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:16px;line-height:1.8;font-size:14px}
+.writer-output h2{color:var(--accent2);margin:16px 0 8px;font-size:16px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.writer-output h2:first-child{margin-top:0}
+
+/* Vote bars */
+.vote-bar{height:8px;background:var(--bg);border-radius:4px;overflow:hidden;margin:8px 0}
+.vote-fill{height:100%;border-radius:4px;transition:width 0.5s}
+.vote-for{background:var(--green)}
+.vote-against{background:var(--red)}
+.vote-stats{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+
+/* Pulse */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.pulse{animation:pulse 2s ease-in-out infinite}
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">🏛️</div>
+    <h1 class="title">MiMoDAO</h1>
+    <p class="subtitle">AI-Powered DAO Governance Intelligence</p>
+    <div class="badges">
+      <span class="badge">Zero Dependencies</span>
+      <span class="badge">Free APIs</span>
+      <span class="badge">MiMo Powered</span>
+      <span class="badge">Single File</span>
+    </div>
+  </div>
+
+  <!-- API Key Bar -->
+  <div class="api-key-bar">
+    <span style="font-size:13px">🧠 MiMo API Key:</span>
+    <input type="password" id="apiKeyInput" placeholder="sk-..." />
+    <button class="btn btn-sm btn-primary" onclick="saveKey()">Save</button>
+    <span id="keyStatus" class="key-status key-missing">Not Set</span>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('analyzer')">🔍 Proposal Analyzer</button>
+    <button class="tab" onclick="switchTab('writer')">✍️ AI Writer</button>
+    <button class="tab" onclick="switchTab('explore')">🌐 DAO Explorer</button>
+  </div>
+
+  <!-- Panel: Analyzer -->
+  <div id="analyzer" class="panel active">
+    <div class="card">
+      <div class="card-title">🏛️ Select DAO</div>
+      <select id="daoSelect" onchange="loadProposals()">
+        <option value="">— Choose a DAO —</option>
+        <option value="ens.eth">ENS (Ethereum Name Service)</option>
+        <option value="uniswap">Uniswap</option>
+        <option value="aave.eth">Aave</option>
+        <option value="lido-snapshot.eth">Lido</option>
+        <option value="arbitrumfoundation.eth">Arbitrum</option>
+        <option value="opcollective.eth">Optimism</option>
+        <option value="gitcoindao.eth">Gitcoin</option>
+        <option value="safe.eth">Safe</option>
+        <option value="curve.eth">Curve</option>
+        <option value="makerdao.eth">MakerDAO</option>
+        <option value="dydxgov.eth">dYdX</option>
+        <option value="sushigov.eth">Sushi</option>
+        <option value="compound-governance.eth">Compound</option>
+        <option value="nouns.eth">Nouns</option>
+        <option value="morpho.eth">Morpho</option>
+      </select>
+    </div>
+
+    <div id="proposalsList"></div>
+    <div id="analysisResult"></div>
+  </div>
+
+  <!-- Panel: Writer -->
+  <div id="writer" class="panel">
+    <div class="card">
+      <div class="card-title">✍️ Describe Your Proposal Idea</div>
+      <label>DAO Name</label>
+      <input type="text" id="writerDao" placeholder="e.g. Uniswap, Aave, ENS..." style="margin-bottom:12px" />
+      <label>Your Idea (describe in plain language)</label>
+      <textarea id="writerIdea" placeholder="e.g. I want to propose that we allocate 500K UNI from the treasury to fund a developer grants program for the next 6 months. Focus on cross-chain bridge integrations and new pool types."></textarea>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn btn-primary" onclick="generateProposal()">🧠 Generate Proposal</button>
+        <button class="btn btn-secondary" onclick="clearWriter()">Clear</button>
+      </div>
+    </div>
+    <div id="writerOutput"></div>
+  </div>
+
+  <!-- Panel: Explorer -->
+  <div id="explore" class="panel">
+    <div class="card">
+      <div class="card-title">🌐 Top DAOs on Snapshot</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Click a DAO to analyze its latest proposals</p>
+    </div>
+    <div id="daoGrid" class="dao-grid">
+      <div class="loading"><div class="spinner"></div> Loading DAOs...</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Built with 🧠 Xiaomi MiMo &nbsp;|&nbsp; <a href="https://snapshot.org" target="_blank">Snapshot</a> &nbsp;|&nbsp; <a href="https://github.com/huolinger010/mimodao" target="_blank">GitHub</a>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const SNAPSHOT_API = 'https://hub.snapshot.org/graphql';
+let apiKey = localStorage.getItem('mimo_api_key') || '';
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  if (apiKey) {
+    document.getElementById('apiKeyInput').value = apiKey;
+    document.getElementById('keyStatus').textContent = '✓ Set';
+    document.getElementById('keyStatus').className = 'key-status key-ok';
+  }
+});
+
+function saveKey() {
+  apiKey = document.getElementById('apiKeyInput').value.trim();
+  if (apiKey) {
+    localStorage.setItem('mimo_api_key', apiKey);
+    document.getElementById('keyStatus').textContent = '✓ Set';
+    document.getElementById('keyStatus').className = 'key-status key-ok';
+    toast('API key saved!');
+  }
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(name).classList.add('active');
+
+  if (name === 'explore') loadTopDAOs();
+}
+
+// ─── SNAPSHOT API ───
+async function snapshotQuery(query, variables = {}) {
+  const res = await fetch(SNAPSHOT_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, variables })
+  });
+  const data = await res.json();
+  return data.data;
+}
+
+async function loadProposals() {
+  const space = document.getElementById('daoSelect').value;
+  if (!space) return;
+  const list = document.getElementById('proposalsList');
+  list.innerHTML = '<div class="loading"><div class="spinner"></div> Loading proposals...</div>';
+  document.getElementById('analysisResult').innerHTML = '';
+
+  try {
+    const data = await snapshotQuery(`
+      query($space: String!) {
+        proposals(first: 10, space: $space, orderBy: "created", orderDirection: desc) {
+          id title body state created end choices scores scores_total author
+        }
+      }
+    `, { space });
+
+    if (!data.proposals || data.proposals.length === 0) {
+      list.innerHTML = '<div class="empty"><div class="empty-icon">📭</div>No proposals found</div>';
+      return;
+    }
+
+    list.innerHTML = data.proposals.map(p => {
+      const statusClass = p.state === 'active' ? 'status-active' : p.state === 'pending' ? 'status-pending' : 'status-closed';
+      const date = new Date(p.created * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const endDate = new Date(p.end * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const totalVotes = p.scores_total || 0;
+      return `
+        <div class="proposal-card" onclick="analyzeProposal('${space}', ${JSON.stringify(p).replace(/'/g, "\\'").replace(/"/g, '&quot;')})">
+          <div class="proposal-header">
+            <div style="flex:1">
+              <div class="proposal-title">${escHtml(p.title)}</div>
+              <div class="proposal-meta">
+                <span>📅 ${date}</span>
+                <span>⏰ Ends ${endDate}</span>
+                <span>🗳️ ${totalVotes.toLocaleString()} votes</span>
+                <span>👤 ${p.author ? p.author.slice(0,6) + '...' + p.author.slice(-4) : '—'}</span>
+              </div>
+            </div>
+            <span class="status ${statusClass}">${p.state}</span>
+          </div>
+          ${p.choices && p.scores ? renderVoteBars(p.choices, p.scores, totalVotes) : ''}
+        </div>`;
+    }).join('');
+  } catch (e) {
+    list.innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div>Error: ${escHtml(e.message)}</div>`;
+  }
+}
+
+function renderVoteBars(choices, scores, total) {
+  if (!total) return '';
+  const top = choices.map((c, i) => ({ name: c, score: scores[i] || 0 }))
+    .sort((a, b) => b.score - a.score).slice(0, 3);
+  return top.map(v => {
+    const pct = ((v.score / total) * 100).toFixed(1);
+    return `<div class="vote-bar"><div class="vote-fill vote-for" style="width:${pct}%"></div></div>
+      <div class="vote-stats"><span>${escHtml(v.name)}</span><span>${pct}% (${Math.round(v.score).toLocaleString()})</span></div>`;
+  }).join('');
+}
+
+async function analyzeProposal(space, proposal) {
+  if (!apiKey) { toast('Please set your MiMo API key first!'); return; }
+  const resultDiv = document.getElementById('analysisResult');
+  resultDiv.innerHTML = '<div class="card"><div class="loading"><div class="spinner"></div> MiMo is analyzing this proposal...</div></div>';
+
+  const bodyShort = proposal.body ? proposal.body.slice(0, 2000) : '(no body)';
+  const prompt = `You are a DAO governance analyst. Analyze this proposal and provide:
+
+1. **Summary** (2-3 sentences)
+2. **Key Points** (bullet points)
+3. **Potential Impact** (positive & negative)
+4. **Risk Assessment** (Low/Medium/High with reasoning)
+5. **Recommendation** (For/Against/Neutral with brief reasoning)
+
+DAO: ${space}
+Proposal: ${proposal.title}
+State: ${proposal.state}
+Total Votes: ${proposal.scores_total || 0}
+Choices: ${(proposal.choices || []).join(', ')}
+Scores: ${(proposal.scores || []).join(', ')}
+
+Proposal Body:
+${bodyShort}`;
+
+  try {
+    const analysis = await callMiMo(prompt);
+    resultDiv.innerHTML = `
+      <div class="card">
+        <div class="card-title">🧠 MiMo Analysis: ${escHtml(proposal.title)}</div>
+        <div class="analysis-box">${formatMarkdown(analysis)}</div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn btn-sm btn-secondary" onclick="copyText(this)">📋 Copy</button>
+          <button class="btn btn-sm btn-secondary" onclick="document.getElementById('analysisResult').innerHTML=''">✕ Close</button>
+        </div>
+      </div>`;
+  } catch (e) {
+    resultDiv.innerHTML = `<div class="card"><div style="color:var(--red)">⚠️ Error: ${escHtml(e.message)}</div></div>`;
+  }
+}
+
+// ─── AI WRITER ───
+async function generateProposal() {
+  if (!apiKey) { toast('Please set your MiMo API key first!'); return; }
+  const dao = document.getElementById('writerDao').value.trim();
+  const idea = document.getElementById('writerIdea').value.trim();
+  if (!dao || !idea) { toast('Please fill in both fields'); return; }
+
+  const output = document.getElementById('writerOutput');
+  output.innerHTML = '<div class="card"><div class="loading"><div class="spinner"></div> MiMo is drafting your proposal...</div></div>';
+
+  const prompt = `You are a professional DAO proposal writer. Convert the following idea into a formal, well-structured DAO governance proposal. Follow standard Snapshot proposal format.
+
+DAO: ${dao}
+User's Idea: ${idea}
+
+Write a complete proposal with these sections:
+1. **Title** — concise, descriptive
+2. **Summary** — 2-3 sentence overview
+3. **Motivation** — why this matters now
+4. **Specification** — detailed implementation plan
+5. **Budget** — if applicable, specify amounts and sources
+6. **Timeline** — milestones and deadlines
+7. **Success Metrics** — how to measure impact
+8. **Risks & Mitigations** — potential issues and solutions
+
+Make it professional, specific, and actionable. Use clear language that DAO members can easily understand and vote on.`;
+
+  try {
+    const result = await callMiMo(prompt);
+    output.innerHTML = `
+      <div class="card">
+        <div class="card-title">📄 Generated Proposal</div>
+        <div class="writer-output">${formatMarkdown(result)}</div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn btn-sm btn-primary" onclick="copyText(this)">📋 Copy to Clipboard</button>
+          <button class="btn btn-sm btn-secondary" onclick="clearWriter()">✕ Clear</button>
+        </div>
+      </div>`;
+  } catch (e) {
+    output.innerHTML = `<div class="card"><div style="color:var(--red)">⚠️ Error: ${escHtml(e.message)}</div></div>`;
+  }
+}
+
+function clearWriter() {
+  document.getElementById('writerDao').value = '';
+  document.getElementById('writerIdea').value = '';
+  document.getElementById('writerOutput').innerHTML = '';
+}
+
+// ─── DAO EXPLORER ───
+async function loadTopDAOs() {
+  const grid = document.getElementById('daoGrid');
+  grid.innerHTML = '<div class="loading"><div class="spinner"></div> Loading top DAOs...</div>';
+
+  try {
+    const data = await snapshotQuery(`
+      {
+        spaces(first: 30, orderBy: "followers", orderDirection: desc) {
+          id name followers members network
+        }
+      }
+    `);
+
+    if (!data.spaces) { grid.innerHTML = '<div class="empty">No DAOs found</div>'; return; }
+
+    grid.innerHTML = data.spaces.map(s => `
+      <div class="dao-item" onclick="selectDaoFromExplorer('${s.id}')">
+        <div class="dao-name">
+          <img src="https://cdn.stamp.fyi/space/${s.id}?s=48" onerror="this.style.display='none'" />
+          ${escHtml(s.name || s.id)}
+        </div>
+        <div class="dao-members">👥 ${(s.members || 0).toLocaleString()} members · ⭐ ${(s.followers || 0).toLocaleString()} followers</div>
+      </div>
+    `).join('');
+  } catch (e) {
+    grid.innerHTML = `<div class="empty">⚠️ ${escHtml(e.message)}</div>`;
+  }
+}
+
+function selectDaoFromExplorer(id) {
+  document.getElementById('daoSelect').value = id;
+  switchTabDirect('analyzer');
+  loadProposals();
+}
+
+function switchTabDirect(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.tab[onclick*="${name}"]`).classList.add('active');
+  document.getElementById(name).classList.add('active');
+}
+
+// ─── MIMO API ───
+async function callMiMo(prompt) {
+  const res = await fetch('https://api.xiaomimimo.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: 'mimo-v2.5-pro',
+      messages: [
+        { role: 'system', content: 'You are MiMoDAO, an expert in DAO governance, DeFi protocols, and blockchain governance. Provide clear, actionable analysis and proposals.' },
+        { role: 'user', content: prompt }
+      ],
+      max_tokens: 2000,
+      temperature: 0.7
+    })
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`API error ${res.status}: ${err.slice(0, 100)}`);
+  }
+
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || 'No response';
+}
+
+// ─── UTILS ───
+function escHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function formatMarkdown(text) {
+  if (!text) return '';
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong style="color:var(--accent2)">$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^### (.+)$/gm, '<h3 style="color:var(--accent2);margin:12px 0 4px;font-size:14px">$1</h3>')
+    .replace(/^## (.+)$/gm, '<h3 style="color:var(--accent2);margin:12px 0 4px;font-size:14px">$1</h3>')
+    .replace(/^# (.+)$/gm, '<h2 style="color:var(--accent2);margin:16px 0 8px;font-size:16px;border-bottom:1px solid var(--border);padding-bottom:8px">$1</h2>')
+    .replace(/^- (.+)$/gm, '<div style="padding-left:16px;position:relative;margin:2px 0"><span style="position:absolute;left:0;color:var(--accent)">•</span>$1</div>')
+    .replace(/^\d+\. (.+)$/gm, '<div style="padding-left:20px;margin:2px 0">$1</div>')
+    .replace(/\n\n/g, '<br><br>')
+    .replace(/\n/g, '<br>');
+}
+
+function copyText(btn) {
+  const box = btn.closest('.card').querySelector('.analysis-box, .writer-output');
+  if (box) {
+    navigator.clipboard.writeText(box.innerText).then(() => toast('Copied!'));
+  }
+}
+</script>
+</body>
+</html>
