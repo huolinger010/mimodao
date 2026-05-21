@@ -225,6 +225,46 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 /* Scrollbar */
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--text3)}
 
+/* Wallet */
+.wallet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:16px}
+.wallet-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;transition:var(--transition)}
+.wallet-card:hover{border-color:var(--accent)}
+.wallet-dao{font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.wallet-dao img{width:24px;height:24px;border-radius:50%;border:1px solid var(--border)}
+.wallet-vp{font-size:24px;font-weight:800;color:var(--accent);margin-bottom:4px}
+.wallet-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.3px}
+
+/* Timeline */
+.timeline{position:relative;padding-left:28px;margin:16px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:16px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition)}
+.tl-item:hover{border-color:var(--accent);transform:translateX(4px)}
+.tl-item::before{content:'';position:absolute;left:-24px;top:18px;width:10px;height:10px;border-radius:50%;border:2px solid var(--accent);background:var(--bg)}
+.tl-item.tl-active::before{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(34,197,94,.4)}
+.tl-item.tl-closed::before{background:var(--text3);border-color:var(--text3)}
+.tl-date{font-size:11px;color:var(--text3);margin-bottom:4px}
+.tl-title{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:6px}
+.tl-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--text3)}
+.tl-bar{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-top:8px}
+.tl-bar-fill{height:100%;border-radius:2px;background:var(--green)}
+
+/* Share Card */
+.share-card{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid rgba(139,92,246,.3);border-radius:var(--radius);padding:24px;margin-top:16px;position:relative;overflow:hidden}
+.share-card::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(139,92,246,.08) 0%,transparent 60%);pointer-events:none}
+.share-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;position:relative}
+.share-logo{font-size:28px}
+.share-title{font-size:18px;font-weight:800;color:#fff}
+.share-subtitle{font-size:12px;color:rgba(255,255,255,.5)}
+.share-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;position:relative}
+.share-score{text-align:center;padding:10px 4px;background:rgba(255,255,255,.05);border-radius:var(--radius-xs);border:1px solid rgba(255,255,255,.08)}
+.share-score-n{font-size:20px;font-weight:800;color:#fff}
+.share-score-l{font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px}
+.share-risk{text-align:center;padding:12px;background:rgba(255,255,255,.03);border-radius:var(--radius-xs);border:1px solid rgba(255,255,255,.06);position:relative}
+.share-risk-level{font-size:16px;font-weight:800;text-transform:uppercase;margin-bottom:4px}
+.share-risk-bar{height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;margin-top:6px}
+.share-risk-fill{height:100%;border-radius:3px}
+.share-footer{text-align:center;margin-top:12px;font-size:10px;color:rgba(255,255,255,.3)}
+
 /* === TABLET (641px - 1024px) === */
 @media(min-width:641px) and (max-width:1024px){
   .container{padding:0 20px}
@@ -302,6 +342,14 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
   .footer{padding:24px 0 16px;font-size:12px}
 
   .bottom-nav{display:block}
+
+  .wallet-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .wallet-vp{font-size:18px}
+
+  .share-scores{grid-template-columns:repeat(2,1fr)}
+  .share-score-n{font-size:16px}
+
+  .tl-title{font-size:12px}
 }
 
 /* === SMALL MOBILE (≤380px) === */
@@ -334,7 +382,7 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
       <div class="hero">
         <span class="hero-icon">🏛️</span>
         <h1>MiMoDAO</h1>
-        <p>AI-Powered DAO Governance Intelligence — Analyze proposals, generate governance docs, explore top DAOs.</p>
+        <p>AI-Powered DAO Governance Intelligence — Analyze proposals, check voting power, explore top DAOs.</p>
         <div class="hero-badges">
           <span class="h-badge"><span class="dot"></span> No API Key</span>
           <span class="h-badge"><span class="dot"></span> 100% Free</span>
@@ -349,6 +397,7 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
           <button class="tab active" onclick="switchTab(this,'analyzer')"><span class="tab-icon">🔍</span><span class="tab-text">Proposal Analyzer</span></button>
           <button class="tab" onclick="switchTab(this,'writer')"><span class="tab-icon">✍️</span><span class="tab-text">AI Writer</span></button>
           <button class="tab" onclick="switchTab(this,'explore')"><span class="tab-icon">🌐</span><span class="tab-text">DAO Explorer</span></button>
+          <button class="tab" onclick="switchTab(this,'wallet')"><span class="tab-icon">📊</span><span class="tab-text">Voting Power</span></button>
         </div>
       </div>
 
@@ -428,6 +477,22 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         </div>
         <div id="daoGrid" class="dao-grid"></div>
       </div>
+
+      <!-- Wallet Panel -->
+      <div id="wallet" class="panel">
+        <div class="card">
+          <div class="card-title">📊 Voting Power Checker <span class="badge-free">FREE</span></div>
+          <p style="font-size:14px;color:var(--text2);margin-bottom:16px">Enter your Ethereum address to see your voting power across top DAOs on Snapshot.</p>
+          <div class="form-group">
+            <label class="form-label">Ethereum Address</label>
+            <input type="text" id="walletAddr" placeholder="0x... or ENS name" />
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="checkVotingPower()">🔍 Check Voting Power</button>
+          </div>
+        </div>
+        <div id="walletResults"></div>
+      </div>
     </div>
   </main>
 
@@ -453,6 +518,10 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
     <button class="bnav-btn" onclick="bnavSwitch(this,'explore')">
       <span class="bnav-icon">🌐</span>
       <span>Explore</span>
+    </button>
+    <button class="bnav-btn" onclick="bnavSwitch(this,'wallet')">
+      <span class="bnav-icon">📊</span>
+      <span>Wallet</span>
     </button>
   </div>
 </nav>
@@ -513,7 +582,7 @@ function switchTabDirect(name) {
   _currentTab = name;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  const idx = { analyzer: 0, writer: 1, explore: 2 };
+  const idx = { analyzer: 0, writer: 1, explore: 2, wallet: 3 };
   const tabs = document.querySelectorAll('.tab');
   if (tabs[idx[name]]) tabs[idx[name]].classList.add('active');
   const panel = document.getElementById(name);
@@ -529,7 +598,7 @@ function bnavSwitch(el, name) {
   el.classList.add('active');
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  const idx = { analyzer: 0, writer: 1, explore: 2 };
+  const idx = { analyzer: 0, writer: 1, explore: 2, wallet: 3 };
   const tabs = document.querySelectorAll('.tab');
   if (tabs[idx[name]]) tabs[idx[name]].classList.add('active');
   const panel = document.getElementById(name);
@@ -980,6 +1049,218 @@ function copyBox(parentId) {
       .catch(() => toast('Copy failed'));
   }
 }
+
+// ─── Voting Power Checker ───
+async function checkVotingPower() {
+  const addr = document.getElementById('walletAddr').value.trim();
+  if (!addr) { toast('Enter an address or ENS name'); return; }
+  const res = document.getElementById('walletResults');
+  res.innerHTML = '<div class="card"><div class="loading"><div class="spinner"></div> Checking voting power...</div></div>';
+
+  try {
+    // Query votes across top DAOs
+    const spaces = POPULAR_DAOS.slice(0, 15).map(d => d.id);
+    const d = await gql(
+      `query($voter:String!) {
+        votes(first:100, where:{voter:$voter}, orderBy:"vp", orderDirection:desc) {
+          vp space choice proposal { id title state end }
+        }
+      }`,
+      { voter: addr.toLowerCase() }
+    );
+    const votes = Array.isArray(d.votes) ? d.votes : [];
+
+    if (!votes.length) {
+      res.innerHTML = `<div class="card">
+        <div class="empty"><div class="empty-icon">📭</div>No voting history found for this address.<br><span style="font-size:13px;color:var(--text3)">Make sure the address has participated in Snapshot voting.</span></div>
+      </div>`;
+      return;
+    }
+
+    // Group by space and calculate total VP
+    const bySpace = {};
+    votes.forEach(v => {
+      const sp = v.space || 'unknown';
+      if (!bySpace[sp]) bySpace[sp] = { votes: 0, totalVp: 0, proposals: [] };
+      bySpace[sp].votes++;
+      bySpace[sp].totalVp += v.vp || 0;
+      if (v.proposal) bySpace[sp].proposals.push(v.proposal.title || 'Untitled');
+    });
+
+    const totalVp = Object.values(bySpace).reduce((s, x) => s + x.totalVp, 0);
+    const totalVotes = votes.length;
+    const daoCount = Object.keys(bySpace).length;
+
+    // Stats chips
+    let html = `<div class="stats-bar" style="display:flex;margin-top:16px">
+      <span class="stat-chip">⚡ <span class="stat-num">${totalVp.toLocaleString(undefined, {maximumFractionDigits:2})}</span> total VP</span>
+      <span class="stat-chip">🗳️ <span class="stat-num">${totalVotes}</span> votes cast</span>
+      <span class="stat-chip">🏛️ <span class="stat-num">${daoCount}</span> DAOs</span>
+    </div>`;
+
+    // Grid of DAOs
+    html += '<div class="wallet-grid">';
+    const sorted = Object.entries(bySpace).sort((a, b) => b[1].totalVp - a[1].totalVp);
+    for (const [sp, data] of sorted) {
+      const daoInfo = POPULAR_DAOS.find(d => d.id === sp);
+      const name = daoInfo ? daoInfo.name : sp;
+      const img = `https://cdn.stamp.fyi/space/${encodeURIComponent(sp)}?s=80`;
+      const vpStr = data.totalVp >= 1000000 ? (data.totalVp / 1000000).toFixed(1) + 'M' :
+                    data.totalVp >= 1000 ? (data.totalVp / 1000).toFixed(1) + 'K' :
+                    data.totalVp.toFixed(2);
+      html += `<div class="wallet-card">
+        <div class="wallet-dao"><img src="${esc(img)}" onerror="this.style.display='none'" /> ${esc(name)}</div>
+        <div class="wallet-vp">${vpStr}</div>
+        <div class="wallet-label">${data.votes} votes · ${data.proposals.length} proposals</div>
+      </div>`;
+    }
+    html += '</div>';
+
+    res.innerHTML = html;
+  } catch (e) {
+    res.innerHTML = `<div class="card"><div class="empty">⚠️ ${esc(e.message)}</div></div>`;
+  }
+}
+
+// ─── Proposal Timeline ───
+function renderTimeline(proposals) {
+  if (!proposals || !proposals.length) return '';
+  const sorted = [...proposals].sort((a, b) => (a.end || 0) - (b.end || 0));
+  const now = Date.now() / 1000;
+  let html = '<div class="timeline">';
+  sorted.forEach(p => {
+    const isActive = p.state === 'active';
+    const isClosed = p.state === 'closed';
+    const cls = isActive ? 'tl-active' : isClosed ? 'tl-closed' : '';
+    const startDate = p.created ? new Date(p.created * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '—';
+    const endDate = p.end ? new Date(p.end * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
+    const cd = getCountdown(p.end);
+    const total = p.scores_total;
+    const topChoice = p.choices && p.choices.length && p.scores && p.scores.length
+      ? p.choices[p.scores.indexOf(Math.max(...p.scores))] : '';
+    const topPct = total > 0 ? ((Math.max(...(p.scores || [0])) / total) * 100).toFixed(0) : 0;
+
+    html += `<div class="tl-item ${cls}" data-pid="${esc(p.id)}" onclick="switchTabDirect('analyzer');showProposalById(this.dataset.pid)">
+      <div class="tl-date">${startDate} → ${endDate} <span class="p-countdown ${cd.ended ? 'ended' : ''}" style="margin-left:8px">${cd.text}</span></div>
+      <div class="tl-title">${esc(p.title)}</div>
+      <div class="tl-meta">
+        <span>🗳️ ${total.toLocaleString()} votes</span>
+        ${topChoice ? `<span>📊 Top: ${esc(topChoice)} (${topPct}%)</span>` : ''}
+        <span class="status ${isActive ? 's-active' : isClosed ? 's-closed' : 's-pending'}">${p.state}</span>
+      </div>
+      ${total > 0 ? `<div class="tl-bar"><div class="tl-bar-fill" style="width:${topPct}%"></div></div>` : ''}
+    </div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+// Add timeline button to analyzer stats bar
+function showTimeline() {
+  if (!_proposals.length) { toast('Load proposals first'); return; }
+  const r = document.getElementById('analysisResult');
+  r.innerHTML = `<div class="card">
+    <div class="card-title">📅 Proposal Timeline <button class="btn btn-sm btn-ghost" onclick="closeAnalysis()" style="margin-left:auto">✕ Close</button></div>
+    ${renderTimeline(_proposals)}
+  </div>`;
+  r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ─── Share Analysis ───
+function shareAnalysis(p, a) {
+  const r = document.getElementById('analysisResult');
+  if (!r) return;
+
+  const scoreHTML = Object.entries(a.scores).slice(0, 4).map(([k, v]) => {
+    const labels = { complexity: 'Complexity', financial: 'Financial', security: 'Security', governance: 'Governance', technical: 'Technical', urgency: 'Urgency', sentiment: 'Sentiment' };
+    const color = v > 70 ? '#ef4444' : v > 40 ? '#eab308' : '#22c55e';
+    return `<div class="share-score"><div class="share-score-n" style="color:${color}">${v}</div><div class="share-score-l">${labels[k] || k}</div></div>`;
+  }).join('');
+
+  const riskColor = a.risk.level === 'high' ? '#ef4444' : a.risk.level === 'med' ? '#eab308' : '#22c55e';
+  const riskLabel = a.risk.level === 'high' ? '⚠️ HIGH RISK' : a.risk.level === 'med' ? '⚡ MODERATE' : '✅ LOW RISK';
+
+  const shareHTML = `<div class="share-card" id="shareCard">
+    <div class="share-header">
+      <span class="share-logo">🏛️</span>
+      <div>
+        <div class="share-title">MiMoDAO Analysis</div>
+        <div class="share-subtitle">${esc(p.title).substring(0, 60)}${p.title.length > 60 ? '...' : ''}</div>
+      </div>
+    </div>
+    <div class="share-scores">${scoreHTML}</div>
+    <div class="share-risk">
+      <div class="share-risk-level" style="color:${riskColor}">${riskLabel}</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.5)">Risk Score: ${a.risk.pct}/100</div>
+      <div class="share-risk-bar"><div class="share-risk-fill" style="width:${a.risk.pct}%;background:${riskColor}"></div></div>
+    </div>
+    <div class="share-footer">Powered by MiMoDAO · ${new Date().toLocaleDateString()} · ${p.scores_total.toLocaleString()} votes</div>
+  </div>`;
+
+  // Append share card after analysis
+  const existingShare = document.getElementById('shareCard');
+  if (existingShare) existingShare.remove();
+  r.querySelector('.card').insertAdjacentHTML('beforeend', shareHTML);
+  document.getElementById('shareCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  toast('Share card generated! Screenshot it 📸');
+}
+
+// Override analyzeProposal to add Timeline + Share buttons
+const _origAnalyze = analyzeProposal;
+analyzeProposal = function(p) {
+  const r = document.getElementById('analysisResult');
+  if (!r) return;
+  r.innerHTML = '<div class="card"><div class="loading"><div class="spinner"></div> Analyzing...</div></div>';
+
+  setTimeout(() => {
+    try {
+      const body = p.body || '';
+      const text = ((p.title || '') + ' ' + body).toLowerCase();
+      const a = smartAnalyze(p, body, text);
+
+      const scoreHTML = Object.entries(a.scores).map(([k, v]) => {
+        const labels = { complexity: 'Complexity', financial: 'Financial', security: 'Security', governance: 'Governance', technical: 'Technical', urgency: 'Urgency', sentiment: 'Sentiment' };
+        const color = v > 70 ? 'var(--red)' : v > 40 ? 'var(--yellow)' : 'var(--green)';
+        return `<div class="score"><div class="score-n" style="color:${color}">${v}</div><div class="score-l">${labels[k] || k}</div></div>`;
+      }).join('');
+
+      const tagsHTML = a.tags.length
+        ? `<div class="tags">${a.tags.map(t => `<span class="tag tag-${t.c}">${esc(t.t)}</span>`).join('')}</div>`
+        : '';
+
+      r.innerHTML = `<div class="card">
+        <div class="card-title">🧠 Analysis: ${esc(p.title)}</div>
+        <div class="scores">${scoreHTML}</div>
+        <div class="a-section">
+          <div class="a-label">⚠️ Risk: ${a.risk.level.toUpperCase()}</div>
+          <div class="risk-bar"><div class="risk-fill risk-${a.risk.level}" style="width:${a.risk.pct}%"></div></div>
+          <div style="font-size:13px;color:var(--text3)">${a.risk.pct}/100</div>
+        </div>
+        ${tagsHTML}
+        <div class="a-box">${a.insight}</div>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-ghost" onclick="copyBox('analysisResult')">📋 Copy</button>
+          <button class="btn btn-sm btn-ghost" onclick="shareAnalysis(_proposals.find(x=>x.id==='${esc(p.id)}'),${JSON.stringify(a).replace(/'/g,"\\'").replace(/"/g,'&quot;')})">🔗 Share Card</button>
+          <button class="btn btn-sm btn-ghost" onclick="showTimeline()">📅 Timeline</button>
+          <button class="btn btn-sm btn-ghost" onclick="closeAnalysis()">✕ Close</button>
+        </div>
+      </div>`;
+      r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (e) {
+      r.innerHTML = `<div class="card"><div style="color:var(--red)">⚠️ Analysis error: ${esc(e.message)}</div></div>`;
+    }
+  }, 300);
+};
+
+// Also add timeline button to stats bar
+const _origLoadProposals = loadProposals;
+loadProposals = async function() {
+  await _origLoadProposals();
+  const statsBar = document.getElementById('statsBar');
+  if (statsBar && statsBar.style.display !== 'none') {
+    statsBar.innerHTML += `<span class="stat-chip" onclick="showTimeline()" style="cursor:pointer;transition:var(--transition)">📅 Timeline</span>`;
+  }
+};
 </script>
 </body>
 </html>
