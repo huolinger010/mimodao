@@ -405,6 +405,7 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
       <div id="analyzer" class="panel active">
         <div class="card">
           <div class="card-title">🏛️ Select DAO <span class="badge-free">FREE</span></div>
+          <div id="favDaosBar" style="display:none;margin-bottom:12px"></div>
           <div class="form-group">
             <select id="daoSelect" onchange="loadProposals()">
               <option value="">— Choose a DAO —</option>
@@ -563,6 +564,36 @@ function toast(m) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
+// ─── Favorites (localStorage) ───
+function getFavs() {
+  try { return JSON.parse(localStorage.getItem('mimo-favs') || '{"daos":[],"proposals":[]}'); }
+  catch(e) { return { daos: [], proposals: [] }; }
+}
+function saveFavs(f) { localStorage.setItem('mimo-favs', JSON.stringify(f)); }
+function toggleFavDao(id) {
+  const f = getFavs();
+  const i = f.daos.indexOf(id);
+  if (i >= 0) { f.daos.splice(i, 1); toast('Removed from favorites'); }
+  else { f.daos.push(id); toast('⭐ Added to favorites'); }
+  saveFavs(f);
+  if (_currentTab === 'explore') loadTopDAOs();
+  updateDaoFavBtn(id);
+}
+function toggleFavProposal(id) {
+  const f = getFavs();
+  const i = f.proposals.indexOf(id);
+  if (i >= 0) { f.proposals.splice(i, 1); toast('Removed from favorites'); }
+  else { f.proposals.push(id); toast('⭐ Added to favorites'); }
+  saveFavs(f);
+  if (_currentTab === 'analyzer') renderProposals(_proposals);
+}
+function isFavDao(id) { return getFavs().daos.includes(id); }
+function isFavProposal(id) { return getFavs().proposals.includes(id); }
+function updateDaoFavBtn(id) {
+  const btn = document.getElementById('daoFavBtn');
+  if (btn) btn.className = 'fav-btn' + (isFavDao(id) ? ' active' : '');
+}
+
 // ─── Tabs ───
 function switchTab(el, name) {
   _currentTab = name;
@@ -681,15 +712,21 @@ async function loadProposals() {
       link: p.link || ''
     }));
 
+    // Show favorite DAOs bar
+    updateFavDaosBar();
+
     // Show search & stats
     searchWrap.style.display = 'block';
     const active = _proposals.filter(p => p.state === 'active').length;
     const totalVotes = _proposals.reduce((s, p) => s + p.scores_total, 0);
     statsBar.style.display = 'flex';
+    const currentDao = document.getElementById('daoSelect').value;
     statsBar.innerHTML = `
       <span class="stat-chip">📋 <span class="stat-num">${_proposals.length}</span> proposals</span>
       <span class="stat-chip">🟢 <span class="stat-num">${active}</span> active</span>
       <span class="stat-chip">🗳️ <span class="stat-num">${(totalVotes / 1000).toFixed(0)}K</span> total votes</span>
+      <span class="stat-chip" onclick="showDaoHealth('${esc(currentDao)}')" style="cursor:pointer">🏥 Health</span>
+      <span class="stat-chip" onclick="showTimeline()" style="cursor:pointer">📅 Timeline</span>
     `;
 
     renderProposals(_proposals);
@@ -707,6 +744,7 @@ function renderProposals(proposals) {
     const cd = getCountdown(p.end);
     const tv = p.scores_total;
     const author = p.author ? p.author.slice(0, 6) + '…' + p.author.slice(-4) : '—';
+    const isFavP = isFavProposal(pid);
     return `<div class="p-card" data-pid="${esc(pid)}" onclick="showProposalById(this.dataset.pid)">
       <div class="p-head"><div style="flex:1;min-width:0">
         <div class="p-title">${esc(p.title)}</div>
@@ -716,7 +754,11 @@ function renderProposals(proposals) {
           <span>🗳️ ${tv.toLocaleString()} votes</span>
           <span>👤 ${esc(author)}</span>
         </div>
-      </div><span class="status ${sc}">${esc(p.state)}</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+        <button class="fav-btn${isFavP ? ' active' : ''}" onclick="event.stopPropagation();toggleFavProposal('${esc(pid)}')" title="Favorite">${isFavP ? '⭐' : '☆'}</button>
+        <span class="status ${sc}">${esc(p.state)}</span>
+      </div></div>
       ${tv > 0 ? renderBars(p.choices, p.scores, tv) : ''}
     </div>`;
   }).join('');
@@ -792,6 +834,21 @@ function analyzeProposal(p) {
       r.innerHTML = `<div class="card"><div style="color:var(--red)">⚠️ Analysis error: ${esc(e.message)}</div></div>`;
     }
   }, 300);
+}
+
+function updateFavDaosBar() {
+  const bar = document.getElementById('favDaosBar');
+  if (!bar) return;
+  const favs = getFavs();
+  if (!favs.daos.length) { bar.style.display = 'none'; return; }
+  bar.style.display = 'flex';
+  bar.style.flexWrap = 'wrap';
+  bar.style.gap = '6px';
+  bar.innerHTML = favs.daos.map(id => {
+    const dao = POPULAR_DAOS.find(d => d.id === id);
+    const name = dao ? dao.name : id;
+    return `<button class="btn btn-sm btn-ghost" onclick="document.getElementById('daoSelect').value='${esc(id)}';loadProposals()" style="font-size:12px;padding:6px 12px">⭐ ${esc(name)}</button>`;
+  }).join('');
 }
 
 function closeAnalysis() {
@@ -983,36 +1040,61 @@ const POPULAR_DAOS = [
 
 async function loadTopDAOs() {
   const grid = document.getElementById('daoGrid');
-  grid.innerHTML = POPULAR_DAOS.map(dao => {
-    return `<div class="dao" data-dao="${esc(dao.id)}" onclick="selectDao(this.dataset.dao)">
-      <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(dao.id)}?s=80"
-        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2244%22 height=%2244%22%3E%3Crect width=%2244%22 height=%2244%22 rx=%2222%22 fill=%22%2327272a%22/%3E%3Ctext x=%2222%22 y=%2228%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2218%22%3E🏛️%3C/text%3E%3C/svg%3E'" />
-      <div class="dao-info">
-        <div class="dao-name">${esc(dao.name)}</div>
-        <div class="dao-stat">Click to analyze proposals</div>
-      </div>
-    </div>`;
-  }).join('');
+    // Show favorites first
+    const favs = getFavs();
+    const favDaos = favs.daos.length ? POPULAR_DAOS.filter(d => favs.daos.includes(d.id)) : [];
+    const otherDaos = POPULAR_DAOS.filter(d => !favs.daos.includes(d.id));
+    const orderedDaos = [...favDaos, ...otherDaos];
 
-  try {
+    let favSection = '';
+    if (favDaos.length) {
+      favSection = `<div class="fav-section"><div class="fav-section-title">⭐ Your Favorites</div></div>`;
+    }
+
+    grid.innerHTML = favSection + orderedDaos.map(dao => {
+      const isFav = favs.daos.includes(dao.id);
+      return `<div class="dao" data-dao="${esc(dao.id)}">
+        <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(dao.id)}?s=80"
+          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2244%22 height=%2244%22%3E%3Crect width=%2244%22 height=%2244%22 rx=%2222%22 fill=%22%2327272a%22/%3E%3Ctext x=%2222%22 y=%2228%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2218%22%3E🏛️%3C/text%3E%3C/svg%3E'" />
+        <div class="dao-info" onclick="selectDao('${esc(dao.id)}')">
+          <div class="dao-name">${esc(dao.name)}</div>
+          <div class="dao-stat">Click to analyze proposals</div>
+        </div>
+        <button class="fav-btn${isFav ? ' active' : ''}" onclick="event.stopPropagation();toggleFavDao('${esc(dao.id)}')" title="Favorite">${isFav ? '⭐' : '☆'}</button>
+      </div>`;
+    }).join('');
+
+    try {
     const ids = POPULAR_DAOS.map(d => d.id);
-    const d = await gql(`{ spaces(where:{id_in:${JSON.stringify(ids)}}, first:20) { id followersCount members proposalsCount } }`);
+    const d = await gql(`{ spaces(where:{id_in:${JSON.stringify(ids)}}, first:50) { id followersCount members proposalsCount } }`);
     const spaces = d.spaces || [];
     const map = {};
     spaces.forEach(s => { map[s.id] = s; });
 
-    grid.innerHTML = POPULAR_DAOS.map(dao => {
+    const favs2 = getFavs();
+    const favDaos2 = favs2.daos.length ? POPULAR_DAOS.filter(d => favs2.daos.includes(d.id)) : [];
+    const otherDaos2 = POPULAR_DAOS.filter(d => !favs2.daos.includes(d.id));
+    const orderedDaos2 = [...favDaos2, ...otherDaos2];
+
+    let favSection2 = '';
+    if (favDaos2.length) {
+      favSection2 = `<div class="fav-section"><div class="fav-section-title">⭐ Your Favorites</div></div>`;
+    }
+
+    grid.innerHTML = favSection2 + orderedDaos2.map(dao => {
       const s = map[dao.id];
       const members = s ? (s.members || []).length : 0;
       const followers = s ? (s.followersCount || 0) : 0;
       const proposals = s ? (s.proposalsCount || 0) : 0;
-      return `<div class="dao" data-dao="${esc(dao.id)}" onclick="selectDao(this.dataset.dao)">
+      const isFav = favs2.daos.includes(dao.id);
+      return `<div class="dao" data-dao="${esc(dao.id)}">
         <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(dao.id)}?s=80"
           onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2244%22 height=%2244%22%3E%3Crect width=%2244%22 height=%2244%22 rx=%2222%22 fill=%22%2327272a%22/%3E%3Ctext x=%2222%22 y=%2228%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2218%22%3E🏛️%3C/text%3E%3C/svg%3E'" />
-        <div class="dao-info">
+        <div class="dao-info" onclick="selectDao('${esc(dao.id)}')">
           <div class="dao-name">${esc(dao.name)}</div>
           <div class="dao-stat">👥 ${members} · ⭐ ${followers.toLocaleString()} · 📋 ${proposals}</div>
         </div>
+        <button class="fav-btn${isFav ? ' active' : ''}" onclick="event.stopPropagation();toggleFavDao('${esc(dao.id)}')" title="Favorite">${isFav ? '⭐' : '☆'}</button>
       </div>`;
     }).join('');
   } catch (e) {
@@ -1034,8 +1116,81 @@ function selectDao(id) {
     sel.appendChild(opt);
   }
   sel.value = id;
+  // Show DAO health before switching
+  showDaoHealth(id);
   switchTabDirect('analyzer');
   loadProposals();
+}
+
+async function showDaoHealth(daoId) {
+  const daoInfo = POPULAR_DAOS.find(d => d.id === daoId);
+  const name = daoInfo ? daoInfo.name : daoId;
+  const r = document.getElementById('analysisResult');
+  if (!r) return;
+  r.innerHTML = `<div class="card"><div class="loading"><div class="spinner"></div> Loading ${esc(name)} health...</div></div>`;
+
+  try {
+    // Fetch space info + recent proposals for health metrics
+    const [spaceData, proposalsData] = await Promise.all([
+      gql(`{ space(id:"${daoId}") { id name followersCount members proposalsCount } }`),
+      gql(`query($s:String!) { proposals(first:50, where:{space:$s}, orderBy:"created", orderDirection:desc) { id state scores_total choices scores end } }`, { s: daoId })
+    ]);
+
+    const space = spaceData.space || {};
+    const proposals = proposalsData.proposals || [];
+    const followers = space.followersCount || 0;
+    const members = (space.members || []).length;
+    const totalProposals = proposals.length;
+    const active = proposals.filter(p => p.state === 'active').length;
+    const closed = proposals.filter(p => p.state === 'closed').length;
+    const totalVotes = proposals.reduce((s, p) => s + (p.scores_total || 0), 0);
+    const avgVotes = totalProposals > 0 ? Math.round(totalVotes / totalProposals) : 0;
+    const participation = followers > 0 ? ((totalVotes / Math.max(totalProposals, 1)) / followers * 100).toFixed(1) : 0;
+
+    // Pass/fail ratio (proposals with >50% on one choice)
+    let passed = 0, failed = 0;
+    proposals.filter(p => p.state === 'closed' && p.scores_total > 0).forEach(p => {
+      const maxScore = Math.max(...(p.scores || [0]));
+      const pct = maxScore / p.scores_total;
+      if (pct > 0.5) passed++; else failed++;
+    });
+    const passRate = (passed + failed) > 0 ? ((passed / (passed + failed)) * 100).toFixed(0) : '—';
+
+    // Recent activity trend
+    const now = Date.now() / 1000;
+    const recent30d = proposals.filter(p => p.end && (now - p.end) < 30 * 86400).length;
+
+    const isFav = isFavDao(daoId);
+
+    r.innerHTML = `<div class="card">
+      <div class="card-title">
+        🏥 ${esc(name)} Health
+        <button class="fav-btn${isFav ? ' active' : ''}" onclick="toggleFavDao('${esc(daoId)}')" style="margin-left:auto" title="Favorite">${isFav ? '⭐' : '☆'}</button>
+        <button class="btn btn-sm btn-ghost" onclick="closeAnalysis()" style="margin-left:8px">✕</button>
+      </div>
+      <div class="health-grid">
+        <div class="health-card"><div class="health-val" style="color:var(--accent)">${followers.toLocaleString()}</div><div class="health-label">Followers</div></div>
+        <div class="health-card"><div class="health-val" style="color:var(--purple)">${members}</div><div class="health-label">Members</div></div>
+        <div class="health-card"><div class="health-val" style="color:var(--green)">${totalProposals}</div><div class="health-label">Proposals</div></div>
+        <div class="health-card"><div class="health-val" style="color:var(--yellow)">${active}</div><div class="health-label">Active Now</div></div>
+        <div class="health-card"><div class="health-val">${avgVotes.toLocaleString()}</div><div class="health-label">Avg Votes</div></div>
+        <div class="health-card"><div class="health-val" style="color:${parseFloat(participation) > 5 ? 'var(--green)' : parseFloat(participation) > 1 ? 'var(--yellow)' : 'var(--red)'}">${participation}%</div><div class="health-label">Participation</div></div>
+        <div class="health-card"><div class="health-val" style="color:${passRate > 70 ? 'var(--green)' : passRate > 40 ? 'var(--yellow)' : 'var(--red)'}">${passRate}%</div><div class="health-label">Pass Rate</div></div>
+        <div class="health-card"><div class="health-val" style="color:var(--blue)">${recent30d}</div><div class="health-label">Last 30 Days</div></div>
+      </div>
+      <div class="tags" style="margin-top:12px">
+        ${members > 100 ? '<span class="tag tag-green">Active Community</span>' : ''}
+        ${parseFloat(participation) > 5 ? '<span class="tag tag-green">High Engagement</span>' : parseFloat(participation) > 1 ? '<span class="tag tag-yellow">Moderate Engagement</span>' : '<span class="tag tag-red">Low Engagement</span>'}
+        ${active > 0 ? '<span class="tag tag-blue">Voting Active</span>' : '<span class="tag tag-purple">All Resolved</span>'}
+        ${recent30d > 5 ? '<span class="tag tag-green">High Activity</span>' : recent30d > 0 ? '<span class="tag tag-yellow">Moderate Activity</span>' : '<span class="tag tag-red">Low Activity</span>'}
+      </div>
+    </div>`;
+  } catch (e) {
+    r.innerHTML = `<div class="card">
+      <div class="card-title">🏥 ${esc(name)} Health <button class="btn btn-sm btn-ghost" onclick="closeAnalysis()" style="margin-left:auto">✕</button></div>
+      <div style="color:var(--text3);font-size:14px">Could not load health data: ${esc(e.message)}</div>
+    </div>`;
+  }
 }
 
 // ─── Copy ───
@@ -1252,15 +1407,7 @@ analyzeProposal = function(p) {
   }, 300);
 };
 
-// Also add timeline button to stats bar
-const _origLoadProposals = loadProposals;
-loadProposals = async function() {
-  await _origLoadProposals();
-  const statsBar = document.getElementById('statsBar');
-  if (statsBar && statsBar.style.display !== 'none') {
-    statsBar.innerHTML += `<span class="stat-chip" onclick="showTimeline()" style="cursor:pointer;transition:var(--transition)">📅 Timeline</span>`;
-  }
-};
+// loadProposals override — now handled inline (fav bar + health + timeline chips)
 </script>
 </body>
 </html>
