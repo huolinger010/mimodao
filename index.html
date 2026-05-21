@@ -600,34 +600,25 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
             <select id="daoSelect" onchange="loadProposals()">
               <option value="">— Choose a DAO —</option>
               <option value="ens.eth">ENS (Ethereum Name Service)</option>
-              <option value="uniswap">Uniswap</option>
-              <option value="aave.eth">Aave</option>
+              <option value="uniswapgovernance.eth">Uniswap</option>
+              <option value="aavedao.eth">Aave DAO</option>
               <option value="lido-snapshot.eth">Lido</option>
-              <option value="arbitrumfoundation.eth">Arbitrum</option>
-              <option value="opcollective.eth">Optimism</option>
+              <option value="arbitrumfoundation.eth">Arbitrum DAO</option>
+              <option value="opcollective.eth">Optimism Collective</option>
               <option value="gitcoindao.eth">Gitcoin</option>
-              <option value="safe.eth">Safe</option>
-              <option value="curve.eth">Curve</option>
-              <option value="makerdao.eth">MakerDAO</option>
+              <option value="safe.eth">SafeDAO</option>
+              <option value="curve.eth">Curve Finance</option>
+              <option value="balancer.eth">Balancer</option>
               <option value="dydxgov.eth">dYdX</option>
               <option value="sushigov.eth">Sushi</option>
-              <option value="compound-governance.eth">Compound</option>
               <option value="nouns.eth">Nouns</option>
               <option value="morpho.eth">Morpho</option>
-              <option value="yearn">Yearn Finance</option>
-              <option value="balancer.eth">Balancer</option>
+              <option value="apecoin.eth">ApeCoin DAO</option>
+              <option value="gnosis.eth">GnosisDAO</option>
               <option value="starknet.eth">Starknet</option>
-              <option value="scroll">Scroll</option>
-              <option value="layerzero.foundation">LayerZero</option>
-              <option value="puffer.eth">Puffer</option>
-              <option value="etherfi.eth">EtherFi</option>
-              <option value="eigenlayer.eth">EigenLayer</option>
-              <option value="jito-dao.eth">Jito</option>
-              <option value="zkSync">zkSync</option>
-              <option value="1inch.eth">1inch</option>
-              <option value="cow.eth">CoW Protocol</option>
               <option value="radiantcapital.eth">Radiant Capital</option>
-              <option value="velodrome.eth">Velodrome</option>
+              <option value="cow.eth">CoW DAO</option>
+              <option value="1inch.eth">1inch Network</option>
             </select>
           </div>
         </div>
@@ -1407,39 +1398,25 @@ function clearWriter() {
 // ─── Explorer ───
 const POPULAR_DAOS = [
   { id: 'ens.eth', name: 'ENS' },
-  { id: 'uniswap', name: 'Uniswap' },
-  { id: 'aave.eth', name: 'Aave' },
+  { id: 'uniswapgovernance.eth', name: 'Uniswap' },
+  { id: 'aavedao.eth', name: 'Aave DAO' },
   { id: 'lido-snapshot.eth', name: 'Lido' },
-  { id: 'arbitrumfoundation.eth', name: 'Arbitrum' },
-  { id: 'opcollective.eth', name: 'Optimism' },
+  { id: 'arbitrumfoundation.eth', name: 'Arbitrum DAO' },
+  { id: 'opcollective.eth', name: 'Optimism Collective' },
   { id: 'gitcoindao.eth', name: 'Gitcoin' },
-  { id: 'safe.eth', name: 'Safe' },
-  { id: 'curve.eth', name: 'Curve' },
-  { id: 'makerdao.eth', name: 'MakerDAO' },
+  { id: 'safe.eth', name: 'SafeDAO' },
+  { id: 'curve.eth', name: 'Curve Finance' },
+  { id: 'balancer.eth', name: 'Balancer' },
   { id: 'dydxgov.eth', name: 'dYdX' },
   { id: 'sushigov.eth', name: 'Sushi' },
-  { id: 'compound-governance.eth', name: 'Compound' },
   { id: 'nouns.eth', name: 'Nouns' },
   { id: 'morpho.eth', name: 'Morpho' },
-  { id: 'jbdao.eth', name: 'Juicebox' },
-  { id: 'pods.eth', name: 'Pods' },
-  { id: 'stakewise.eth', name: 'StakeWise' },
-  { id: 'rocketpool-dao.eth', name: 'Rocket Pool' },
-  { id: 'hop.eth', name: 'Hop Protocol' },
-  { id: 'yearn', name: 'Yearn Finance' },
-  { id: 'balancer.eth', name: 'Balancer' },
+  { id: 'apecoin.eth', name: 'ApeCoin DAO' },
+  { id: 'gnosis.eth', name: 'GnosisDAO' },
   { id: 'starknet.eth', name: 'Starknet' },
-  { id: 'scroll', name: 'Scroll' },
-  { id: 'layerzero.foundation', name: 'LayerZero' },
-  { id: 'puffer.eth', name: 'Puffer' },
-  { id: 'etherfi.eth', name: 'EtherFi' },
-  { id: 'eigenlayer.eth', name: 'EigenLayer' },
-  { id: 'jito-dao.eth', name: 'Jito' },
-  { id: 'zkSync', name: 'zkSync' },
-  { id: '1inch.eth', name: '1inch' },
-  { id: 'cow.eth', name: 'CoW Protocol' },
   { id: 'radiantcapital.eth', name: 'Radiant Capital' },
-  { id: 'velodrome.eth', name: 'Velodrome' }
+  { id: 'cow.eth', name: 'CoW DAO' },
+  { id: '1inch.eth', name: '1inch Network' }
 ];
 
 async function loadTopDAOs() {
