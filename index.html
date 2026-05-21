@@ -53,24 +53,16 @@ html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
-
-/* Layout */
 .app{display:flex;flex-direction:column;min-height:100vh}
 .container{max-width:960px;margin:0 auto;padding:0 20px;width:100%}
 .main{flex:1;padding:20px 0 40px}
-
-/* Nav */
 .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:var(--glass);border-bottom:1px solid var(--border);transition:var(--transition)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
 .nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--text);white-space:nowrap}
 .nav-logo span{font-size:22px}
 .nav-actions{display:flex;align-items:center;gap:8px}
-
-/* Theme Toggle */
 .theme-btn{width:40px;height:40px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:var(--transition);flex-shrink:0}
 .theme-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
-
-/* Hero */
 .hero{text-align:center;padding:48px 0 32px;position:relative}
 .hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;opacity:.6}
 .hero-icon{font-size:52px;margin-bottom:12px;display:block;animation:float 3s ease-in-out infinite}
@@ -81,28 +73,18 @@ a:hover{text-decoration:underline}
 .h-badge{background:var(--bg2);border:1px solid var(--border);padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:5px;transition:var(--transition)}
 .h-badge:hover{border-color:var(--accent);color:var(--accent)}
 .h-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
-
-/* Tabs */
 .tabs-wrap{position:sticky;top:56px;z-index:40;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:var(--glass);padding:12px 0;border-bottom:1px solid var(--border);transition:var(--transition)}
 .tabs{display:flex;gap:4px;background:var(--bg2);border-radius:var(--radius-sm);padding:4px;border:1px solid var(--border)}
 .tab{flex:1;padding:10px 16px;border:none;background:transparent;color:var(--text3);font-size:13px;font-weight:600;border-radius:var(--radius-xs);cursor:pointer;transition:var(--transition);font-family:var(--font);white-space:nowrap}
 .tab.active{background:var(--accent);color:var(--accent-text);box-shadow:0 2px 8px var(--accent-glow)}
 .tab:hover:not(.active){color:var(--text);background:var(--surface)}
-
-/* Panel */
 .panel{display:none;animation:fadeUp .3s ease}
 .panel.active{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* Card */
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;transition:var(--transition);box-shadow:var(--shadow)}
 .card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-lg)}
 .card-title{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-
-/* Badge */
 .badge-free{background:var(--green-bg);color:var(--green);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.3px}
-
-/* Form */
 .form-group{margin-bottom:16px}
 .form-label{display:block;font-size:12px;color:var(--text3);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 select,input[type="text"],textarea{width:100%;background:var(--input-bg);border:1px solid var(--border);color:var(--text);padding:12px 14px;border-radius:var(--radius-xs);font-size:14px;font-family:var(--font);transition:var(--transition);outline:none}
@@ -110,8 +92,6 @@ select:hover,input[type="text"]:hover,textarea:hover{border-color:var(--border-h
 select:focus,input[type="text"]:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
 textarea{min-height:130px;resize:vertical;line-height:1.6}
 select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2371717a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-
-/* Button */
 .btn{padding:11px 22px;border:none;border-radius:var(--radius-xs);font-size:14px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font);display:inline-flex;align-items:center;gap:6px;line-height:1}
 .btn-primary{background:var(--accent);color:var(--accent-text);box-shadow:0 2px 8px var(--accent-glow)}
 .btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 4px 16px var(--accent-glow)}
@@ -120,45 +100,31 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
 .btn-sm{padding:8px 14px;font-size:12px}
 .btn-group{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-
-/* Proposal Card */
 .p-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow)}
 .p-card:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
 .p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .p-title{font-size:14px;font-weight:600;margin-bottom:8px;line-height:1.4}
 .p-meta{display:flex;gap:14px;flex-wrap:wrap}
 .p-meta span{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:4px}
-
-/* Status */
 .status{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;flex-shrink:0}
 .s-active{background:var(--green-bg);color:var(--green)}
 .s-closed{background:var(--surface);color:var(--text3)}
 .s-pending{background:var(--yellow-bg);color:var(--yellow)}
-
-/* Vote Bar */
 .vbar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin:6px 0}
 .vfill{height:100%;border-radius:3px;transition:width .6s ease}
-.vfill-f{background:var(--green)}.vfill-a{background:var(--red)}.vfill-ab{background:var(--yellow)}
+.vfill-f{background:var(--green)}
 .vstat{display:flex;justify-content:space-between;font-size:11px;color:var(--text3)}
-
-/* Analysis */
-.a-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;margin-top:14px;line-height:1.7;font-size:14px}
+.a-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;margin-top:14px;line-height:1.7;font-size:14px;white-space:pre-wrap}
 .a-section{margin-bottom:16px}.a-section:last-child{margin-bottom:0}
 .a-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-
-/* Score Grid */
 .scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin:14px 0}
 .score{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-xs);padding:14px 10px;text-align:center;transition:var(--transition)}
 .score:hover{border-color:var(--accent)}
 .score-n{font-size:26px;font-weight:800;line-height:1;margin-bottom:4px}
 .score-l{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
-
-/* Risk Meter */
 .risk-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin:8px 0}
 .risk-fill{height:100%;border-radius:4px;transition:width .5s ease}
 .risk-low{background:var(--green)}.risk-med{background:var(--yellow)}.risk-high{background:var(--red)}
-
-/* Tags */
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
 .tag{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;transition:var(--transition)}
 .tag-green{background:var(--green-bg);color:var(--green)}
@@ -166,8 +132,6 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 .tag-yellow{background:var(--yellow-bg);color:var(--yellow)}
 .tag-blue{background:var(--blue-bg);color:var(--blue)}
 .tag-purple{background:var(--purple-bg);color:var(--purple)}
-
-/* DAO Grid */
 .dao-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .dao{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow);display:flex;align-items:center;gap:14px}
 .dao:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
@@ -175,31 +139,17 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 .dao-info{flex:1;min-width:0}
 .dao-name{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dao-stat{font-size:12px;color:var(--text3)}
-
-/* Loading */
 .loading{display:flex;align-items:center;gap:10px;color:var(--text3);font-size:13px;padding:20px 0;justify-content:center}
 .spinner{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* Empty */
 .empty{text-align:center;padding:48px 20px;color:var(--text3)}
 .empty-icon{font-size:48px;margin-bottom:12px;opacity:.5}
-
-/* Writer Output */
 .w-out{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:16px;line-height:1.8;font-size:14px;white-space:pre-wrap}
-
-/* Footer */
 .footer{text-align:center;padding:32px 0;color:var(--text3);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
 .footer a{color:var(--accent)}
-
-/* Toast */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--accent);color:var(--accent-text);padding:12px 20px;border-radius:var(--radius-xs);font-size:13px;font-weight:600;transform:translateY(100px);opacity:0;transition:var(--transition);z-index:100;box-shadow:var(--shadow-xl)}
 .toast.show{transform:translateY(0);opacity:1}
-
-/* Scrollbar */
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--text3)}
-
-/* Mobile */
 @media(max-width:640px){
   .container{padding:0 14px}
   .hero{padding:32px 0 24px}
@@ -217,7 +167,6 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 </head>
 <body>
 <div class="app">
-  <!-- Nav -->
   <nav class="nav">
     <div class="container nav-inner">
       <div class="nav-logo"><span>🏛️</span> MiMoDAO</div>
@@ -226,10 +175,8 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
       </div>
     </div>
   </nav>
-
   <main class="main">
     <div class="container">
-      <!-- Hero -->
       <div class="hero">
         <span class="hero-icon">🏛️</span>
         <h1>MiMoDAO</h1>
@@ -241,8 +188,6 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
           <span class="h-badge">Single File</span>
         </div>
       </div>
-
-      <!-- Tabs -->
       <div class="tabs-wrap">
         <div class="tabs">
           <button class="tab active" onclick="switchTab(this,'analyzer')">🔍 Proposal Analyzer</button>
@@ -251,7 +196,7 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
         </div>
       </div>
 
-      <!-- Analyzer Panel -->
+      <!-- Analyzer -->
       <div id="analyzer" class="panel active">
         <div class="card">
           <div class="card-title">🏛️ Select DAO <span class="badge-free">FREE</span></div>
@@ -280,7 +225,7 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
         <div id="analysisResult"></div>
       </div>
 
-      <!-- Writer Panel -->
+      <!-- Writer -->
       <div id="writer" class="panel">
         <div class="card">
           <div class="card-title">✍️ Generate a DAO Proposal <span class="badge-free">FREE</span></div>
@@ -310,7 +255,7 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
         <div id="writerOutput"></div>
       </div>
 
-      <!-- Explorer Panel -->
+      <!-- Explorer -->
       <div id="explore" class="panel">
         <div class="card">
           <div class="card-title">🌐 Top DAOs on Snapshot <span class="badge-free">FREE</span></div>
@@ -322,195 +267,430 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
       </div>
     </div>
   </main>
-
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       Built with 🧠 AI Intelligence &nbsp;·&nbsp; <a href="https://snapshot.org" target="_blank">Snapshot</a> &nbsp;·&nbsp; <a href="https://github.com/huolinger010/mimodao" target="_blank">GitHub</a> &nbsp;·&nbsp; © 2026 MiMoDAO
     </div>
   </footer>
 </div>
-
 <div id="toast" class="toast"></div>
 
 <script>
-const SNAPSHOT='https://hub.snapshot.org/graphql';
+const SNAPSHOT = 'https://hub.snapshot.org/graphql';
+
+// ─── Cache for proposals (fixes onclick injection bug) ───
+let _proposals = [];
 
 // ─── Theme ───
-function toggleTheme(){
-  const html=document.documentElement;
-  const cur=html.getAttribute('data-theme');
-  const next=cur==='dark'?'light':'dark';
-  html.setAttribute('data-theme',next);
-  localStorage.setItem('mimo-theme',next);
-  document.getElementById('themeBtn').textContent=next==='dark'?'🌙':'☀️';
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('mimo-theme', next);
+  updateThemeBtn(next);
 }
-(function(){
-  const t=localStorage.getItem('mimo-theme')||'dark';
-  document.documentElement.setAttribute('data-theme',t);
-  document.getElementById('themeBtn').textContent=t==='dark'?'🌙':'☀️';
+function updateThemeBtn(t) {
+  const btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = t === 'dark' ? '🌙' : '☀️';
+}
+(function initTheme() {
+  const t = localStorage.getItem('mimo-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => updateThemeBtn(t));
+  } else {
+    updateThemeBtn(t);
+  }
 })();
 
 // ─── Toast ───
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+function toast(m) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = m;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
 
 // ─── Tabs ───
-function switchTab(el,name){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+function switchTab(el, name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
   document.getElementById(name).classList.add('active');
-  if(name==='explore')loadTopDAOs();
+  if (name === 'explore') loadTopDAOs();
 }
-function switchTabDirect(name){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  const tabs=document.querySelectorAll('.tab');
-  const map={analyzer:0,writer:1,explore:2};
-  tabs[map[name]].classList.add('active');
-  document.getElementById(name).classList.add('active');
+function switchTabDirect(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  const idx = { analyzer: 0, writer: 1, explore: 2 };
+  const tabs = document.querySelectorAll('.tab');
+  if (tabs[idx[name]]) tabs[idx[name]].classList.add('active');
+  const panel = document.getElementById(name);
+  if (panel) panel.classList.add('active');
 }
 
-// ─── API ───
-async function gql(q,v={}){
-  const r=await fetch(SNAPSHOT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q,variables:v})});
-  return(await r.json()).data;
+// ─── Snapshot API ───
+async function gql(query, variables) {
+  try {
+    const res = await fetch(SNAPSHOT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query, variables: variables || {} })
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    if (json.errors && json.errors.length) throw new Error(json.errors[0].message);
+    return json.data || {};
+  } catch (e) {
+    throw new Error('Snapshot API: ' + e.message);
+  }
 }
-function esc(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):''}
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
-// ─── Proposals ───
-async function loadProposals(){
-  const space=document.getElementById('daoSelect').value;
-  if(!space)return;
-  const list=document.getElementById('proposalsList');
-  list.innerHTML='<div class="loading"><div class="spinner"></div> Loading proposals...</div>';
-  document.getElementById('analysisResult').innerHTML='';
-  try{
-    const d=await gql(`query($s:String!){proposals(first:10,space:$s,orderBy:"created",orderDirection:desc){id title body state created end choices scores scores_total author link}}`,{s:space});
-    if(!d.proposals||!d.proposals.length){list.innerHTML='<div class="empty"><div class="empty-icon">📭</div>No proposals found</div>';return}
-    list.innerHTML=d.proposals.map(p=>{
-      const sc=p.state==='active'?'s-active':p.state==='pending'?'s-pending':'s-closed';
-      const dt=new Date(p.created*1000).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-      const end=new Date(p.end*1000).toLocaleDateString('en-US',{month:'short',day:'numeric'});
-      const tv=p.scores_total||0;
-      const pData=JSON.stringify({...p,body:(p.body||'').slice(0,3000)}).replace(/'/g,'&#39;');
-      return`<div class="p-card" onclick='analyzeProposal(${pData})'><div class="p-head"><div style="flex:1;min-width:0"><div class="p-title">${esc(p.title)}</div><div class="p-meta"><span>📅 ${dt}</span><span>⏰ Ends ${end}</span><span>🗳️ ${tv.toLocaleString()} votes</span><span>👤 ${p.author?p.author.slice(0,6)+'…'+p.author.slice(-4):'—'}</span></div></div><span class="status ${sc}">${p.state}</span></div>${tv?renderBars(p.choices,p.scores,tv):''}</div>`;
+// ─── Load Proposals ───
+async function loadProposals() {
+  const space = document.getElementById('daoSelect').value;
+  if (!space) return;
+  const list = document.getElementById('proposalsList');
+  list.innerHTML = '<div class="loading"><div class="spinner"></div> Loading proposals...</div>';
+  document.getElementById('analysisResult').innerHTML = '';
+  _proposals = [];
+
+  try {
+    const d = await gql(
+      'query($s:String!) { proposals(first:10, space:$s, orderBy:"created", orderDirection:desc) { id title body state created end choices scores scores_total author link } }',
+      { s: space }
+    );
+    const proposals = d.proposals || [];
+    if (!proposals.length) {
+      list.innerHTML = '<div class="empty"><div class="empty-icon">📭</div>No proposals found</div>';
+      return;
+    }
+
+    _proposals = proposals.map(p => ({
+      id: p.id || '',
+      title: p.title || 'Untitled',
+      body: (p.body || '').slice(0, 4000),
+      state: p.state || 'unknown',
+      created: p.created || 0,
+      end: p.end || 0,
+      choices: p.choices || [],
+      scores: p.scores || [],
+      scores_total: p.scores_total || 0,
+      author: p.author || '',
+      link: p.link || ''
+    }));
+
+    list.innerHTML = _proposals.map((p, i) => {
+      const sc = p.state === 'active' ? 's-active' : p.state === 'pending' ? 's-pending' : 's-closed';
+      const dt = new Date(p.created * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const end = new Date(p.end * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const tv = p.scores_total;
+      const author = p.author ? p.author.slice(0, 6) + '…' + p.author.slice(-4) : '—';
+      return `<div class="p-card" onclick="showProposal(${i})">
+        <div class="p-head"><div style="flex:1;min-width:0">
+          <div class="p-title">${esc(p.title)}</div>
+          <div class="p-meta">
+            <span>📅 ${dt}</span><span>⏰ Ends ${end}</span>
+            <span>🗳️ ${tv.toLocaleString()} votes</span><span>👤 ${esc(author)}</span>
+          </div>
+        </div><span class="status ${sc}">${esc(p.state)}</span></div>
+        ${tv > 0 ? renderBars(p.choices, p.scores, tv) : ''}
+      </div>`;
     }).join('');
-  }catch(e){list.innerHTML=`<div class="empty">⚠️ ${esc(e.message)}</div>`}
+  } catch (e) {
+    list.innerHTML = `<div class="empty">⚠️ ${esc(e.message)}</div>`;
+  }
 }
 
-function renderBars(ch,scores,tot){
-  if(!tot)return '';
-  return ch.map((c,i)=>({n:c,s:scores[i]||0})).sort((a,b)=>b.s-a.s).slice(0,3).map(v=>{
-    const p=((v.s/tot)*100).toFixed(1);
-    return`<div class="vbar"><div class="vfill vfill-f" style="width:${p}%"></div></div><div class="vstat"><span>${esc(v.n)}</span><span>${p}%</span></div>`;
-  }).join('');
+function showProposal(index) {
+  const p = _proposals[index];
+  if (!p) return;
+  analyzeProposal(p);
+}
+
+function renderBars(choices, scores, total) {
+  if (!total || !choices || !choices.length) return '';
+  return choices
+    .map((c, i) => ({ n: c || 'Choice ' + (i + 1), s: (scores && scores[i]) || 0 }))
+    .sort((a, b) => b.s - a.s)
+    .slice(0, 3)
+    .map(v => {
+      const pct = ((v.s / total) * 100).toFixed(1);
+      return `<div class="vbar"><div class="vfill vfill-f" style="width:${pct}%"></div></div>
+        <div class="vstat"><span>${esc(v.n)}</span><span>${pct}%</span></div>`;
+    }).join('');
 }
 
 // ─── Analysis ───
-function analyzeProposal(p){
-  const r=document.getElementById('analysisResult');
-  r.innerHTML='<div class="card"><div class="loading"><div class="spinner"></div> Analyzing...</div></div>';
-  setTimeout(()=>{
-    const body=p.body||'';
-    const text=(p.title+' '+body).toLowerCase();
-    const a=smartAnalyze(p,body,text);
-    r.innerHTML=`<div class="card"><div class="card-title">🧠 Analysis: ${esc(p.title)}</div>
-      <div class="scores">${Object.entries(a.scores).map(([k,v])=>{const l={complexity:'Complexity',financial:'Financial',security:'Security',governance:'Governance',technical:'Technical',urgency:'Urgency',sentiment:'Sentiment'}[k];const c=v>70?'var(--red)':v>40?'var(--yellow)':'var(--green)';return`<div class="score"><div class="score-n" style="color:${c}">${v}</div><div class="score-l">${l}</div></div>`}).join('')}</div>
-      <div class="a-section"><div class="a-label">⚠️ Risk: ${a.risk.level.toUpperCase()}</div><div class="risk-bar"><div class="risk-fill risk-${a.risk.level}" style="width:${a.risk.pct}%"></div></div><div style="font-size:12px;color:var(--text3)">${a.risk.pct}/100</div></div>
-      ${a.tags.length?`<div class="tags">${a.tags.map(t=>`<span class="tag tag-${t.c}">${t.t}</span>`).join('')}</div>`:''}
-      <div class="a-box">${a.insight}</div>
-      <div class="btn-group"><button class="btn btn-sm btn-ghost" onclick="copyBox('#analysisResult .a-box')">📋 Copy</button><button class="btn btn-sm btn-ghost" onclick="document.getElementById('analysisResult').innerHTML=''">✕ Close</button></div>
-    </div>`;
-  },300);
+function analyzeProposal(p) {
+  const r = document.getElementById('analysisResult');
+  if (!r) return;
+  r.innerHTML = '<div class="card"><div class="loading"><div class="spinner"></div> Analyzing...</div></div>';
+
+  setTimeout(() => {
+    try {
+      const body = p.body || '';
+      const text = ((p.title || '') + ' ' + body).toLowerCase();
+      const a = smartAnalyze(p, body, text);
+
+      const scoreHTML = Object.entries(a.scores).map(([k, v]) => {
+        const labels = { complexity: 'Complexity', financial: 'Financial', security: 'Security', governance: 'Governance', technical: 'Technical', urgency: 'Urgency', sentiment: 'Sentiment' };
+        const label = labels[k] || k;
+        const color = v > 70 ? 'var(--red)' : v > 40 ? 'var(--yellow)' : 'var(--green)';
+        return `<div class="score"><div class="score-n" style="color:${color}">${v}</div><div class="score-l">${label}</div></div>`;
+      }).join('');
+
+      const tagsHTML = a.tags.length
+        ? `<div class="tags">${a.tags.map(t => `<span class="tag tag-${t.c}">${esc(t.t)}</span>`).join('')}</div>`
+        : '';
+
+      r.innerHTML = `<div class="card">
+        <div class="card-title">🧠 Analysis: ${esc(p.title)}</div>
+        <div class="scores">${scoreHTML}</div>
+        <div class="a-section">
+          <div class="a-label">⚠️ Risk: ${a.risk.level.toUpperCase()}</div>
+          <div class="risk-bar"><div class="risk-fill risk-${a.risk.level}" style="width:${a.risk.pct}%"></div></div>
+          <div style="font-size:12px;color:var(--text3)">${a.risk.pct}/100</div>
+        </div>
+        ${tagsHTML}
+        <div class="a-box">${a.insight}</div>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-ghost" onclick="copyBox('analysisResult')">📋 Copy</button>
+          <button class="btn btn-sm btn-ghost" onclick="closeAnalysis()">✕ Close</button>
+        </div>
+      </div>`;
+    } catch (e) {
+      r.innerHTML = `<div class="card"><div style="color:var(--red)">⚠️ Analysis error: ${esc(e.message)}</div></div>`;
+    }
+  }, 300);
 }
 
-function smartAnalyze(p,body,text){
-  const scores={};const tags=[];let risk=0;
-  const wc=body.split(/\s+/).length;
-  scores.complexity=wc>800?90:wc>400?70:wc>200?50:30;
-  const hasMoney=/\b(treasury|fund|allocat|grant|budget|usd|eth|uni|token|million|thousand|spend|payment|compensat)\b/i.test(body);
-  scores.financial=hasMoney?85:20;if(hasMoney)tags.push({t:'Treasury Impact',c:'yellow'});
-  const hasSec=/\b(security|audit|vuln|exploit|hack|risk|safe|protect|multisig|timelock)\b/i.test(text);
-  scores.security=hasSec?80:15;if(hasSec)tags.push({t:'Security',c:'red'});risk+=hasSec?20:0;
-  const hasGov=/\b(vote|quorum|governance|delegate|council|committee)\b/i.test(text);
-  scores.governance=hasGov?75:25;if(hasGov)tags.push({t:'Governance',c:'purple'});
-  const hasTech=/\b(contract|upgrade|deploy|migration|parameter|threshold)\b/i.test(text);
-  scores.technical=hasTech?80:20;if(hasTech)tags.push({t:'Technical',c:'blue'});
-  const hasUrg=/\b(urgent|emergency|immediate|critical|asap)\b/i.test(text);
-  scores.urgency=hasUrg?90:20;if(hasUrg)tags.push({t:'Urgent',c:'red'});risk+=hasUrg?15:0;
-  const pos=(text.match(/\b(improve|enhance|grow|benefit|increase|strengthen|support|success)\b/g)||[]).length;
-  const neg=(text.match(/\b(risk|concern|problem|issue|fail|loss|threat|vulnerability)\b/g)||[]).length;
-  scores.sentiment=Math.min(100,Math.max(0,50+(pos-neg)*10));
-  risk+=scores.financial>60?15:0;risk+=scores.technical>60?10:0;
-  const rp=Math.min(100,risk);const rl=rp>60?'high':rp>30?'med':'low';
-  if(p.state==='active')tags.push({t:'Active',c:'green'});
-  if((p.scores_total||0)>10000)tags.push({t:'High Participation',c:'green'});
-  let ins='';
-  const sents=body.split(/[.!?]+/).filter(s=>s.trim().length>20).slice(0,3);
-  ins+=`📋 <strong style="color:var(--accent)">Summary</strong>\n${sents.length?sents.join('. ')+'.':'No detailed description provided.'}\n\n`;
-  ins+=`📊 <strong style="color:var(--accent)">Key Metrics</strong>\n• Total votes: ${(p.scores_total||0).toLocaleString()}\n• Choices: ${(p.choices||[]).join(', ')}\n• Period: ${new Date(p.created*1000).toLocaleDateString()} → ${new Date(p.end*1000).toLocaleDateString()}\n\n`;
-  ins+=`📈 <strong style="color:var(--accent)">Score Breakdown</strong>\n`;
-  for(const[k,v]of Object.entries(scores)){const l={complexity:'Complexity',financial:'Financial',security:'Security',governance:'Governance',technical:'Technical',urgency:'Urgency',sentiment:'Sentiment'}[k];const bar='█'.repeat(Math.round(v/10))+'░'.repeat(10-Math.round(v/10));ins+=`• ${l}: ${bar} ${v}/100\n`}
-  ins+=`\n⚠️ <strong style="color:var(--accent)">Risk Assessment</strong>: ${rl.toUpperCase()} (${rp}/100)\n`;
-  if(rp>60)ins+='Significant risk. Careful review recommended.\n\n';
-  else if(rp>30)ins+='Moderate risk. Standard due diligence.\n\n';
-  else ins+='Low risk. Straightforward proposal.\n\n';
-  ins+=`💡 <strong style="color:var(--accent)">Recommendation</strong>\n`;
-  const ov=(scores.sentiment+scores.governance+scores.financial)/3;
-  if(p.state==='closed')ins+='Already decided. Review results for context.';
-  else if(ov>65&&rp<40)ins+='🟢 FAVORABLE — Positive indicators, manageable risk. Consider voting FOR.';
-  else if(rp>60||scores.sentiment<30)ins+='🔴 CAUTION — Elevated risk or negative sentiment. Review carefully.';
-  else ins+='🟡 NEUTRAL — Mixed signals. Review details before deciding.';
-  return{scores,risk:{level:rl,pct:rp},tags,insight:ins};
+function closeAnalysis() {
+  const el = document.getElementById('analysisResult');
+  if (el) el.innerHTML = '';
+}
+
+function smartAnalyze(p, body, text) {
+  const scores = {};
+  const tags = [];
+  let risk = 0;
+
+  const wc = body.split(/\s+/).filter(Boolean).length;
+  scores.complexity = wc > 800 ? 90 : wc > 400 ? 70 : wc > 200 ? 50 : 30;
+
+  const hasMoney = /\b(treasury|fund|allocat|grant|budget|usd|eth|uni|token|million|thousand|spend|payment|compensat)\b/i.test(body);
+  scores.financial = hasMoney ? 85 : 20;
+  if (hasMoney) tags.push({ t: 'Treasury Impact', c: 'yellow' });
+
+  const hasSec = /\b(security|audit|vuln|exploit|hack|risk|safe|protect|multisig|timelock)\b/i.test(text);
+  scores.security = hasSec ? 80 : 15;
+  if (hasSec) tags.push({ t: 'Security', c: 'red' });
+  risk += hasSec ? 20 : 0;
+
+  const hasGov = /\b(vote|quorum|governance|delegate|council|committee)\b/i.test(text);
+  scores.governance = hasGov ? 75 : 25;
+  if (hasGov) tags.push({ t: 'Governance', c: 'purple' });
+
+  const hasTech = /\b(contract|upgrade|deploy|migration|parameter|threshold)\b/i.test(text);
+  scores.technical = hasTech ? 80 : 20;
+  if (hasTech) tags.push({ t: 'Technical', c: 'blue' });
+
+  const hasUrg = /\b(urgent|emergency|immediate|critical|asap)\b/i.test(text);
+  scores.urgency = hasUrg ? 90 : 20;
+  if (hasUrg) tags.push({ t: 'Urgent', c: 'red' });
+  risk += hasUrg ? 15 : 0;
+
+  const pos = (text.match(/\b(improve|enhance|grow|benefit|increase|strengthen|support|success)\b/g) || []).length;
+  const neg = (text.match(/\b(risk|concern|problem|issue|fail|loss|threat|vulnerability)\b/g) || []).length;
+  scores.sentiment = Math.min(100, Math.max(0, 50 + (pos - neg) * 10));
+
+  risk += scores.financial > 60 ? 15 : 0;
+  risk += scores.technical > 60 ? 10 : 0;
+  const rp = Math.min(100, risk);
+  const rl = rp > 60 ? 'high' : rp > 30 ? 'med' : 'low';
+
+  if (p.state === 'active') tags.push({ t: 'Active', c: 'green' });
+  if (p.scores_total > 10000) tags.push({ t: 'High Participation', c: 'green' });
+
+  let ins = '';
+  const sents = body.split(/[.!?]+/).filter(s => s.trim().length > 20).slice(0, 3);
+  ins += `📋 Summary\n${sents.length ? sents.join('. ') + '.' : 'No detailed description provided.'}\n\n`;
+
+  ins += `📊 Key Metrics\n• Total votes: ${p.scores_total.toLocaleString()}\n• Choices: ${(p.choices || []).join(', ')}\n• Period: ${p.created ? new Date(p.created * 1000).toLocaleDateString() : '—'} → ${p.end ? new Date(p.end * 1000).toLocaleDateString() : '—'}\n\n`;
+
+  ins += `📈 Score Breakdown\n`;
+  const scoreLabels = { complexity: 'Complexity', financial: 'Financial', security: 'Security', governance: 'Governance', technical: 'Technical', urgency: 'Urgency', sentiment: 'Sentiment' };
+  for (const [k, v] of Object.entries(scores)) {
+    const bar = '█'.repeat(Math.round(v / 10)) + '░'.repeat(10 - Math.round(v / 10));
+    ins += `• ${scoreLabels[k] || k}: ${bar} ${v}/100\n`;
+  }
+
+  ins += `\n⚠️ Risk Assessment: ${rl.toUpperCase()} (${rp}/100)\n`;
+  if (rp > 60) ins += 'Significant risk. Careful review recommended.\n\n';
+  else if (rp > 30) ins += 'Moderate risk. Standard due diligence.\n\n';
+  else ins += 'Low risk. Straightforward proposal.\n\n';
+
+  ins += `💡 Recommendation\n`;
+  const ov = (scores.sentiment + scores.governance + scores.financial) / 3;
+  if (p.state === 'closed') ins += 'Already decided. Review results for context.';
+  else if (ov > 65 && rp < 40) ins += '🟢 FAVORABLE — Positive indicators, manageable risk. Consider voting FOR.';
+  else if (rp > 60 || scores.sentiment < 30) ins += '🔴 CAUTION — Elevated risk or negative sentiment. Review carefully.';
+  else ins += '🟡 NEUTRAL — Mixed signals. Review details before deciding.';
+
+  return { scores, risk: { level: rl, pct: rp }, tags, insight: ins };
 }
 
 // ─── Writer ───
-function generateProposal(){
-  const dao=document.getElementById('writerDao').value.trim();
-  const idea=document.getElementById('writerIdea').value.trim();
-  const type=document.getElementById('writerType').value;
-  if(!dao||!idea){toast('Fill in DAO name and idea');return}
-  const out=document.getElementById('writerOutput');
-  out.innerHTML='<div class="card"><div class="loading"><div class="spinner"></div> Generating...</div></div>';
-  setTimeout(()=>{out.innerHTML=`<div class="card"><div class="card-title">📄 Generated Proposal</div><div class="w-out">${buildProposal(dao,idea,type)}</div><div class="btn-group"><button class="btn btn-sm btn-primary" onclick="copyBox('#writerOutput .w-out')">📋 Copy</button><button class="btn btn-sm btn-ghost" onclick="clearWriter()">✕ Clear</button></div></div>`},400);
+function generateProposal() {
+  const dao = document.getElementById('writerDao').value.trim();
+  const idea = document.getElementById('writerIdea').value.trim();
+  const type = document.getElementById('writerType').value;
+  if (!dao || !idea) { toast('Fill in DAO name and idea'); return; }
+
+  const out = document.getElementById('writerOutput');
+  out.innerHTML = '<div class="card"><div class="loading"><div class="spinner"></div> Generating...</div></div>';
+
+  setTimeout(() => {
+    try {
+      const proposal = buildProposal(dao, idea, type);
+      out.innerHTML = `<div class="card">
+        <div class="card-title">📄 Generated Proposal</div>
+        <div class="w-out">${esc(proposal)}</div>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-primary" onclick="copyBox('writerOutput')">📋 Copy</button>
+          <button class="btn btn-sm btn-ghost" onclick="clearWriter()">✕ Clear</button>
+        </div>
+      </div>`;
+    } catch (e) {
+      out.innerHTML = `<div class="card"><div style="color:var(--red)">⚠️ Error: ${esc(e.message)}</div></div>`;
+    }
+  }, 400);
 }
 
-function buildProposal(dao,idea,type){
-  const tl={general:'General Governance',treasury:'Treasury / Funding',technical:'Technical Upgrade',partnership:'Partnership / Integration',parameter:'Parameter Change'};
-  const words=idea.split(/\s+/).slice(0,10).join(' ');
-  const prefix={general:'Proposal:',treasury:'Funding:',technical:'Technical:',partnership:'Partnership:',parameter:'Parameter Change:'}[type];
-  const now=new Date().toISOString().split('T')[0];
-  let p=`# ${prefix} ${words}\n\nDAO: ${dao}  ·  Type: ${tl[type]}  ·  Date: ${now}  ·  Status: Draft\n\n---\n\n`;
-  p+=`## Summary\n\n${idea.split(/[.!?]+/).filter(s=>s.trim().length>10).slice(0,2).join('. ')||idea.slice(0,200)}.\n\n`;
-  const mvs={general:'The DAO governance process must evolve to meet community needs. This proposal addresses a key gap and strengthens the protocol.',treasury:'Effective treasury management is critical to sustainability. This proposal outlines a strategic resource allocation generating returns while supporting growth.',technical:'Technical upgrades are necessary to maintain competitiveness. This addresses specific requirements identified through community feedback.',partnership:'Strategic partnerships expand reach and capabilities. This collaboration brings mutual benefits and creates value for stakeholders.',parameter:'Protocol parameters must reflect current conditions. These adjustments improve efficiency, reduce risk, and align incentives.'};
-  p+=`## Motivation\n\n${mvs[type]}\n\n`;
-  p+=`## Specification\n\nThe implementation follows these phases:\n\n1. **Planning** — Define requirements, assemble working group, establish channels.\n2. **Development** — Execute core implementation with regular community updates.\n3. **Deployment** — Deploy with monitoring, gather feedback, iterate.\n4. **Evaluation** — Measure outcomes, publish transparent report.\n\n`;
-  if(type==='treasury'){const amt=idea.match(/(\d[\d,]*)\s*(usd|eth|uni|dai|usdc)/i);p+=`## Budget\n\n| Category | Allocation |\n|---|---|\n| Direct Funding | ${amt?amt[0]:'[TBD]'} |\n| Operations | 10% |\n| Contingency | 10% |\n\nMulti-sig with milestone-based releases.\n\n`}
-  const tm={general:'Week 1-2: Discussion\nWeek 3: Snapshot vote\nWeek 4-6: Implementation\nWeek 7-8: Review\nWeek 9+: Evaluation',treasury:'Week 1-2: Budget review\nWeek 3: Vote\nMonth 1-3: Core implementation\nMonth 4: Mid-review\nMonth 5-6: Completion',technical:'Week 1-2: Spec review\nWeek 3: Audit\nWeek 4-5: Testnet\nWeek 6: Community testing\nWeek 7: Mainnet\nWeek 8: Monitoring',partnership:'Week 1-2: Due diligence\nWeek 3: Community discussion\nWeek 4: Vote\nMonth 2: Activation\nMonth 3-6: Execution\nMonth 6: Review',parameter:'Week 1: Analysis\nWeek 2: Discussion\nWeek 3: Vote\nWeek 4: Update\nWeek 5-8: Monitoring'};
-  p+=`## Timeline\n\n${tm[type]}\n\n`;
-  const mets={general:['Engagement rate +20%','Proposal participation','Time to execution','Stakeholder satisfaction'],treasury:['ROI >1.5x','Grants funded','Ecosystem TVL growth','Treasury diversification'],technical:['Gas cost -15%','Success rate >99.5%','Developer adoption','Zero critical bugs'],partnership:['New users +1000','Cross-protocol TVL','Initiative completion','Community sentiment'],parameter:['Capital efficiency +10%','Risk stability','User retention','Revenue impact']};
-  p+=`## Success Metrics\n\n${mets[type].map(m=>`• ${m}`).join('\n')}\n\n`;
-  const risks={general:[{r:'Disagreement',m:'Extended discussion, iterative feedback'},{r:'Delays',m:'Clear milestones, dedicated PM'}],treasury:[{r:'Fund misuse',m:'Multi-sig, transparent reporting'},{r:'Market downturn',m:'Diversified allocation'}],technical:[{r:'Vulnerability',m:'Audit, bug bounty, staged rollout'},{r:'Breaking changes',m:'Compatibility testing'}],partnership:[{r:'Underperformance',m:'KPI milestones, exit clauses'},{r:'Reputation risk',m:'Due diligence, community vetting'}],parameter:[{r:'Unintended effects',m:'Simulation, gradual adjustment'},{r:'Pushback',m:'Transparent analysis, education'}]};
-  p+=`## Risks & Mitigations\n\n${risks[type].map(r=>`• **Risk:** ${r.r}\n  **Mitigation:** ${r.m}`).join('\n\n')}\n\n---\n\n*Generated by MiMoDAO*`;
+function buildProposal(dao, idea, type) {
+  const tl = { general: 'General Governance', treasury: 'Treasury / Funding', technical: 'Technical Upgrade', partnership: 'Partnership / Integration', parameter: 'Parameter Change' };
+  const words = idea.split(/\s+/).slice(0, 10).join(' ');
+  const prefix = { general: 'Proposal:', treasury: 'Funding:', technical: 'Technical:', partnership: 'Partnership:', parameter: 'Parameter Change:' }[type] || 'Proposal:';
+  const now = new Date().toISOString().split('T')[0];
+
+  let p = `# ${prefix} ${words}\n\nDAO: ${dao}  ·  Type: ${tl[type]}  ·  Date: ${now}  ·  Status: Draft\n\n---\n\n`;
+
+  p += `## Summary\n\n${idea.split(/[.!?]+/).filter(s => s.trim().length > 10).slice(0, 2).join('. ') || idea.slice(0, 200)}.\n\n`;
+
+  const mvs = {
+    general: 'The DAO governance process must evolve to meet community needs. This proposal addresses a key gap and strengthens the protocol.',
+    treasury: 'Effective treasury management is critical to sustainability. This proposal outlines a strategic resource allocation generating returns while supporting growth.',
+    technical: 'Technical upgrades are necessary to maintain competitiveness. This addresses specific requirements identified through community feedback.',
+    partnership: 'Strategic partnerships expand reach and capabilities. This collaboration brings mutual benefits and creates value for stakeholders.',
+    parameter: 'Protocol parameters must reflect current conditions. These adjustments improve efficiency, reduce risk, and align incentives.'
+  };
+  p += `## Motivation\n\n${mvs[type] || mvs.general}\n\n`;
+
+  p += `## Specification\n\nThe implementation follows these phases:\n\n1. **Planning** — Define requirements, assemble working group, establish channels.\n2. **Development** — Execute core implementation with regular community updates.\n3. **Deployment** — Deploy with monitoring, gather feedback, iterate.\n4. **Evaluation** — Measure outcomes, publish transparent report.\n\n`;
+
+  if (type === 'treasury') {
+    const amt = idea.match(/(\d[\d,]*)\s*(usd|eth|uni|dai|usdc)/i);
+    p += `## Budget\n\n| Category | Allocation |\n|---|---|\n| Direct Funding | ${amt ? amt[0] : '[TBD]'} |\n| Operations | 10% |\n| Contingency | 10% |\n\nMulti-sig with milestone-based releases.\n\n`;
+  }
+
+  const tm = {
+    general: 'Week 1-2: Discussion\nWeek 3: Snapshot vote\nWeek 4-6: Implementation\nWeek 7-8: Review\nWeek 9+: Evaluation',
+    treasury: 'Week 1-2: Budget review\nWeek 3: Vote\nMonth 1-3: Core implementation\nMonth 4: Mid-review\nMonth 5-6: Completion',
+    technical: 'Week 1-2: Spec review\nWeek 3: Audit\nWeek 4-5: Testnet\nWeek 6: Community testing\nWeek 7: Mainnet\nWeek 8: Monitoring',
+    partnership: 'Week 1-2: Due diligence\nWeek 3: Community discussion\nWeek 4: Vote\nMonth 2: Activation\nMonth 3-6: Execution\nMonth 6: Review',
+    parameter: 'Week 1: Analysis\nWeek 2: Discussion\nWeek 3: Vote\nWeek 4: Update\nWeek 5-8: Monitoring'
+  };
+  p += `## Timeline\n\n${tm[type] || tm.general}\n\n`;
+
+  const mets = {
+    general: ['Engagement rate +20%', 'Proposal participation', 'Time to execution', 'Stakeholder satisfaction'],
+    treasury: ['ROI >1.5x', 'Grants funded', 'Ecosystem TVL growth', 'Treasury diversification'],
+    technical: ['Gas cost -15%', 'Success rate >99.5%', 'Developer adoption', 'Zero critical bugs'],
+    partnership: ['New users +1000', 'Cross-protocol TVL', 'Initiative completion', 'Community sentiment'],
+    parameter: ['Capital efficiency +10%', 'Risk stability', 'User retention', 'Revenue impact']
+  };
+  p += `## Success Metrics\n\n${(mets[type] || mets.general).map(m => '• ' + m).join('\n')}\n\n`;
+
+  const risks = {
+    general: [{ r: 'Disagreement', m: 'Extended discussion, iterative feedback' }, { r: 'Delays', m: 'Clear milestones, dedicated PM' }],
+    treasury: [{ r: 'Fund misuse', m: 'Multi-sig, transparent reporting' }, { r: 'Market downturn', m: 'Diversified allocation' }],
+    technical: [{ r: 'Vulnerability', m: 'Audit, bug bounty, staged rollout' }, { r: 'Breaking changes', m: 'Compatibility testing' }],
+    partnership: [{ r: 'Underperformance', m: 'KPI milestones, exit clauses' }, { r: 'Reputation risk', m: 'Due diligence, community vetting' }],
+    parameter: [{ r: 'Unintended effects', m: 'Simulation, gradual adjustment' }, { r: 'Pushback', m: 'Transparent analysis, education' }]
+  };
+  p += `## Risks & Mitigations\n\n${(risks[type] || risks.general).map(r => '• Risk: ' + r.r + '\n  Mitigation: ' + r.m).join('\n\n')}\n\n---\n\nGenerated by MiMoDAO`;
+
   return p;
 }
-function clearWriter(){document.getElementById('writerDao').value='';document.getElementById('writerIdea').value='';document.getElementById('writerOutput').innerHTML=''}
+
+function clearWriter() {
+  document.getElementById('writerDao').value = '';
+  document.getElementById('writerIdea').value = '';
+  document.getElementById('writerOutput').innerHTML = '';
+}
 
 // ─── Explorer ───
-async function loadTopDAOs(){
-  const grid=document.getElementById('daoGrid');
-  grid.innerHTML='<div class="loading"><div class="spinner"></div> Loading top DAOs...</div>';
-  try{
-    const d=await gql(`{spaces(first:30,orderBy:"followers",orderDirection:desc){id name followers members network}}`);
-    if(!d.spaces){grid.innerHTML='<div class="empty">No DAOs found</div>';return}
-    grid.innerHTML=d.spaces.map(s=>`<div class="dao" onclick="selectDao('${s.id}')"><img class="dao-img" src="https://cdn.stamp.fyi/space/${s.id}?s=80" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2220%22 fill=%22%2327272a%22/%3E%3Ctext x=%2220%22 y=%2225%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2216%22%3E🏛️%3C/text%3E%3C/svg%3E'"/><div class="dao-info"><div class="dao-name">${esc(s.name||s.id)}</div><div class="dao-stat">👥 ${(s.members||0).toLocaleString()} · ⭐ ${(s.followers||0).toLocaleString()}</div></div></div>`).join('');
-  }catch(e){grid.innerHTML=`<div class="empty">⚠️ ${esc(e.message)}</div>`}
+async function loadTopDAOs() {
+  const grid = document.getElementById('daoGrid');
+  grid.innerHTML = '<div class="loading"><div class="spinner"></div> Loading top DAOs...</div>';
+  try {
+    const d = await gql('{ spaces(first:30, orderBy:"followers", orderDirection:desc) { id name followers members network } }');
+    const spaces = d.spaces || [];
+    if (!spaces.length) { grid.innerHTML = '<div class="empty">No DAOs found</div>'; return; }
+
+    grid.innerHTML = spaces.map(s => {
+      const id = s.id || '';
+      const name = s.name || id;
+      const members = (s.members || 0).toLocaleString();
+      const followers = (s.followers || 0).toLocaleString();
+      return `<div class="dao" onclick="selectDao('${esc(id)}')">
+        <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(id)}?s=80"
+          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2220%22 fill=%22%2327272a%22/%3E%3Ctext x=%2220%22 y=%2225%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2216%22%3E🏛️%3C/text%3E%3C/svg%3E'" />
+        <div class="dao-info">
+          <div class="dao-name">${esc(name)}</div>
+          <div class="dao-stat">👥 ${members} · ⭐ ${followers}</div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch (e) {
+    grid.innerHTML = `<div class="empty">⚠️ ${esc(e.message)}</div>`;
+  }
 }
-function selectDao(id){document.getElementById('daoSelect').value=id;switchTabDirect('analyzer');loadProposals()}
+
+function selectDao(id) {
+  const sel = document.getElementById('daoSelect');
+  // Check if option exists, if not add it
+  let found = false;
+  for (let i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].value === id) { found = true; break; }
+  }
+  if (!found) {
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.textContent = id;
+    sel.appendChild(opt);
+  }
+  sel.value = id;
+  switchTabDirect('analyzer');
+  loadProposals();
+}
 
 // ─── Copy ───
-function copyBox(sel){const b=document.querySelector(sel);if(b)navigator.clipboard.writeText(b.innerText).then(()=>toast('Copied!'))}
+function copyBox(parentId) {
+  const parent = document.getElementById(parentId);
+  if (!parent) return;
+  const box = parent.querySelector('.a-box') || parent.querySelector('.w-out');
+  if (box) {
+    navigator.clipboard.writeText(box.innerText)
+      .then(() => toast('Copied!'))
+      .catch(() => toast('Copy failed'));
+  }
+}
 </script>
 </body>
 </html>
