@@ -362,7 +362,7 @@ async function loadProposals() {
 
   try {
     const d = await gql(
-      'query($s:String!) { proposals(first:10, space:$s, orderBy:"created", orderDirection:desc) { id title body state created end choices scores scores_total author link } }',
+      'query($s:String!) { proposals(first:10, where:{space:$s}, orderBy:"created", orderDirection:desc) { id title body state created end choices scores scores_total author link } }',
       { s: space }
     );
     const proposals = d.proposals || [];
@@ -635,30 +635,67 @@ function clearWriter() {
 }
 
 // ─── Explorer ───
+const POPULAR_DAOS = [
+  { id: 'ens.eth', name: 'ENS' },
+  { id: 'uniswap', name: 'Uniswap' },
+  { id: 'aave.eth', name: 'Aave' },
+  { id: 'lido-snapshot.eth', name: 'Lido' },
+  { id: 'arbitrumfoundation.eth', name: 'Arbitrum' },
+  { id: 'opcollective.eth', name: 'Optimism' },
+  { id: 'gitcoindao.eth', name: 'Gitcoin' },
+  { id: 'safe.eth', name: 'Safe' },
+  { id: 'curve.eth', name: 'Curve' },
+  { id: 'makerdao.eth', name: 'MakerDAO' },
+  { id: 'dydxgov.eth', name: 'dYdX' },
+  { id: 'sushigov.eth', name: 'Sushi' },
+  { id: 'compound-governance.eth', name: 'Compound' },
+  { id: 'nouns.eth', name: 'Nouns' },
+  { id: 'morpho.eth', name: 'Morpho' },
+  { id: 'jbdao.eth', name: 'Juicebox' },
+  { id: 'pods.eth', name: 'Pods' },
+  { id: 'stakewise.eth', name: 'StakeWise' },
+  { id: 'rocketpool-dao.eth', name: 'Rocket Pool' },
+  { id: 'hop.eth', name: 'Hop Protocol' }
+];
+
 async function loadTopDAOs() {
   const grid = document.getElementById('daoGrid');
-  grid.innerHTML = '<div class="loading"><div class="spinner"></div> Loading top DAOs...</div>';
-  try {
-    const d = await gql('{ spaces(first:30, orderBy:"followers", orderDirection:desc) { id name followers members network } }');
-    const spaces = d.spaces || [];
-    if (!spaces.length) { grid.innerHTML = '<div class="empty">No DAOs found</div>'; return; }
+  // Render instantly from cached list
+  grid.innerHTML = POPULAR_DAOS.map(dao => {
+    return `<div class="dao" onclick="selectDao('${esc(dao.id)}')">
+      <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(dao.id)}?s=80"
+        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2220%22 fill=%22%2327272a%22/%3E%3Ctext x=%2220%22 y=%2225%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2216%22%3E🏛️%3C/text%3E%3C/svg%3E'" />
+      <div class="dao-info">
+        <div class="dao-name">${esc(dao.name)}</div>
+        <div class="dao-stat">Click to analyze proposals</div>
+      </div>
+    </div>`;
+  }).join('');
 
-    grid.innerHTML = spaces.map(s => {
-      const id = s.id || '';
-      const name = s.name || id;
-      const members = (s.members || 0).toLocaleString();
-      const followers = (s.followers || 0).toLocaleString();
-      return `<div class="dao" onclick="selectDao('${esc(id)}')">
-        <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(id)}?s=80"
+  // Enrich with live data from Snapshot
+  try {
+    const ids = POPULAR_DAOS.map(d => d.id);
+    const d = await gql(`{ spaces(where:{id_in:${JSON.stringify(ids)}}, first:20) { id followersCount members proposalsCount } }`);
+    const spaces = d.spaces || [];
+    const map = {};
+    spaces.forEach(s => { map[s.id] = s; });
+
+    grid.innerHTML = POPULAR_DAOS.map(dao => {
+      const s = map[dao.id];
+      const members = s ? (s.members || []).length : 0;
+      const followers = s ? (s.followersCount || 0) : 0;
+      const proposals = s ? (s.proposalsCount || 0) : 0;
+      return `<div class="dao" onclick="selectDao('${esc(dao.id)}')">
+        <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(dao.id)}?s=80"
           onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2220%22 fill=%22%2327272a%22/%3E%3Ctext x=%2220%22 y=%2225%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2216%22%3E🏛️%3C/text%3E%3C/svg%3E'" />
         <div class="dao-info">
-          <div class="dao-name">${esc(name)}</div>
-          <div class="dao-stat">👥 ${members} · ⭐ ${followers}</div>
+          <div class="dao-name">${esc(dao.name)}</div>
+          <div class="dao-stat">👥 ${members} members · ⭐ ${followers.toLocaleString()} · 📋 ${proposals} proposals</div>
         </div>
       </div>`;
     }).join('');
   } catch (e) {
-    grid.innerHTML = `<div class="empty">⚠️ ${esc(e.message)}</div>`;
+    // Static list already rendered, silently ignore enrichment error
   }
 }
 
