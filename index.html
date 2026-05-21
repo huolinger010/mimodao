@@ -556,7 +556,7 @@ async function gql(query, variables) {
 }
 function esc(s) {
   if (!s) return '';
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 // ─── Countdown ───
@@ -592,7 +592,7 @@ async function loadProposals() {
       'query($s:String!) { proposals(first:20, where:{space:$s}, orderBy:"created", orderDirection:desc) { id title body state created end choices scores scores_total author link } }',
       { s: space }
     );
-    const proposals = d.proposals || [];
+    const proposals = Array.isArray(d.proposals) ? d.proposals : [];
     if (!proposals.length) {
       list.innerHTML = '<div class="empty"><div class="empty-icon">📭</div>No proposals found</div>';
       return;
@@ -631,14 +631,14 @@ async function loadProposals() {
 
 function renderProposals(proposals) {
   const list = document.getElementById('proposalsList');
-  list.innerHTML = proposals.map((p, i) => {
-    const realIdx = _proposals.indexOf(p);
+  list.innerHTML = proposals.map(p => {
+    const pid = p.id;
     const sc = p.state === 'active' ? 's-active' : p.state === 'pending' ? 's-pending' : 's-closed';
     const dt = new Date(p.created * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     const cd = getCountdown(p.end);
     const tv = p.scores_total;
     const author = p.author ? p.author.slice(0, 6) + '…' + p.author.slice(-4) : '—';
-    return `<div class="p-card" onclick="showProposal(${realIdx})">
+    return `<div class="p-card" data-pid="${esc(pid)}" onclick="showProposalById(this.dataset.pid)">
       <div class="p-head"><div style="flex:1;min-width:0">
         <div class="p-title">${esc(p.title)}</div>
         <div class="p-meta">
@@ -662,8 +662,8 @@ function filterProposals() {
   renderProposals(filtered);
 }
 
-function showProposal(index) {
-  const p = _proposals[index];
+function showProposalById(id) {
+  const p = _proposals.find(x => x.id === id);
   if (!p) return;
   analyzeProposal(p);
 }
@@ -915,7 +915,7 @@ const POPULAR_DAOS = [
 async function loadTopDAOs() {
   const grid = document.getElementById('daoGrid');
   grid.innerHTML = POPULAR_DAOS.map(dao => {
-    return `<div class="dao" onclick="selectDao('${esc(dao.id)}')">
+    return `<div class="dao" data-dao="${esc(dao.id)}" onclick="selectDao(this.dataset.dao)">
       <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(dao.id)}?s=80"
         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2244%22 height=%2244%22%3E%3Crect width=%2244%22 height=%2244%22 rx=%2222%22 fill=%22%2327272a%22/%3E%3Ctext x=%2222%22 y=%2228%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2218%22%3E🏛️%3C/text%3E%3C/svg%3E'" />
       <div class="dao-info">
@@ -937,7 +937,7 @@ async function loadTopDAOs() {
       const members = s ? (s.members || []).length : 0;
       const followers = s ? (s.followersCount || 0) : 0;
       const proposals = s ? (s.proposalsCount || 0) : 0;
-      return `<div class="dao" onclick="selectDao('${esc(dao.id)}')">
+      return `<div class="dao" data-dao="${esc(dao.id)}" onclick="selectDao(this.dataset.dao)">
         <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(dao.id)}?s=80"
           onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2244%22 height=%2244%22%3E%3Crect width=%2244%22 height=%2244%22 rx=%2222%22 fill=%22%2327272a%22/%3E%3Ctext x=%2222%22 y=%2228%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2218%22%3E🏛️%3C/text%3E%3C/svg%3E'" />
         <div class="dao-info">
@@ -947,7 +947,8 @@ async function loadTopDAOs() {
       </div>`;
     }).join('');
   } catch (e) {
-    // Static list already rendered
+    // Static list already rendered, show error silently
+    console.warn('DAO stats load failed:', e.message);
   }
 }
 
