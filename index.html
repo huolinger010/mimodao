@@ -254,6 +254,105 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 /* Scrollbar */
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--text3)}
 
+/* Skeleton Loaders */
+.skeleton{background:linear-gradient(90deg,var(--bg2) 0%,var(--bg3) 50%,var(--bg2) 100%);background-size:200% 100%;animation:shimmer 1.5s ease-in-out infinite;border-radius:var(--radius-sm)}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.sk-line{height:14px;margin:8px 0;border-radius:7px}
+.sk-line.short{width:60%}
+.sk-line.med{width:80%}
+.sk-card{padding:18px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px}
+
+/* Count-up animations */
+.count-up{font-variant-numeric:tabular-nums}
+
+/* Trending Panel */
+.trend-hero{text-align:center;padding:32px 0 20px;position:relative}
+.trend-hero h2{font-size:32px;font-weight:900;background:linear-gradient(135deg,#fb923c,#f87171,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;margin-bottom:8px;display:inline-flex;align-items:center;gap:10px}
+.trend-hero h2::before{content:'🔥';-webkit-text-fill-color:initial;background:none;animation:flicker 1.5s ease-in-out infinite}
+@keyframes flicker{0%,100%{transform:scale(1) rotate(-5deg)}50%{transform:scale(1.1) rotate(5deg)}}
+.trend-hero p{color:var(--text2);font-size:14px}
+.trend-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:20px}
+.trend-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 16px;text-align:center;transition:var(--transition);backdrop-filter:blur(20px);position:relative;overflow:hidden}
+.trend-stat::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(251,146,60,.06) 0%,transparent 60%);pointer-events:none}
+.trend-stat:hover{border-color:rgba(251,146,60,.3);transform:translateY(-3px);box-shadow:0 0 30px rgba(251,146,60,.15)}
+.trend-stat-val{font-size:28px;font-weight:900;background:linear-gradient(135deg,#fb923c,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
+.trend-stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+
+.trend-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;cursor:pointer;transition:var(--transition);backdrop-filter:blur(20px);position:relative;overflow:hidden}
+.trend-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,#fb923c,#f87171,#ec4899);opacity:0;transition:var(--transition)}
+.trend-card:hover{border-color:rgba(251,146,60,.3);transform:translateX(4px);box-shadow:0 8px 24px rgba(251,146,60,.1)}
+.trend-card:hover::before{opacity:1}
+.trend-card.hot::before{opacity:1}
+.trend-rank{position:absolute;top:16px;right:16px;font-size:11px;font-weight:800;color:var(--text3);background:var(--surface);padding:4px 10px;border-radius:var(--radius-full);border:1px solid var(--border)}
+.trend-rank.top{background:linear-gradient(135deg,#fb923c,#f87171);color:#fff;border:none;box-shadow:0 0 12px rgba(251,146,60,.4)}
+.trend-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.trend-dao{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-glow);padding:4px 10px;border-radius:var(--radius-full);border:1px solid rgba(139,92,246,.15)}
+.trend-dao img{width:18px;height:18px;border-radius:50%}
+.trend-title{font-size:16px;font-weight:700;line-height:1.4;margin-bottom:10px;letter-spacing:-.1px}
+.trend-stats-row{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--text3);margin-bottom:10px}
+.trend-stats-row span{display:flex;align-items:center;gap:4px}
+.trend-heat{display:flex;align-items:center;gap:8px;margin-top:8px}
+.trend-heat-bar{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.trend-heat-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#fbbf24,#fb923c,#f87171,#ec4899);transition:width .8s ease}
+.trend-heat-pct{font-size:11px;font-weight:700;color:#fb923c;min-width:40px;text-align:right}
+.trend-pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.5);animation:trend-pulse 2s infinite}
+@keyframes trend-pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+
+/* Vote Predictor */
+.predictor{background:linear-gradient(135deg,rgba(139,92,246,.06),rgba(99,102,241,.04));border:1px solid rgba(139,92,246,.2);border-radius:var(--radius);padding:20px;margin:16px 0;position:relative;overflow:hidden}
+.predictor::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(139,92,246,.08) 0%,transparent 60%);pointer-events:none;animation:rotate 20s linear infinite}
+@keyframes rotate{to{transform:rotate(360deg)}}
+.pred-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;position:relative}
+.pred-title{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:flex;align-items:center;gap:8px}
+.pred-confidence{display:flex;align-items:center;gap:8px}
+.pred-ring{position:relative;width:80px;height:80px;flex-shrink:0}
+.pred-ring svg{transform:rotate(-90deg)}
+.pred-ring-bg{stroke:var(--bg3);stroke-width:8;fill:none}
+.pred-ring-fg{stroke:url(#predGrad);stroke-width:8;fill:none;stroke-linecap:round;stroke-dasharray:226;stroke-dashoffset:226;transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)}
+.pred-ring-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900}
+.pred-ring-num{font-size:22px;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.pred-ring-label{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-top:2px}
+.pred-winner{display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-top:12px;position:relative}
+.pred-winner-icon{font-size:24px;flex-shrink:0}
+.pred-winner-info{flex:1;min-width:0}
+.pred-winner-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:2px}
+.pred-winner-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pred-winner-stat{font-size:12px;color:var(--text2)}
+.pred-momentum{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--radius-full);flex-shrink:0}
+.pred-momentum.rising{background:var(--green-bg);color:var(--green)}
+.pred-momentum.steady{background:var(--blue-bg);color:var(--blue)}
+.pred-momentum.declining{background:var(--red-bg);color:var(--red)}
+.pred-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.pred-row{display:flex;align-items:center;gap:10px;font-size:12px}
+.pred-row-name{flex-shrink:0;min-width:80px;font-weight:600;color:var(--text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pred-row-bar{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;position:relative}
+.pred-row-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.pred-row-fill.win{background:var(--gradient-accent)}
+.pred-row-fill.other{background:var(--text3);opacity:.4}
+.pred-row-pct{flex-shrink:0;min-width:50px;text-align:right;font-weight:700;color:var(--text2);font-variant-numeric:tabular-nums}
+
+/* Global Search */
+.gsearch-trigger{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);padding:9px 14px;border-radius:var(--radius-sm);font-size:13px;color:var(--text3);cursor:pointer;transition:var(--transition);font-family:var(--font);font-weight:500;backdrop-filter:blur(10px)}
+.gsearch-trigger:hover{border-color:var(--accent);color:var(--accent);box-shadow:var(--shadow-glow)}
+.gsearch-trigger kbd{font-size:10px;padding:2px 6px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;color:var(--text3);font-family:var(--font);font-weight:700}
+.gsearch-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);z-index:200;display:none;align-items:flex-start;justify-content:center;padding-top:80px}
+.gsearch-overlay.show{display:flex;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.gsearch-modal{width:100%;max-width:640px;background:var(--card);border:1px solid var(--border-hover);border-radius:var(--radius);box-shadow:0 30px 80px rgba(0,0,0,.4),var(--shadow-glow);backdrop-filter:blur(30px);overflow:hidden;animation:slideDown .3s cubic-bezier(.4,0,.2,1)}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.gsearch-input-wrap{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--border)}
+.gsearch-input-wrap input{flex:1;background:transparent;border:none;color:var(--text);font-size:18px;font-family:var(--font);outline:none;padding:0}
+.gsearch-input-wrap input::placeholder{color:var(--text3)}
+.gsearch-results{max-height:60vh;overflow-y:auto;padding:8px}
+.gsearch-result{display:flex;align-items:center;gap:12px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition-fast)}
+.gsearch-result:hover{background:var(--surface)}
+.gsearch-result-icon{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--accent-glow);font-size:16px;border:1px solid var(--border)}
+.gsearch-result-info{flex:1;min-width:0}
+.gsearch-result-title{font-size:14px;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gsearch-result-meta{font-size:11px;color:var(--text3)}
+.gsearch-empty{padding:48px 20px;text-align:center;color:var(--text3);font-size:14px}
+.gsearch-loading{padding:32px 20px;text-align:center}
+
 /* Wallet */
 .wallet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:16px}
 .wallet-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;transition:var(--transition);backdrop-filter:blur(10px)}
@@ -342,6 +441,9 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 
 /* === MOBILE (≤640px) === */
 @media(max-width:640px){
+  .gsearch-trigger-text{display:none}
+  .gsearch-trigger kbd{display:none}
+  .gsearch-trigger{padding:9px 11px}
   .container{padding:0 16px}
   .nav-inner{height:56px}
   .nav-logo{font-size:17px}
@@ -442,6 +544,9 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
     <div class="container nav-inner">
       <div class="nav-logo"><span>🏛️</span> MiMoDAO</div>
       <div class="nav-actions">
+        <button class="gsearch-trigger" onclick="openGlobalSearch()" title="Search all DAOs">
+          <span>🔍</span><span class="gsearch-trigger-text">Search proposals…</span><kbd>⌘K</kbd>
+        </button>
         <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button>
       </div>
     </div>
@@ -454,12 +559,12 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
       <div class="hero">
         <span class="hero-icon">🏛️</span>
         <h1>MiMoDAO</h1>
-        <p>AI-Powered DAO Governance Intelligence — Analyze proposals, check voting power, explore top DAOs.</p>
+        <p>AI-powered DAO governance intelligence — analyze proposals, predict outcomes, and explore 30+ top DAOs in real time.</p>
         <div class="hero-badges">
-          <span class="h-badge"><span class="dot"></span> No API Key</span>
+          <span class="h-badge"><span class="dot"></span> Live Data</span>
           <span class="h-badge"><span class="dot"></span> 100% Free</span>
-          <span class="h-badge">Zero Dependencies</span>
-          <span class="h-badge">Single File</span>
+          <span class="h-badge">🔮 Vote Predictor</span>
+          <span class="h-badge">🔥 Trending Feed</span>
         </div>
       </div>
 
@@ -468,6 +573,7 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         <div class="tabs">
           <button class="tab" onclick="switchTab(this,'dashboard')"><span class="tab-icon">📋</span><span class="tab-text">Dashboard</span></button>
           <button class="tab active" onclick="switchTab(this,'analyzer')"><span class="tab-icon">🔍</span><span class="tab-text">Analyzer</span></button>
+          <button class="tab" onclick="switchTab(this,'trending')"><span class="tab-icon">🔥</span><span class="tab-text">Trending</span></button>
           <button class="tab" onclick="switchTab(this,'explore')"><span class="tab-icon">🌐</span><span class="tab-text">Explore</span></button>
           <button class="tab" onclick="switchTab(this,'writer')"><span class="tab-icon">✍️</span><span class="tab-text">Writer</span></button>
           <button class="tab" onclick="switchTab(this,'wallet')"><span class="tab-icon">📊</span><span class="tab-text">Wallet</span></button>
@@ -547,6 +653,16 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         <div id="daoGrid" class="dao-grid"></div>
       </div>
 
+      <!-- Trending Panel -->
+      <div id="trending" class="panel">
+        <div class="trend-hero">
+          <h2>Trending Proposals</h2>
+          <p>Live ranking of the hottest active proposals across 30+ DAOs — sorted by participation momentum</p>
+        </div>
+        <div id="trendStats" class="trend-stats"></div>
+        <div id="trendContent"></div>
+      </div>
+
       <!-- Writer Panel -->
       <div id="writer" class="panel">
         <div class="card">
@@ -614,6 +730,10 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
       <span class="bnav-icon">🔍</span>
       <span>Analyze</span>
     </button>
+    <button class="bnav-btn" onclick="bnavSwitch(this,'trending')">
+      <span class="bnav-icon">🔥</span>
+      <span>Trending</span>
+    </button>
     <button class="bnav-btn" onclick="bnavSwitch(this,'explore')">
       <span class="bnav-icon">🌐</span>
       <span>Explore</span>
@@ -630,6 +750,20 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 </nav>
 
 <div id="toast" class="toast"></div>
+
+<!-- Global Search Modal -->
+<div id="gsearchOverlay" class="gsearch-overlay" onclick="if(event.target===this)closeGlobalSearch()">
+  <div class="gsearch-modal">
+    <div class="gsearch-input-wrap">
+      <span style="font-size:18px">🔍</span>
+      <input type="text" id="gsearchInput" placeholder="Search proposals across all DAOs..." oninput="onGSearchInput()" autocomplete="off" />
+      <kbd style="font-size:10px;padding:3px 7px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;color:var(--text3);font-family:var(--font);font-weight:700">ESC</kbd>
+    </div>
+    <div id="gsearchResults" class="gsearch-results">
+      <div class="gsearch-empty">Type to search live proposals across 30+ DAOs</div>
+    </div>
+  </div>
+</div>
 
 <script>
 const SNAPSHOT = 'https://hub.snapshot.org/graphql';
@@ -699,7 +833,7 @@ function updateDaoFavBtn(id) {
 }
 
 // ─── Tabs ───
-const TAB_INDEX = { dashboard: 0, analyzer: 1, explore: 2, writer: 3, wallet: 4 };
+const TAB_INDEX = { dashboard: 0, analyzer: 1, trending: 2, explore: 3, writer: 4, wallet: 5 };
 
 function switchTab(el, name) {
   _currentTab = name;
@@ -714,6 +848,7 @@ function switchTab(el, name) {
   });
   if (name === 'explore') loadTopDAOs();
   if (name === 'dashboard') loadDashboard();
+  if (name === 'trending') loadTrending();
 }
 function switchTabDirect(name) {
   _currentTab = name;
@@ -740,6 +875,7 @@ function bnavSwitch(el, name) {
   _currentTab = name;
   if (name === 'explore') loadTopDAOs();
   if (name === 'dashboard') loadDashboard();
+  if (name === 'trending') loadTrending();
 }
 
 // ─── Snapshot API ───
@@ -1068,6 +1204,7 @@ function analyzeProposal(p) {
           <div style="font-size:13px;color:var(--text3)">${a.risk.pct}/100</div>
         </div>
         ${tagsHTML}
+        ${renderPredictor(p)}
         <div class="a-box">${a.insight}</div>
         <div class="btn-group">
           <button class="btn btn-sm btn-ghost" onclick="copyBox('analysisResult')">📋 Copy</button>
@@ -1077,6 +1214,12 @@ function analyzeProposal(p) {
         </div>
       </div>`;
       r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Animate predictor bars
+      setTimeout(() => {
+        document.querySelectorAll('.pred-row-fill').forEach(el => {
+          el.style.width = (el.dataset.target || 0) + '%';
+        });
+      }, 200);
     } catch (e) {
       r.innerHTML = `<div class="card"><div style="color:var(--red)">⚠️ Analysis error: ${esc(e.message)}</div></div>`;
     }
@@ -1605,6 +1748,272 @@ function shareAnalysis(p, a) {
   r.querySelector('.card').insertAdjacentHTML('beforeend', shareHTML);
   document.getElementById('shareCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
   toast('Share card generated! Screenshot it 📸');
+}
+
+// ─── Count-up animation ───
+function animateCount(el, target, duration = 1000) {
+  if (!el) return;
+  const start = 0;
+  const startTime = performance.now();
+  function tick(now) {
+    const elapsed = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - elapsed, 3);
+    el.textContent = Math.floor(start + (target - start) * eased).toLocaleString();
+    if (elapsed < 1) requestAnimationFrame(tick);
+    else el.textContent = target.toLocaleString();
+  }
+  requestAnimationFrame(tick);
+}
+
+// ─── Trending Feed ───
+async function loadTrending() {
+  const stats = document.getElementById('trendStats');
+  const content = document.getElementById('trendContent');
+  if (!content) return;
+
+  // Skeleton
+  stats.innerHTML = `<div class="trend-stat"><div class="skeleton sk-line" style="height:28px;margin:0 auto 6px;width:60%"></div><div class="skeleton sk-line short" style="margin:0 auto"></div></div>`.repeat(3);
+  content.innerHTML = `<div class="sk-card"><div class="skeleton sk-line"></div><div class="skeleton sk-line med"></div><div class="skeleton sk-line short"></div></div>`.repeat(4);
+
+  try {
+    const data = await gql(
+      `query { proposals(first: 100, where:{state:"active"}, orderBy:"scores_total", orderDirection:desc) { id title body state created end choices scores scores_total author space { id name } } }`
+    );
+    const proposals = (data?.proposals || []).filter(p => p.scores_total > 0).slice(0, 30);
+
+    if (!proposals.length) {
+      stats.innerHTML = '';
+      content.innerHTML = '<div class="empty"><div class="empty-icon">🔥</div><h3 style="margin-bottom:8px">No active proposals right now</h3><p>Check back later or browse all DAOs.</p></div>';
+      return;
+    }
+
+    // Compute heat: combine vote count + recency + time-to-end
+    const now = Date.now() / 1000;
+    proposals.forEach(p => {
+      const ageHrs = Math.max(1, (now - (p.created || now)) / 3600);
+      const remHrs = Math.max(1, ((p.end || now) - now) / 3600);
+      const velocity = (p.scores_total || 0) / ageHrs;
+      const urgency = remHrs < 48 ? 1.5 : remHrs < 168 ? 1.2 : 1;
+      p._heat = velocity * urgency;
+    });
+    proposals.sort((a, b) => b._heat - a._heat);
+    const maxHeat = Math.max(...proposals.map(p => p._heat));
+
+    const totalVotes = proposals.reduce((s, p) => s + (p.scores_total || 0), 0);
+    const uniqueDaos = new Set(proposals.map(p => p.space?.id)).size;
+    const totalProps = proposals.length;
+
+    stats.innerHTML = `
+      <div class="trend-stat"><div class="trend-stat-val count-up" id="trendStatProps">0</div><div class="trend-stat-label">🔥 Hot Proposals</div></div>
+      <div class="trend-stat"><div class="trend-stat-val count-up" id="trendStatDaos">0</div><div class="trend-stat-label">🏛️ Active DAOs</div></div>
+      <div class="trend-stat"><div class="trend-stat-val count-up" id="trendStatVotes">0</div><div class="trend-stat-label">🗳️ Total Votes</div></div>
+    `;
+    setTimeout(() => {
+      animateCount(document.getElementById('trendStatProps'), totalProps);
+      animateCount(document.getElementById('trendStatDaos'), uniqueDaos);
+      animateCount(document.getElementById('trendStatVotes'), Math.floor(totalVotes));
+    }, 50);
+
+    content.innerHTML = proposals.slice(0, 20).map((p, i) => {
+      const heatPct = Math.round((p._heat / maxHeat) * 100);
+      const remHrs = Math.max(0, ((p.end || now) - now) / 3600);
+      const remStr = remHrs < 1 ? `${Math.round(remHrs * 60)}m left` : remHrs < 24 ? `${Math.round(remHrs)}h left` : `${Math.round(remHrs / 24)}d left`;
+      const spaceImg = `https://cdn.stamp.fyi/space/${p.space?.id}?s=24`;
+      return `<div class="trend-card ${i < 3 ? 'hot' : ''}" onclick="openTrending('${esc(p.space?.id)}','${esc(p.id)}')">
+        <span class="trend-rank ${i < 3 ? 'top' : ''}">#${i + 1}</span>
+        <div class="trend-meta">
+          <span class="trend-dao"><img src="${spaceImg}" onerror="this.style.display='none'"/>${esc(p.space?.name || p.space?.id)}</span>
+          <span class="trend-pulse" title="Active"></span>
+          <span style="font-size:11px;color:var(--yellow);font-weight:700">${remStr}</span>
+        </div>
+        <div class="trend-title">${esc(p.title)}</div>
+        <div class="trend-stats-row">
+          <span>🗳️ ${(p.scores_total || 0).toLocaleString()} votes</span>
+          <span>📊 ${(p.choices || []).length} options</span>
+          <span>👤 ${esc((p.author || '').slice(0, 6))}…${esc((p.author || '').slice(-4))}</span>
+        </div>
+        <div class="trend-heat">
+          <div class="trend-heat-bar"><div class="trend-heat-fill" style="width:0%" data-target="${heatPct}"></div></div>
+          <span class="trend-heat-pct">${heatPct}°</span>
+        </div>
+      </div>`;
+    }).join('');
+
+    // Animate heat bars
+    setTimeout(() => {
+      document.querySelectorAll('.trend-heat-fill').forEach(el => {
+        el.style.width = (el.dataset.target || 0) + '%';
+      });
+    }, 100);
+  } catch (e) {
+    stats.innerHTML = '';
+    content.innerHTML = `<div class="card" style="color:var(--red)">⚠️ Failed to load trending: ${esc(e.message)}</div>`;
+  }
+}
+
+function openTrending(spaceId, proposalId) {
+  const sel = document.getElementById('daoSelect');
+  // Add option if missing
+  if (sel && !Array.from(sel.options).some(o => o.value === spaceId)) {
+    const opt = document.createElement('option');
+    opt.value = spaceId;
+    opt.textContent = spaceId;
+    sel.appendChild(opt);
+  }
+  if (sel) sel.value = spaceId;
+  switchTabDirect('analyzer');
+  loadProposals().then(() => {
+    setTimeout(() => showProposalById(proposalId), 600);
+  });
+}
+
+// ─── Vote Predictor ───
+function predictVote(p) {
+  if (!p || !p.choices || !p.scores) return null;
+  const total = p.scores_total || p.scores.reduce((s, n) => s + n, 0);
+  if (total === 0) return null;
+
+  const dist = p.choices.map((name, i) => ({
+    name,
+    votes: p.scores[i] || 0,
+    pct: total > 0 ? ((p.scores[i] || 0) / total) * 100 : 0
+  })).sort((a, b) => b.votes - a.votes);
+
+  const winner = dist[0];
+  const second = dist[1] || { pct: 0 };
+  const margin = winner.pct - second.pct;
+
+  // Confidence based on margin + total participation
+  let confidence = Math.min(100, Math.round(margin * 1.2 + (total > 1000 ? 20 : total > 100 ? 10 : 0)));
+  if (p.state === 'closed') confidence = 100;
+
+  // Momentum based on time remaining + lead size
+  const now = Date.now() / 1000;
+  const remHrs = Math.max(0, ((p.end || now) - now) / 3600);
+  let momentum = 'steady';
+  let momentumLabel = '→ Steady';
+  if (margin > 30) { momentum = 'rising'; momentumLabel = '↗ Strong lead'; }
+  else if (margin < 5 && remHrs < 24) { momentum = 'declining'; momentumLabel = '⚡ Tight race'; }
+  else if (margin > 15) { momentum = 'rising'; momentumLabel = '↗ Leading'; }
+
+  return { winner, dist, confidence, margin, momentum, momentumLabel, total };
+}
+
+function renderPredictor(p) {
+  const pred = predictVote(p);
+  if (!pred) return '';
+
+  const winnerIcon = pred.winner.name.toLowerCase().includes('for') || pred.winner.name.toLowerCase().includes('yes') || pred.winner.name.toLowerCase().includes('approve') ? '✅' :
+    pred.winner.name.toLowerCase().includes('against') || pred.winner.name.toLowerCase().includes('no') || pred.winner.name.toLowerCase().includes('reject') ? '❌' :
+    pred.winner.name.toLowerCase().includes('abstain') ? '⚪' : '🏆';
+
+  const dashOffset = 226 - (226 * pred.confidence / 100);
+
+  const distHTML = pred.dist.slice(0, 4).map((d, i) => `
+    <div class="pred-row">
+      <span class="pred-row-name" title="${esc(d.name)}">${esc(d.name)}</span>
+      <div class="pred-row-bar"><div class="pred-row-fill ${i === 0 ? 'win' : 'other'}" style="width:0%" data-target="${d.pct.toFixed(1)}"></div></div>
+      <span class="pred-row-pct">${d.pct.toFixed(1)}%</span>
+    </div>
+  `).join('');
+
+  return `<div class="predictor">
+    <svg width="0" height="0" style="position:absolute"><defs><linearGradient id="predGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs></svg>
+    <div class="pred-header">
+      <div class="pred-title">🔮 Vote Predictor</div>
+      <span class="pred-momentum ${pred.momentum}">${pred.momentumLabel}</span>
+    </div>
+    <div style="display:flex;gap:16px;align-items:center;position:relative">
+      <div class="pred-ring">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle class="pred-ring-bg" cx="40" cy="40" r="36"/>
+          <circle class="pred-ring-fg" cx="40" cy="40" r="36" style="stroke-dashoffset:${dashOffset}"/>
+        </svg>
+        <div class="pred-ring-text">
+          <div class="pred-ring-num">${pred.confidence}%</div>
+          <div class="pred-ring-label">Confidence</div>
+        </div>
+      </div>
+      <div class="pred-winner-info">
+        <div class="pred-winner-label">${p.state === 'closed' ? 'Final Winner' : 'Predicted Winner'}</div>
+        <div class="pred-winner-name">${winnerIcon} ${esc(pred.winner.name)}</div>
+        <div class="pred-winner-stat">${pred.winner.pct.toFixed(1)}% · margin ${pred.margin.toFixed(1)}pts · ${pred.total.toLocaleString()} votes</div>
+      </div>
+    </div>
+    <div class="pred-list">${distHTML}</div>
+  </div>`;
+}
+
+// ─── Global Search ───
+let _gsearchTimer = null;
+let _gsearchCache = null;
+
+function openGlobalSearch() {
+  const overlay = document.getElementById('gsearchOverlay');
+  const input = document.getElementById('gsearchInput');
+  if (!overlay || !input) return;
+  overlay.classList.add('show');
+  setTimeout(() => input.focus(), 100);
+}
+function closeGlobalSearch() {
+  const overlay = document.getElementById('gsearchOverlay');
+  const input = document.getElementById('gsearchInput');
+  if (overlay) overlay.classList.remove('show');
+  if (input) input.value = '';
+  const r = document.getElementById('gsearchResults');
+  if (r) r.innerHTML = '<div class="gsearch-empty">Type to search live proposals across 30+ DAOs</div>';
+}
+
+document.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    openGlobalSearch();
+  }
+  if (e.key === 'Escape') {
+    const overlay = document.getElementById('gsearchOverlay');
+    if (overlay && overlay.classList.contains('show')) closeGlobalSearch();
+  }
+});
+
+function onGSearchInput() {
+  clearTimeout(_gsearchTimer);
+  const q = document.getElementById('gsearchInput').value.trim().toLowerCase();
+  const r = document.getElementById('gsearchResults');
+  if (!q) { r.innerHTML = '<div class="gsearch-empty">Type to search live proposals across 30+ DAOs</div>'; return; }
+  if (q.length < 2) { r.innerHTML = '<div class="gsearch-empty">Keep typing…</div>'; return; }
+
+  _gsearchTimer = setTimeout(async () => {
+    r.innerHTML = '<div class="gsearch-loading"><div class="spinner" style="margin:0 auto"></div></div>';
+    try {
+      // Cache 60s of broad results, then filter client-side
+      const cacheAge = _gsearchCache ? (Date.now() - _gsearchCache.t) / 1000 : 999;
+      if (cacheAge > 60) {
+        const data = await gql(`query { proposals(first: 200, orderBy:"created", orderDirection:desc) { id title state scores_total space { id name } } }`);
+        _gsearchCache = { t: Date.now(), data: data?.proposals || [] };
+      }
+      const matches = _gsearchCache.data.filter(p =>
+        (p.title || '').toLowerCase().includes(q) ||
+        (p.space?.name || '').toLowerCase().includes(q)
+      ).slice(0, 12);
+
+      if (!matches.length) {
+        r.innerHTML = `<div class="gsearch-empty">No proposals found for "${esc(q)}"</div>`;
+        return;
+      }
+      r.innerHTML = matches.map(p => {
+        const stateColor = p.state === 'active' ? 'var(--green)' : p.state === 'pending' ? 'var(--yellow)' : 'var(--text3)';
+        return `<div class="gsearch-result" onclick="closeGlobalSearch();openTrending('${esc(p.space?.id)}','${esc(p.id)}')">
+          <div class="gsearch-result-icon">🏛️</div>
+          <div class="gsearch-result-info">
+            <div class="gsearch-result-title">${esc(p.title)}</div>
+            <div class="gsearch-result-meta">${esc(p.space?.name || p.space?.id)} · <span style="color:${stateColor};font-weight:700">${p.state}</span> · ${(p.scores_total || 0).toLocaleString()} votes</div>
+          </div>
+        </div>`;
+      }).join('');
+    } catch (e) {
+      r.innerHTML = `<div class="gsearch-empty">⚠️ Search failed: ${esc(e.message)}</div>`;
+    }
+  }, 250);
 }
 </script>
 </body>
