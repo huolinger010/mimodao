@@ -1815,7 +1815,10 @@ async function loadTrending() {
     }, 50);
 
     content.innerHTML = proposals.slice(0, 20).map((p, i) => {
-      const heatPct = Math.round((p._heat / maxHeat) * 100);
+      // Log-scaled heat so even lower-ranked items show meaningful bars
+      const logHeat = Math.log10(Math.max(1, p._heat));
+      const logMax = Math.log10(Math.max(2, maxHeat));
+      const heatPct = Math.max(8, Math.round((logHeat / logMax) * 100));
       const remHrs = Math.max(0, ((p.end || now) - now) / 3600);
       const remStr = remHrs < 1 ? `${Math.round(remHrs * 60)}m left` : remHrs < 24 ? `${Math.round(remHrs)}h left` : `${Math.round(remHrs / 24)}d left`;
       const spaceImg = `https://cdn.stamp.fyi/space/${p.space?.id}?s=24`;
