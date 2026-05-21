@@ -7,127 +7,148 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>MiMoDAO — AI-Powered DAO Governance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  --radius:16px;--radius-sm:10px;--radius-xs:8px;--radius-full:9999px;
+  --radius:16px;--radius-sm:12px;--radius-xs:10px;--radius-full:9999px;
   --transition:all .3s cubic-bezier(.4,0,.2,1);
-  --shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
-  --shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
-  --shadow-xl:0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);
+  --transition-fast:all .15s cubic-bezier(.4,0,.2,1);
+  --shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.08);
+  --shadow-lg:0 10px 25px -5px rgba(0,0,0,.15),0 4px 10px -2px rgba(0,0,0,.08);
+  --shadow-xl:0 25px 50px -12px rgba(0,0,0,.25);
+  --shadow-glow:0 0 40px rgba(139,92,246,.15);
 }
 [data-theme="dark"]{
-  --bg:#09090b;--bg2:#18181b;--bg3:#27272a;
-  --card:#111113;--card-hover:#1a1a1f;
-  --border:#27272a;--border-hover:#3f3f46;
-  --text:#fafafa;--text2:#a1a1aa;--text3:#71717a;
-  --accent:#8b5cf6;--accent-hover:#7c3aed;--accent-glow:rgba(139,92,246,.15);--accent-text:#fff;
-  --green:#22c55e;--green-bg:rgba(34,197,94,.12);
-  --red:#ef4444;--red-bg:rgba(239,68,68,.12);
-  --yellow:#eab308;--yellow-bg:rgba(234,179,8,.12);
-  --blue:#3b82f6;--blue-bg:rgba(59,130,246,.12);
-  --purple:#a78bfa;--purple-bg:rgba(167,139,250,.12);
-  --surface:rgba(255,255,255,.03);
-  --glass:rgba(17,17,19,.8);
-  --input-bg:#09090b;
+  --bg:#050507;--bg2:#0c0c10;--bg3:#16161d;
+  --card:rgba(14,14,20,.7);--card-hover:rgba(20,20,30,.8);
+  --border:rgba(255,255,255,.06);--border-hover:rgba(139,92,246,.3);
+  --text:#f0f0f5;--text2:#8888a0;--text3:#55556a;
+  --accent:#a78bfa;--accent-hover:#8b5cf6;--accent-glow:rgba(167,139,250,.15);--accent-text:#fff;
+  --green:#34d399;--green-bg:rgba(52,211,153,.1);
+  --red:#f87171;--red-bg:rgba(248,113,113,.1);
+  --yellow:#fbbf24;--yellow-bg:rgba(251,191,36,.1);
+  --blue:#60a5fa;--blue-bg:rgba(96,165,250,.1);
+  --purple:#c084fc;--purple-bg:rgba(192,132,252,.1);
+  --surface:rgba(255,255,255,.02);
+  --glass:rgba(8,8,14,.75);
+  --input-bg:rgba(10,10,16,.8);
+  --gradient-accent:linear-gradient(135deg,#8b5cf6,#6366f1,#a78bfa);
+  --gradient-card:linear-gradient(135deg,rgba(139,92,246,.05),rgba(99,102,241,.03));
+  --mesh-1:radial-gradient(at 20% 20%,rgba(139,92,246,.08) 0%,transparent 50%);
+  --mesh-2:radial-gradient(at 80% 80%,rgba(99,102,241,.06) 0%,transparent 50%);
+  --mesh-3:radial-gradient(at 50% 50%,rgba(167,139,250,.04) 0%,transparent 60%);
 }
 [data-theme="light"]{
-  --bg:#fafafa;--bg2:#f4f4f5;--bg3:#e4e4e7;
-  --card:#ffffff;--card-hover:#f8f8fa;
-  --border:#e4e4e7;--border-hover:#d4d4d8;
-  --text:#09090b;--text2:#52525b;--text3:#a1a1aa;
-  --accent:#7c3aed;--accent-hover:#6d28d9;--accent-glow:rgba(124,58,237,.1);--accent-text:#fff;
-  --green:#16a34a;--green-bg:rgba(22,163,74,.08);
-  --red:#dc2626;--red-bg:rgba(220,38,38,.08);
-  --yellow:#ca8a04;--yellow-bg:rgba(202,138,4,.08);
-  --blue:#2563eb;--blue-bg:rgba(37,99,235,.08);
-  --purple:#7c3aed;--purple-bg:rgba(124,58,237,.08);
-  --surface:rgba(0,0,0,.02);
-  --glass:rgba(255,255,255,.85);
-  --input-bg:#fff;
-  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
-  --shadow-lg:0 10px 15px -3px rgba(0,0,0,.05),0 4px 6px -2px rgba(0,0,0,.03);
-  --shadow-xl:0 20px 25px -5px rgba(0,0,0,.06),0 10px 10px -5px rgba(0,0,0,.03);
+  --bg:#f8f8fc;--bg2:#f0f0f8;--bg3:#e4e4f0;
+  --card:rgba(255,255,255,.9);--card-hover:rgba(255,255,255,.95);
+  --border:rgba(0,0,0,.06);--border-hover:rgba(139,92,246,.3);
+  --text:#0a0a14;--text2:#555570;--text3:#8888a0;
+  --accent:#7c3aed;--accent-hover:#6d28d9;--accent-glow:rgba(124,58,237,.08);--accent-text:#fff;
+  --green:#059669;--green-bg:rgba(5,150,105,.06);
+  --red:#dc2626;--red-bg:rgba(220,38,38,.06);
+  --yellow:#d97706;--yellow-bg:rgba(217,119,6,.06);
+  --blue:#2563eb;--blue-bg:rgba(37,99,235,.06);
+  --purple:#7c3aed;--purple-bg:rgba(124,58,237,.06);
+  --surface:rgba(0,0,0,.015);
+  --glass:rgba(248,248,252,.8);
+  --input-bg:rgba(255,255,255,.9);
+  --gradient-accent:linear-gradient(135deg,#7c3aed,#6366f1,#8b5cf6);
+  --gradient-card:linear-gradient(135deg,rgba(124,58,237,.03),rgba(99,102,241,.02));
+  --mesh-1:radial-gradient(at 20% 20%,rgba(124,58,237,.05) 0%,transparent 50%);
+  --mesh-2:radial-gradient(at 80% 80%,rgba(99,102,241,.04) 0%,transparent 50%);
+  --mesh-3:radial-gradient(at 50% 50%,rgba(139,92,246,.03) 0%,transparent 60%);
+  --shadow:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.03);
+  --shadow-lg:0 10px 25px -5px rgba(0,0,0,.06),0 4px 10px -2px rgba(0,0,0,.03);
+  --shadow-xl:0 25px 50px -12px rgba(0,0,0,.1);
+  --shadow-glow:0 0 40px rgba(124,58,237,.08);
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;transition:background .5s,color .5s;position:relative}
+body::before{content:'';position:fixed;inset:0;background:var(--mesh-1),var(--mesh-2),var(--mesh-3);pointer-events:none;z-index:0}
+a{color:var(--accent);text-decoration:none;transition:var(--transition-fast)}
+a:hover{text-decoration:underline;color:var(--accent-hover)}
 
 /* Layout */
-.app{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+.app{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;position:relative;z-index:1}
 .container{max-width:1100px;margin:0 auto;padding:0 24px;width:100%}
 .main{flex:1;padding:24px 0 100px}
 
 /* Nav */
-.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:var(--glass);border-bottom:1px solid var(--border);transition:var(--transition)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:var(--text);white-space:nowrap}
-.nav-logo span{font-size:24px}
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);background:var(--glass);border-bottom:1px solid var(--border);transition:var(--transition)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.nav-logo{display:flex;align-items:center;gap:12px;font-weight:900;font-size:20px;color:var(--text);white-space:nowrap;letter-spacing:-.3px}
+.nav-logo span{font-size:26px;filter:drop-shadow(0 0 8px rgba(139,92,246,.4))}
 .nav-actions{display:flex;align-items:center;gap:8px}
-.theme-btn{width:44px;height:44px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;transition:var(--transition);flex-shrink:0;-webkit-tap-highlight-color:transparent}
-.theme-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
-.theme-btn:active{transform:scale(.95)}
+.theme-btn{width:44px;height:44px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--card);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;transition:var(--transition);flex-shrink:0;-webkit-tap-highlight-color:transparent;backdrop-filter:blur(10px)}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow);box-shadow:var(--shadow-glow)}
+.theme-btn:active{transform:scale(.92)}
 
 /* Hero */
-.hero{text-align:center;padding:56px 0 40px;position:relative}
-.hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;opacity:.6}
-.hero-icon{font-size:56px;margin-bottom:16px;display:block;animation:float 3s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.hero h1{font-size:clamp(32px,6vw,48px);font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:10px}
-.hero p{color:var(--text2);font-size:16px;max-width:560px;margin:0 auto;line-height:1.5}
-.hero-badges{display:flex;gap:8px;justify-content:center;margin-top:24px;flex-wrap:wrap}
-.h-badge{background:var(--bg2);border:1px solid var(--border);padding:6px 16px;border-radius:var(--radius-full);font-size:12px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:6px;transition:var(--transition)}
-.h-badge:hover{border-color:var(--accent);color:var(--accent)}
-.h-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.hero{text-align:center;padding:64px 0 48px;position:relative}
+.hero::before{content:'';position:absolute;top:-140px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(139,92,246,.12) 0%,rgba(99,102,241,.06) 30%,transparent 70%);pointer-events:none;animation:pulse-glow 4s ease-in-out infinite}
+@keyframes pulse-glow{0%,100%{opacity:.6;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.05)}}
+.hero-icon{font-size:64px;margin-bottom:20px;display:block;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(139,92,246,.3))}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero h1{font-size:clamp(36px,7vw,56px);font-weight:900;background:linear-gradient(135deg,#a78bfa,#818cf8,#6366f1,#a78bfa);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;margin-bottom:14px;letter-spacing:-1px;animation:gradient-shift 6s ease infinite}
+@keyframes gradient-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero p{color:var(--text2);font-size:17px;max-width:580px;margin:0 auto;line-height:1.6;font-weight:400}
+.hero-badges{display:flex;gap:10px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.h-badge{background:var(--card);border:1px solid var(--border);padding:7px 18px;border-radius:var(--radius-full);font-size:12px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:7px;transition:var(--transition);backdrop-filter:blur(10px)}
+.h-badge:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow-glow)}
+.h-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(52,211,153,.5)}
 
 /* Tabs */
-.tabs-wrap{position:sticky;top:60px;z-index:40;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:var(--glass);padding:14px 0;border-bottom:1px solid var(--border);transition:var(--transition)}
-.tabs{display:flex;gap:4px;background:var(--bg2);border-radius:var(--radius-sm);padding:4px;border:1px solid var(--border)}
-.tab{flex:1;padding:12px 20px;border:none;background:transparent;color:var(--text3);font-size:14px;font-weight:600;border-radius:var(--radius-xs);cursor:pointer;transition:var(--transition);font-family:var(--font);white-space:nowrap;-webkit-tap-highlight-color:transparent;min-height:44px;display:flex;align-items:center;justify-content:center;gap:6px}
-.tab.active{background:var(--accent);color:var(--accent-text);box-shadow:0 2px 8px var(--accent-glow)}
+.tabs-wrap{position:sticky;top:64px;z-index:40;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:var(--glass);padding:14px 0;border-bottom:1px solid var(--border);transition:var(--transition)}
+.tabs{display:flex;gap:4px;background:var(--bg2);border-radius:var(--radius-sm);padding:5px;border:1px solid var(--border)}
+.tab{flex:1;padding:12px 16px;border:none;background:transparent;color:var(--text3);font-size:13px;font-weight:600;border-radius:var(--radius-xs);cursor:pointer;transition:var(--transition);font-family:var(--font);white-space:nowrap;-webkit-tap-highlight-color:transparent;min-height:44px;display:flex;align-items:center;justify-content:center;gap:6px;position:relative;overflow:hidden}
+.tab.active{background:var(--gradient-accent);color:var(--accent-text);box-shadow:0 4px 16px rgba(139,92,246,.3)}
 .tab:hover:not(.active){color:var(--text);background:var(--surface)}
 .tab .tab-icon{font-size:16px}
+.tab .tab-badge{background:rgba(255,255,255,.2);font-size:10px;font-weight:800;padding:2px 7px;border-radius:var(--radius-full);margin-left:4px}
 
 /* Panels */
-.panel{display:none;animation:fadeUp .3s ease}
+.panel{display:none;animation:fadeUp .35s ease}
 .panel.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
 /* Cards */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;transition:var(--transition);box-shadow:var(--shadow)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;transition:var(--transition);box-shadow:var(--shadow);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.2),transparent);opacity:0;transition:var(--transition)}
 .card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-lg)}
-.card-title{font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
-.badge-free{background:var(--green-bg);color:var(--green);font-size:10px;font-weight:700;padding:4px 12px;border-radius:var(--radius-full);letter-spacing:.3px}
+.card:hover::before{opacity:1}
+.card-title{font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px;letter-spacing:-.2px}
+.badge-free{background:var(--green-bg);color:var(--green);font-size:10px;font-weight:700;padding:4px 12px;border-radius:var(--radius-full);letter-spacing:.5px;border:1px solid rgba(52,211,153,.15)}
 
 /* Search */
 .search-wrap{position:relative;margin-bottom:16px}
-.search-input{width:100%;background:var(--input-bg);border:1px solid var(--border);color:var(--text);padding:12px 14px 12px 42px;border-radius:var(--radius-sm);font-size:14px;font-family:var(--font);transition:var(--transition);outline:none}
-.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.search-input{width:100%;background:var(--input-bg);border:1px solid var(--border);color:var(--text);padding:14px 16px 14px 44px;border-radius:var(--radius-sm);font-size:14px;font-family:var(--font);transition:var(--transition);outline:none;backdrop-filter:blur(10px)}
+.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow),var(--shadow-glow)}
 .search-input::placeholder{color:var(--text3)}
 .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:16px;pointer-events:none}
 
 /* Stats Bar */
 .stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.stat-chip{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-full);padding:8px 16px;font-size:12px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:6px;transition:var(--transition)}
+.stat-chip{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-full);padding:8px 16px;font-size:12px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:6px;transition:var(--transition);backdrop-filter:blur(10px);cursor:default}
 .stat-chip:hover{border-color:var(--accent);color:var(--accent)}
+.stat-chip[onclick]{cursor:pointer}
+.stat-chip[onclick]:hover{box-shadow:var(--shadow-glow)}
 .stat-num{color:var(--accent);font-weight:800}
 
 /* Form */
 .form-group{margin-bottom:18px}
-.form-label{display:block;font-size:12px;color:var(--text3);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-select,input[type="text"],textarea{width:100%;background:var(--input-bg);border:1px solid var(--border);color:var(--text);padding:14px 16px;border-radius:var(--radius-sm);font-size:15px;font-family:var(--font);transition:var(--transition);outline:none;-webkit-appearance:none}
+.form-label{display:block;font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:.8px}
+select,input[type="text"],textarea{width:100%;background:var(--input-bg);border:1px solid var(--border);color:var(--text);padding:14px 16px;border-radius:var(--radius-sm);font-size:15px;font-family:var(--font);transition:var(--transition);outline:none;-webkit-appearance:none;backdrop-filter:blur(10px)}
 select:hover,input[type="text"]:hover,textarea:hover{border-color:var(--border-hover)}
 select:focus,input[type="text"]:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
 textarea{min-height:140px;resize:vertical;line-height:1.6}
 select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2371717a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
 
 /* Buttons */
-.btn{padding:12px 24px;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font);display:inline-flex;align-items:center;justify-content:center;gap:8px;line-height:1;min-height:44px;-webkit-tap-highlight-color:transparent}
-.btn-primary{background:var(--accent);color:var(--accent-text);box-shadow:0 2px 8px var(--accent-glow)}
-.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 4px 16px var(--accent-glow)}
+.btn{padding:12px 24px;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font);display:inline-flex;align-items:center;justify-content:center;gap:8px;line-height:1;min-height:44px;-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden}
+.btn-primary{background:var(--gradient-accent);color:var(--accent-text);box-shadow:0 4px 16px rgba(139,92,246,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,92,246,.35)}
 .btn-primary:active{transform:translateY(0) scale(.98)}
 .btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
@@ -135,26 +156,30 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 .btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 
 /* Proposal Cards */
-.p-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:10px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow);-webkit-tap-highlight-color:transparent}
-.p-card:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
-.p-card:active{transform:scale(.99)}
+.p-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:10px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow);-webkit-tap-highlight-color:transparent;backdrop-filter:blur(20px);position:relative;overflow:hidden}
+.p-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.15),transparent);opacity:0;transition:var(--transition)}
+.p-card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.p-card:hover::before{opacity:1}
+.p-card:active{transform:scale(.995)}
 .p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.p-title{font-size:15px;font-weight:600;margin-bottom:10px;line-height:1.4}
-.p-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.p-title{font-size:15px;font-weight:600;margin-bottom:10px;line-height:1.45;letter-spacing:-.1px}
+.p-meta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .p-meta span{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:4px}
-.p-countdown{font-size:11px;font-weight:600;color:var(--yellow);background:var(--yellow-bg);padding:3px 10px;border-radius:var(--radius-full)}
-.p-countdown.ended{color:var(--text3);background:var(--surface)}
+.p-countdown{font-size:11px;font-weight:600;color:var(--yellow);background:var(--yellow-bg);padding:3px 10px;border-radius:var(--radius-full);border:1px solid rgba(251,191,36,.1)}
+.p-countdown.ended{color:var(--text3);background:var(--surface);border-color:var(--border)}
+.p-dao-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-glow);padding:4px 10px;border-radius:var(--radius-full);border:1px solid rgba(139,92,246,.1)}
+.p-dao-badge img{width:16px;height:16px;border-radius:50%}
 
 /* Status */
-.status{padding:4px 12px;border-radius:var(--radius-full);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;flex-shrink:0}
-.s-active{background:var(--green-bg);color:var(--green)}
-.s-closed{background:var(--surface);color:var(--text3)}
-.s-pending{background:var(--yellow-bg);color:var(--yellow)}
+.status{padding:4px 12px;border-radius:var(--radius-full);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
+.s-active{background:var(--green-bg);color:var(--green);border:1px solid rgba(52,211,153,.1)}
+.s-closed{background:var(--surface);color:var(--text3);border:1px solid var(--border)}
+.s-pending{background:var(--yellow-bg);color:var(--yellow);border:1px solid rgba(251,191,36,.1)}
 
 /* Vote Bars */
 .vbar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin:8px 0}
 .vfill{height:100%;border-radius:4px;transition:width .6s ease}
-.vfill-f{background:var(--green)}
+.vfill-f{background:linear-gradient(90deg,var(--green),var(--blue))}
 .vstat{display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-top:2px}
 .vstat .v-pct{font-weight:700;color:var(--text2)}
 
@@ -166,33 +191,37 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 
 /* Score Grid */
 .scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:16px 0}
-.score{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 12px;text-align:center;transition:var(--transition)}
-.score:hover{border-color:var(--accent);transform:translateY(-2px)}
+.score{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 12px;text-align:center;transition:var(--transition);backdrop-filter:blur(10px)}
+.score:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow-glow)}
 .score-n{font-size:28px;font-weight:800;line-height:1;margin-bottom:4px}
 .score-l{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
 
 /* Risk */
 .risk-bar{height:10px;background:var(--bg3);border-radius:5px;overflow:hidden;margin:8px 0}
 .risk-fill{height:100%;border-radius:5px;transition:width .5s ease}
-.risk-low{background:var(--green)}.risk-med{background:var(--yellow)}.risk-high{background:var(--red)}
+.risk-low{background:linear-gradient(90deg,var(--green),var(--blue))}.risk-med{background:linear-gradient(90deg,var(--yellow),var(--accent))}.risk-high{background:linear-gradient(90deg,var(--red),var(--yellow))}
 
 /* Tags */
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
-.tag{padding:5px 14px;border-radius:var(--radius-full);font-size:12px;font-weight:600;transition:var(--transition)}
-.tag-green{background:var(--green-bg);color:var(--green)}
-.tag-red{background:var(--red-bg);color:var(--red)}
-.tag-yellow{background:var(--yellow-bg);color:var(--yellow)}
-.tag-blue{background:var(--blue-bg);color:var(--blue)}
-.tag-purple{background:var(--purple-bg);color:var(--purple)}
+.tag{padding:5px 14px;border-radius:var(--radius-full);font-size:12px;font-weight:600;transition:var(--transition);border:1px solid transparent}
+.tag:hover{transform:translateY(-1px)}
+.tag-green{background:var(--green-bg);color:var(--green);border-color:rgba(52,211,153,.1)}
+.tag-red{background:var(--red-bg);color:var(--red);border-color:rgba(248,113,113,.1)}
+.tag-yellow{background:var(--yellow-bg);color:var(--yellow);border-color:rgba(251,191,36,.1)}
+.tag-blue{background:var(--blue-bg);color:var(--blue);border-color:rgba(96,165,250,.1)}
+.tag-purple{background:var(--purple-bg);color:var(--purple);border-color:rgba(192,132,252,.1)}
 
 /* DAO Grid */
 .dao-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
-.dao{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow);display:flex;align-items:center;gap:16px;-webkit-tap-highlight-color:transparent}
-.dao:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+.dao{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow);display:flex;align-items:center;gap:16px;-webkit-tap-highlight-color:transparent;backdrop-filter:blur(20px);position:relative;overflow:hidden}
+.dao::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.15),transparent);opacity:0;transition:var(--transition)}
+.dao:hover{border-color:var(--border-hover);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.dao:hover::before{opacity:1}
 .dao:active{transform:scale(.99)}
-.dao-img{width:44px;height:44px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;object-fit:cover}
+.dao-img{width:44px;height:44px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;object-fit:cover;transition:var(--transition)}
+.dao:hover .dao-img{border-color:var(--accent);box-shadow:0 0 12px rgba(139,92,246,.2)}
 .dao-info{flex:1;min-width:0}
-.dao-name{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.dao-name{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;letter-spacing:-.1px}
 .dao-stat{font-size:12px;color:var(--text3)}
 
 /* Loading */
@@ -212,11 +241,11 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 .footer a{color:var(--accent)}
 
 /* Toast */
-.toast{position:fixed;bottom:80px;right:20px;background:var(--accent);color:var(--accent-text);padding:14px 22px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;transform:translateY(100px);opacity:0;transition:var(--transition);z-index:200;box-shadow:var(--shadow-xl)}
+.toast{position:fixed;bottom:80px;right:20px;background:var(--gradient-accent);color:var(--accent-text);padding:14px 22px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;transform:translateY(100px);opacity:0;transition:var(--transition);z-index:200;box-shadow:var(--shadow-xl)}
 .toast.show{transform:translateY(0);opacity:1}
 
 /* Mobile Bottom Nav */
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:60;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:var(--glass);border-top:1px solid var(--border);padding:6px 8px env(safe-area-inset-bottom,8px);transition:var(--transition)}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:60;backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);background:var(--glass);border-top:1px solid var(--border);padding:6px 8px env(safe-area-inset-bottom,8px);transition:var(--transition)}
 .bottom-nav-inner{display:flex;gap:4px}
 .bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;border:none;background:transparent;color:var(--text3);font-size:10px;font-weight:600;font-family:var(--font);border-radius:var(--radius-xs);cursor:pointer;transition:var(--transition);-webkit-tap-highlight-color:transparent;min-height:52px}
 .bnav-btn.active{color:var(--accent);background:var(--accent-glow)}
@@ -227,36 +256,36 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 
 /* Wallet */
 .wallet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:16px}
-.wallet-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;transition:var(--transition)}
-.wallet-card:hover{border-color:var(--accent)}
+.wallet-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;transition:var(--transition);backdrop-filter:blur(10px)}
+.wallet-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-glow)}
 .wallet-dao{font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}
 .wallet-dao img{width:24px;height:24px;border-radius:50%;border:1px solid var(--border)}
-.wallet-vp{font-size:24px;font-weight:800;color:var(--accent);margin-bottom:4px}
+.wallet-vp{font-size:24px;font-weight:800;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px}
 .wallet-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.3px}
 
 /* Timeline */
 .timeline{position:relative;padding-left:28px;margin:16px 0}
-.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
-.tl-item{position:relative;margin-bottom:16px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition)}
-.tl-item:hover{border-color:var(--accent);transform:translateX(4px)}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--blue),var(--border));border-radius:1px}
+.tl-item{position:relative;margin-bottom:16px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition);backdrop-filter:blur(10px)}
+.tl-item:hover{border-color:var(--accent);transform:translateX(4px);box-shadow:var(--shadow-glow)}
 .tl-item::before{content:'';position:absolute;left:-24px;top:18px;width:10px;height:10px;border-radius:50%;border:2px solid var(--accent);background:var(--bg)}
-.tl-item.tl-active::before{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(34,197,94,.4)}
+.tl-item.tl-active::before{background:var(--green);border-color:var(--green);box-shadow:0 0 10px rgba(52,211,153,.5)}
 .tl-item.tl-closed::before{background:var(--text3);border-color:var(--text3)}
 .tl-date{font-size:11px;color:var(--text3);margin-bottom:4px}
 .tl-title{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:6px}
 .tl-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--text3)}
 .tl-bar{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-top:8px}
-.tl-bar-fill{height:100%;border-radius:2px;background:var(--green)}
+.tl-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--green),var(--blue))}
 
 /* Share Card */
-.share-card{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid rgba(139,92,246,.3);border-radius:var(--radius);padding:24px;margin-top:16px;position:relative;overflow:hidden}
-.share-card::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(139,92,246,.08) 0%,transparent 60%);pointer-events:none}
+.share-card{background:linear-gradient(135deg,#0c0c1a 0%,#1a1a3e 50%,#0c0c1a 100%);border:1px solid rgba(139,92,246,.3);border-radius:var(--radius);padding:28px;margin-top:16px;position:relative;overflow:hidden}
+.share-card::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(139,92,246,.1) 0%,transparent 60%);pointer-events:none}
 .share-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;position:relative}
-.share-logo{font-size:28px}
-.share-title{font-size:18px;font-weight:800;color:#fff}
+.share-logo{font-size:28px;filter:drop-shadow(0 0 10px rgba(139,92,246,.4))}
+.share-title{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px}
 .share-subtitle{font-size:12px;color:rgba(255,255,255,.5)}
 .share-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;position:relative}
-.share-score{text-align:center;padding:10px 4px;background:rgba(255,255,255,.05);border-radius:var(--radius-xs);border:1px solid rgba(255,255,255,.08)}
+.share-score{text-align:center;padding:10px 4px;background:rgba(255,255,255,.04);border-radius:var(--radius-xs);border:1px solid rgba(255,255,255,.06)}
 .share-score-n{font-size:20px;font-weight:800;color:#fff}
 .share-score-l{font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px}
 .share-risk{text-align:center;padding:12px;background:rgba(255,255,255,.03);border-radius:var(--radius-xs);border:1px solid rgba(255,255,255,.06);position:relative}
@@ -264,6 +293,41 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 .share-risk-bar{height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;margin-top:6px}
 .share-risk-fill{height:100%;border-radius:3px}
 .share-footer{text-align:center;margin-top:12px;font-size:10px;color:rgba(255,255,255,.3)}
+
+/* Favorites */
+.fav-btn{background:none;border:none;cursor:pointer;font-size:18px;padding:4px;transition:var(--transition);opacity:.5;-webkit-tap-highlight-color:transparent;line-height:1}
+.fav-btn:hover{opacity:1;transform:scale(1.2)}
+.fav-btn.active{opacity:1}
+.fav-section{margin-bottom:16px}
+.fav-section-title{font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+
+/* DAO Health */
+.health-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:12px 0}
+.health-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;text-align:center;transition:var(--transition);backdrop-filter:blur(10px)}
+.health-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.health-val{font-size:22px;font-weight:800;margin-bottom:2px}
+.health-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.3px}
+
+/* Dashboard */
+.dash-hero{text-align:center;padding:32px 0 24px}
+.dash-hero h2{font-size:28px;font-weight:900;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;margin-bottom:8px}
+.dash-hero p{color:var(--text2);font-size:14px}
+.dash-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:20px}
+.dash-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:var(--transition);backdrop-filter:blur(20px);position:relative;overflow:hidden}
+.dash-stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gradient-accent);opacity:0;transition:var(--transition)}
+.dash-stat:hover{border-color:var(--border-hover);transform:translateY(-3px);box-shadow:var(--shadow-glow)}
+.dash-stat:hover::before{opacity:1}
+.dash-stat-val{font-size:32px;font-weight:900;background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
+.dash-stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.dash-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.dash-filter{padding:8px 16px;border-radius:var(--radius-full);border:1px solid var(--border);background:var(--card);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font)}
+.dash-filter.active{background:var(--gradient-accent);color:var(--accent-text);border-color:transparent;box-shadow:0 4px 12px rgba(139,92,246,.2)}
+.dash-filter:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.dash-empty{text-align:center;padding:48px 20px}
+.dash-empty-icon{font-size:48px;margin-bottom:12px;opacity:.6}
+.dash-empty h3{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.dash-empty p{color:var(--text3);font-size:14px;max-width:360px;margin:0 auto;line-height:1.5}
+.dash-empty .btn{margin-top:16px}
 
 /* === TABLET (641px - 1024px) === */
 @media(min-width:641px) and (max-width:1024px){
@@ -273,34 +337,35 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
   .tab{padding:10px 16px;font-size:13px}
   .dao-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
   .scores{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+  .dash-stats{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
 }
 
 /* === MOBILE (≤640px) === */
 @media(max-width:640px){
   .container{padding:0 16px}
-  .nav-inner{height:54px}
+  .nav-inner{height:56px}
   .nav-logo{font-size:17px}
-  .nav-logo span{font-size:20px}
+  .nav-logo span{font-size:22px}
   .theme-btn{width:40px;height:40px;font-size:18px}
 
-  .hero{padding:28px 0 20px}
-  .hero-icon{font-size:42px}
+  .hero{padding:32px 0 20px}
+  .hero-icon{font-size:48px}
   .hero p{font-size:14px}
-  .hero-badges{gap:6px;margin-top:16px}
+  .hero-badges{gap:6px;margin-top:18px}
   .h-badge{padding:5px 12px;font-size:10px}
 
-  .tabs-wrap{top:54px;padding:10px 0}
-  .tabs{gap:3px;padding:3px}
-  .tab{padding:10px 10px;font-size:12px;min-height:40px}
+  .tabs-wrap{top:56px;padding:10px 0}
+  .tabs{gap:3px;padding:4px}
+  .tab{padding:10px 8px;font-size:12px;min-height:40px}
   .tab .tab-text{display:none}
   .tab .tab-icon{font-size:18px}
 
   .main{padding-bottom:80px}
 
-  .card{padding:16px;border-radius:var(--radius-sm)}
+  .card{padding:18px;border-radius:var(--radius-sm)}
   .card-title{font-size:14px;margin-bottom:12px}
 
-  .search-input{padding:10px 12px 10px 38px;font-size:14px}
+  .search-input{padding:12px 14px 12px 40px;font-size:14px}
 
   .stats-bar{gap:6px}
   .stat-chip{padding:6px 12px;font-size:11px}
@@ -350,16 +415,23 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
   .share-score-n{font-size:16px}
 
   .tl-title{font-size:12px}
+
+  .dash-hero h2{font-size:22px}
+  .dash-stats{grid-template-columns:repeat(2,1fr)}
+  .dash-stat-val{font-size:24px}
+  .dash-filters{gap:6px}
+  .dash-filter{padding:7px 12px;font-size:11px}
 }
 
 /* === SMALL MOBILE (≤380px) === */
 @media(max-width:380px){
   .container{padding:0 12px}
-  .hero h1{font-size:26px}
-  .hero-icon{font-size:36px}
+  .hero h1{font-size:28px}
+  .hero-icon{font-size:38px}
   .tab{padding:8px 8px;font-size:11px}
   .scores{grid-template-columns:repeat(2,1fr)}
   .p-meta{flex-direction:column;gap:4px}
+  .dash-stats{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -394,11 +466,23 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
       <!-- Desktop Tabs -->
       <div class="tabs-wrap" id="desktopTabs">
         <div class="tabs">
-          <button class="tab active" onclick="switchTab(this,'analyzer')"><span class="tab-icon">🔍</span><span class="tab-text">Proposal Analyzer</span></button>
-          <button class="tab" onclick="switchTab(this,'writer')"><span class="tab-icon">✍️</span><span class="tab-text">AI Writer</span></button>
-          <button class="tab" onclick="switchTab(this,'explore')"><span class="tab-icon">🌐</span><span class="tab-text">DAO Explorer</span></button>
-          <button class="tab" onclick="switchTab(this,'wallet')"><span class="tab-icon">📊</span><span class="tab-text">Voting Power</span></button>
+          <button class="tab" onclick="switchTab(this,'dashboard')"><span class="tab-icon">📋</span><span class="tab-text">Dashboard</span></button>
+          <button class="tab active" onclick="switchTab(this,'analyzer')"><span class="tab-icon">🔍</span><span class="tab-text">Analyzer</span></button>
+          <button class="tab" onclick="switchTab(this,'explore')"><span class="tab-icon">🌐</span><span class="tab-text">Explore</span></button>
+          <button class="tab" onclick="switchTab(this,'writer')"><span class="tab-icon">✍️</span><span class="tab-text">Writer</span></button>
+          <button class="tab" onclick="switchTab(this,'wallet')"><span class="tab-icon">📊</span><span class="tab-text">Wallet</span></button>
         </div>
+      </div>
+
+      <!-- Dashboard Panel -->
+      <div id="dashboard" class="panel">
+        <div class="dash-hero">
+          <h2>📋 My Dashboard</h2>
+          <p>Active proposals from your favorite DAOs — all in one view</p>
+        </div>
+        <div id="dashStats" class="dash-stats"></div>
+        <div id="dashFilters" class="dash-filters"></div>
+        <div id="dashContent"></div>
       </div>
 
       <!-- Analyzer Panel -->
@@ -424,6 +508,20 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
               <option value="compound-governance.eth">Compound</option>
               <option value="nouns.eth">Nouns</option>
               <option value="morpho.eth">Morpho</option>
+              <option value="yearn">Yearn Finance</option>
+              <option value="balancer.eth">Balancer</option>
+              <option value="starknet.eth">Starknet</option>
+              <option value="scroll">Scroll</option>
+              <option value="layerzero.foundation">LayerZero</option>
+              <option value="puffer.eth">Puffer</option>
+              <option value="etherfi.eth">EtherFi</option>
+              <option value="eigenlayer.eth">EigenLayer</option>
+              <option value="jito-dao.eth">Jito</option>
+              <option value="zkSync">zkSync</option>
+              <option value="1inch.eth">1inch</option>
+              <option value="cow.eth">CoW Protocol</option>
+              <option value="radiantcapital.eth">Radiant Capital</option>
+              <option value="velodrome.eth">Velodrome</option>
             </select>
           </div>
         </div>
@@ -438,6 +536,15 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         <div id="proposalsList"></div>
         <!-- Analysis Result -->
         <div id="analysisResult"></div>
+      </div>
+
+      <!-- Explorer Panel -->
+      <div id="explore" class="panel">
+        <div class="card">
+          <div class="card-title">🌐 Top DAOs on Snapshot <span class="badge-free">FREE</span></div>
+          <p style="font-size:14px;color:var(--text2)">Click a DAO to analyze its latest proposals</p>
+        </div>
+        <div id="daoGrid" class="dao-grid"></div>
       </div>
 
       <!-- Writer Panel -->
@@ -470,15 +577,6 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         <div id="writerOutput"></div>
       </div>
 
-      <!-- Explorer Panel -->
-      <div id="explore" class="panel">
-        <div class="card">
-          <div class="card-title">🌐 Top DAOs on Snapshot <span class="badge-free">FREE</span></div>
-          <p style="font-size:14px;color:var(--text2)">Click a DAO to analyze its latest proposals</p>
-        </div>
-        <div id="daoGrid" class="dao-grid"></div>
-      </div>
-
       <!-- Wallet Panel -->
       <div id="wallet" class="panel">
         <div class="card">
@@ -508,17 +606,21 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 <!-- Mobile Bottom Nav -->
 <nav class="bottom-nav">
   <div class="bottom-nav-inner">
+    <button class="bnav-btn" onclick="bnavSwitch(this,'dashboard')">
+      <span class="bnav-icon">📋</span>
+      <span>Home</span>
+    </button>
     <button class="bnav-btn active" onclick="bnavSwitch(this,'analyzer')">
       <span class="bnav-icon">🔍</span>
       <span>Analyze</span>
     </button>
-    <button class="bnav-btn" onclick="bnavSwitch(this,'writer')">
-      <span class="bnav-icon">✍️</span>
-      <span>Writer</span>
-    </button>
     <button class="bnav-btn" onclick="bnavSwitch(this,'explore')">
       <span class="bnav-icon">🌐</span>
       <span>Explore</span>
+    </button>
+    <button class="bnav-btn" onclick="bnavSwitch(this,'writer')">
+      <span class="bnav-icon">✍️</span>
+      <span>Writer</span>
     </button>
     <button class="bnav-btn" onclick="bnavSwitch(this,'wallet')">
       <span class="bnav-icon">📊</span>
@@ -533,6 +635,7 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 const SNAPSHOT = 'https://hub.snapshot.org/graphql';
 let _proposals = [];
 let _currentTab = 'analyzer';
+let _dashFilter = 'all';
 
 // ─── Theme ───
 function toggleTheme() {
@@ -577,6 +680,7 @@ function toggleFavDao(id) {
   else { f.daos.push(id); toast('⭐ Added to favorites'); }
   saveFavs(f);
   if (_currentTab === 'explore') loadTopDAOs();
+  if (_currentTab === 'dashboard') loadDashboard();
   updateDaoFavBtn(id);
 }
 function toggleFavProposal(id) {
@@ -595,6 +699,8 @@ function updateDaoFavBtn(id) {
 }
 
 // ─── Tabs ───
+const TAB_INDEX = { dashboard: 0, analyzer: 1, explore: 2, writer: 3, wallet: 4 };
+
 function switchTab(el, name) {
   _currentTab = name;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -602,23 +708,21 @@ function switchTab(el, name) {
   if (el) el.classList.add('active');
   const panel = document.getElementById(name);
   if (panel) panel.classList.add('active');
-  // Sync bottom nav
   document.querySelectorAll('.bnav-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.bnav-btn').forEach(b => {
     if (b.getAttribute('onclick')?.includes(name)) b.classList.add('active');
   });
   if (name === 'explore') loadTopDAOs();
+  if (name === 'dashboard') loadDashboard();
 }
 function switchTabDirect(name) {
   _currentTab = name;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  const idx = { analyzer: 0, writer: 1, explore: 2, wallet: 3 };
   const tabs = document.querySelectorAll('.tab');
-  if (tabs[idx[name]]) tabs[idx[name]].classList.add('active');
+  if (tabs[TAB_INDEX[name]]) tabs[TAB_INDEX[name]].classList.add('active');
   const panel = document.getElementById(name);
   if (panel) panel.classList.add('active');
-  // Sync bottom nav
   document.querySelectorAll('.bnav-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.bnav-btn').forEach(b => {
     if (b.getAttribute('onclick')?.includes(name)) b.classList.add('active');
@@ -629,13 +733,13 @@ function bnavSwitch(el, name) {
   el.classList.add('active');
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  const idx = { analyzer: 0, writer: 1, explore: 2, wallet: 3 };
   const tabs = document.querySelectorAll('.tab');
-  if (tabs[idx[name]]) tabs[idx[name]].classList.add('active');
+  if (tabs[TAB_INDEX[name]]) tabs[TAB_INDEX[name]].classList.add('active');
   const panel = document.getElementById(name);
   if (panel) panel.classList.add('active');
   _currentTab = name;
   if (name === 'explore') loadTopDAOs();
+  if (name === 'dashboard') loadDashboard();
 }
 
 // ─── Snapshot API ───
@@ -671,6 +775,147 @@ function getCountdown(endTs) {
   if (d > 0) return { text: `${d}d ${h}h left`, ended: false };
   if (h > 0) return { text: `${h}h ${m}m left`, ended: false };
   return { text: `${m}m left`, ended: false };
+}
+
+// ─── Dashboard ───
+async function loadDashboard() {
+  const favs = getFavs();
+  const content = document.getElementById('dashContent');
+  const statsEl = document.getElementById('dashStats');
+  const filtersEl = document.getElementById('dashFilters');
+
+  if (!favs.daos.length) {
+    statsEl.innerHTML = '';
+    filtersEl.innerHTML = '';
+    content.innerHTML = `<div class="dash-empty">
+      <div class="dash-empty-icon">⭐</div>
+      <h3>No Favorite DAOs Yet</h3>
+      <p>Star your favorite DAOs in the Explore tab to see their active proposals here.</p>
+      <button class="btn btn-primary" onclick="switchTabDirect('explore')">🌐 Explore DAOs</button>
+    </div>`;
+    return;
+  }
+
+  content.innerHTML = '<div class="loading"><div class="spinner"></div> Loading dashboard...</div>';
+
+  try {
+    // Fetch all proposals from fav DAOs
+    const queries = favs.daos.map(daoId =>
+      gql(`query($s:String!) { space(id:$s) { id name } proposals(first:20, where:{space:$s, state:"active"}, orderBy:"created", orderDirection:desc) { id title state created end choices scores scores_total author link } }`, { s: daoId })
+    );
+    const results = await Promise.allSettled(queries);
+
+    let allProposals = [];
+    let daoMap = {};
+    results.forEach(r => {
+      if (r.status === 'fulfilled' && r.value) {
+        const space = r.value.space;
+        if (space) daoMap[space.id] = space;
+        (r.value.proposals || []).forEach(p => {
+          allProposals.push({ ...p, _daoId: space?.id, _daoName: space?.name || space?.id });
+        });
+      }
+    });
+
+    // Sort by end date (urgent first)
+    allProposals.sort((a, b) => (a.end || 0) - (b.end || 0));
+
+    // Stats
+    const totalActive = allProposals.length;
+    const daoCount = Object.keys(daoMap).length;
+    const totalVotes = allProposals.reduce((s, p) => s + (p.scores_total || 0), 0);
+    const endingSoon = allProposals.filter(p => {
+      const diff = (p.end || 0) - Date.now() / 1000;
+      return diff > 0 && diff < 86400 * 3;
+    }).length;
+
+    statsEl.innerHTML = `
+      <div class="dash-stat"><div class="dash-stat-val">${totalActive}</div><div class="dash-stat-label">Active Proposals</div></div>
+      <div class="dash-stat"><div class="dash-stat-val">${daoCount}</div><div class="dash-stat-label">DAOs Tracked</div></div>
+      <div class="dash-stat"><div class="dash-stat-val">${(totalVotes/1000).toFixed(0)}K</div><div class="dash-stat-label">Total Votes</div></div>
+      <div class="dash-stat"><div class="dash-stat-val" style="color:var(--yellow)">${endingSoon}</div><div class="dash-stat-label">Ending Soon</div></div>
+    `;
+
+    // Filters
+    const daoFilters = Object.values(daoMap);
+    filtersEl.innerHTML = `
+      <button class="dash-filter${_dashFilter === 'all' ? ' active' : ''}" onclick="setDashFilter('all')">All DAOs</button>
+      ${daoFilters.map(d => `<button class="dash-filter${_dashFilter === d.id ? ' active' : ''}" onclick="setDashFilter('${esc(d.id)}')">${esc(d.name || d.id)}</button>`).join('')}
+    `;
+
+    // Filter proposals
+    let filtered = _dashFilter === 'all' ? allProposals : allProposals.filter(p => p._daoId === _dashFilter);
+
+    if (!filtered.length) {
+      content.innerHTML = `<div class="dash-empty">
+        <div class="dash-empty-icon">📭</div>
+        <h3>No Active Proposals</h3>
+        <p>${_dashFilter === 'all' ? 'None of your favorite DAOs have active proposals right now.' : 'This DAO has no active proposals right now.'}</p>
+      </div>`;
+      return;
+    }
+
+    // Render
+    content.innerHTML = filtered.map(p => {
+      const cd = getCountdown(p.end);
+      const daoInfo = POPULAR_DAOS.find(d => d.id === p._daoId);
+      const daoName = daoInfo ? daoInfo.name : (p._daoName || p._daoId);
+      const tv = p.scores_total || 0;
+      const author = p.author ? p.author.slice(0, 6) + '…' + p.author.slice(-4) : '—';
+
+      return `<div class="p-card" data-pid="${esc(p.id)}" data-dao="${esc(p._daoId)}" onclick="goToProposal(this.dataset.dao, this.dataset.pid)">
+        <div style="margin-bottom:8px">
+          <span class="p-dao-badge">
+            <img src="https://cdn.stamp.fyi/space/${encodeURIComponent(p._daoId)}?s=32" onerror="this.style.display='none'" />
+            ${esc(daoName)}
+          </span>
+        </div>
+        <div class="p-head"><div style="flex:1;min-width:0">
+          <div class="p-title">${esc(p.title)}</div>
+          <div class="p-meta">
+            <span class="p-countdown ${cd.ended ? 'ended' : ''}">⏰ ${cd.text}</span>
+            <span>🗳️ ${tv.toLocaleString()} votes</span>
+            <span>👤 ${esc(author)}</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+          <button class="fav-btn${isFavProposal(p.id) ? ' active' : ''}" onclick="event.stopPropagation();toggleFavProposal('${esc(p.id)}')" title="Favorite">${isFavProposal(p.id) ? '⭐' : '☆'}</button>
+        </div></div>
+        ${tv > 0 ? renderBars(p.choices, p.scores, tv) : ''}
+      </div>`;
+    }).join('');
+
+  } catch (e) {
+    content.innerHTML = `<div class="dash-empty">
+      <div class="dash-empty-icon">⚠️</div>
+      <h3>Error Loading Dashboard</h3>
+      <p>${esc(e.message)}</p>
+    </div>`;
+  }
+}
+
+function setDashFilter(filter) {
+  _dashFilter = filter;
+  loadDashboard();
+}
+
+function goToProposal(daoId, proposalId) {
+  const sel = document.getElementById('daoSelect');
+  let found = false;
+  for (let i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].value === daoId) { found = true; break; }
+  }
+  if (!found) {
+    const opt = document.createElement('option');
+    opt.value = daoId;
+    opt.textContent = daoId;
+    sel.appendChild(opt);
+  }
+  sel.value = daoId;
+  switchTabDirect('analyzer');
+  loadProposals().then(() => {
+    showProposalById(proposalId);
+  });
 }
 
 // ─── Load Proposals ───
@@ -826,6 +1071,8 @@ function analyzeProposal(p) {
         <div class="a-box">${a.insight}</div>
         <div class="btn-group">
           <button class="btn btn-sm btn-ghost" onclick="copyBox('analysisResult')">📋 Copy</button>
+          <button class="btn btn-sm btn-ghost" onclick="shareAnalysis(_proposals.find(x=>x.id==='${esc(p.id)}'),${JSON.stringify(a).replace(/'/g,"\\'").replace(/"/g,'&quot;')})">🔗 Share Card</button>
+          <button class="btn btn-sm btn-ghost" onclick="showTimeline()">📅 Timeline</button>
           <button class="btn btn-sm btn-ghost" onclick="closeAnalysis()">✕ Close</button>
         </div>
       </div>`;
@@ -834,6 +1081,11 @@ function analyzeProposal(p) {
       r.innerHTML = `<div class="card"><div style="color:var(--red)">⚠️ Analysis error: ${esc(e.message)}</div></div>`;
     }
   }, 300);
+}
+
+function closeAnalysis() {
+  const el = document.getElementById('analysisResult');
+  if (el) el.innerHTML = '';
 }
 
 function updateFavDaosBar() {
@@ -849,11 +1101,6 @@ function updateFavDaosBar() {
     const name = dao ? dao.name : id;
     return `<button class="btn btn-sm btn-ghost" onclick="document.getElementById('daoSelect').value='${esc(id)}';loadProposals()" style="font-size:12px;padding:6px 12px">⭐ ${esc(name)}</button>`;
   }).join('');
-}
-
-function closeAnalysis() {
-  const el = document.getElementById('analysisResult');
-  if (el) el.innerHTML = '';
 }
 
 function smartAnalyze(p, body, text) {
@@ -1035,36 +1282,49 @@ const POPULAR_DAOS = [
   { id: 'pods.eth', name: 'Pods' },
   { id: 'stakewise.eth', name: 'StakeWise' },
   { id: 'rocketpool-dao.eth', name: 'Rocket Pool' },
-  { id: 'hop.eth', name: 'Hop Protocol' }
+  { id: 'hop.eth', name: 'Hop Protocol' },
+  { id: 'yearn', name: 'Yearn Finance' },
+  { id: 'balancer.eth', name: 'Balancer' },
+  { id: 'starknet.eth', name: 'Starknet' },
+  { id: 'scroll', name: 'Scroll' },
+  { id: 'layerzero.foundation', name: 'LayerZero' },
+  { id: 'puffer.eth', name: 'Puffer' },
+  { id: 'etherfi.eth', name: 'EtherFi' },
+  { id: 'eigenlayer.eth', name: 'EigenLayer' },
+  { id: 'jito-dao.eth', name: 'Jito' },
+  { id: 'zkSync', name: 'zkSync' },
+  { id: '1inch.eth', name: '1inch' },
+  { id: 'cow.eth', name: 'CoW Protocol' },
+  { id: 'radiantcapital.eth', name: 'Radiant Capital' },
+  { id: 'velodrome.eth', name: 'Velodrome' }
 ];
 
 async function loadTopDAOs() {
   const grid = document.getElementById('daoGrid');
-    // Show favorites first
-    const favs = getFavs();
-    const favDaos = favs.daos.length ? POPULAR_DAOS.filter(d => favs.daos.includes(d.id)) : [];
-    const otherDaos = POPULAR_DAOS.filter(d => !favs.daos.includes(d.id));
-    const orderedDaos = [...favDaos, ...otherDaos];
+  const favs = getFavs();
+  const favDaos = favs.daos.length ? POPULAR_DAOS.filter(d => favs.daos.includes(d.id)) : [];
+  const otherDaos = POPULAR_DAOS.filter(d => !favs.daos.includes(d.id));
+  const orderedDaos = [...favDaos, ...otherDaos];
 
-    let favSection = '';
-    if (favDaos.length) {
-      favSection = `<div class="fav-section"><div class="fav-section-title">⭐ Your Favorites</div></div>`;
-    }
+  let favSection = '';
+  if (favDaos.length) {
+    favSection = `<div class="fav-section"><div class="fav-section-title">⭐ Your Favorites</div></div>`;
+  }
 
-    grid.innerHTML = favSection + orderedDaos.map(dao => {
-      const isFav = favs.daos.includes(dao.id);
-      return `<div class="dao" data-dao="${esc(dao.id)}">
-        <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(dao.id)}?s=80"
-          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2244%22 height=%2244%22%3E%3Crect width=%2244%22 height=%2244%22 rx=%2222%22 fill=%22%2327272a%22/%3E%3Ctext x=%2222%22 y=%2228%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2218%22%3E🏛️%3C/text%3E%3C/svg%3E'" />
-        <div class="dao-info" onclick="selectDao('${esc(dao.id)}')">
-          <div class="dao-name">${esc(dao.name)}</div>
-          <div class="dao-stat">Click to analyze proposals</div>
-        </div>
-        <button class="fav-btn${isFav ? ' active' : ''}" onclick="event.stopPropagation();toggleFavDao('${esc(dao.id)}')" title="Favorite">${isFav ? '⭐' : '☆'}</button>
-      </div>`;
-    }).join('');
+  grid.innerHTML = favSection + orderedDaos.map(dao => {
+    const isFav = favs.daos.includes(dao.id);
+    return `<div class="dao" data-dao="${esc(dao.id)}">
+      <img class="dao-img" src="https://cdn.stamp.fyi/space/${encodeURIComponent(dao.id)}?s=80"
+        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2244%22 height=%2244%22%3E%3Crect width=%2244%22 height=%2244%22 rx=%2222%22 fill=%22%2327272a%22/%3E%3Ctext x=%2222%22 y=%2228%22 text-anchor=%22middle%22 fill=%22%2371717a%22 font-size=%2218%22%3E🏛️%3C/text%3E%3C/svg%3E'" />
+      <div class="dao-info" onclick="selectDao('${esc(dao.id)}')">
+        <div class="dao-name">${esc(dao.name)}</div>
+        <div class="dao-stat">Click to analyze proposals</div>
+      </div>
+      <button class="fav-btn${isFav ? ' active' : ''}" onclick="event.stopPropagation();toggleFavDao('${esc(dao.id)}')" title="Favorite">${isFav ? '⭐' : '☆'}</button>
+    </div>`;
+  }).join('');
 
-    try {
+  try {
     const ids = POPULAR_DAOS.map(d => d.id);
     const d = await gql(`{ spaces(where:{id_in:${JSON.stringify(ids)}}, first:50) { id followersCount members proposalsCount } }`);
     const spaces = d.spaces || [];
@@ -1098,7 +1358,6 @@ async function loadTopDAOs() {
       </div>`;
     }).join('');
   } catch (e) {
-    // Static list already rendered, show error silently
     console.warn('DAO stats load failed:', e.message);
   }
 }
@@ -1116,7 +1375,6 @@ function selectDao(id) {
     sel.appendChild(opt);
   }
   sel.value = id;
-  // Show DAO health before switching
   showDaoHealth(id);
   switchTabDirect('analyzer');
   loadProposals();
@@ -1130,7 +1388,6 @@ async function showDaoHealth(daoId) {
   r.innerHTML = `<div class="card"><div class="loading"><div class="spinner"></div> Loading ${esc(name)} health...</div></div>`;
 
   try {
-    // Fetch space info + recent proposals for health metrics
     const [spaceData, proposalsData] = await Promise.all([
       gql(`{ space(id:"${daoId}") { id name followersCount members proposalsCount } }`),
       gql(`query($s:String!) { proposals(first:50, where:{space:$s}, orderBy:"created", orderDirection:desc) { id state scores_total choices scores end } }`, { s: daoId })
@@ -1147,7 +1404,6 @@ async function showDaoHealth(daoId) {
     const avgVotes = totalProposals > 0 ? Math.round(totalVotes / totalProposals) : 0;
     const participation = followers > 0 ? ((totalVotes / Math.max(totalProposals, 1)) / followers * 100).toFixed(1) : 0;
 
-    // Pass/fail ratio (proposals with >50% on one choice)
     let passed = 0, failed = 0;
     proposals.filter(p => p.state === 'closed' && p.scores_total > 0).forEach(p => {
       const maxScore = Math.max(...(p.scores || [0]));
@@ -1156,7 +1412,6 @@ async function showDaoHealth(daoId) {
     });
     const passRate = (passed + failed) > 0 ? ((passed / (passed + failed)) * 100).toFixed(0) : '—';
 
-    // Recent activity trend
     const now = Date.now() / 1000;
     const recent30d = proposals.filter(p => p.end && (now - p.end) < 30 * 86400).length;
 
@@ -1213,8 +1468,6 @@ async function checkVotingPower() {
   res.innerHTML = '<div class="card"><div class="loading"><div class="spinner"></div> Checking voting power...</div></div>';
 
   try {
-    // Query votes across top DAOs
-    const spaces = POPULAR_DAOS.slice(0, 15).map(d => d.id);
     const d = await gql(
       `query($voter:String!) {
         votes(first:100, where:{voter:$voter}, orderBy:"vp", orderDirection:desc) {
@@ -1232,7 +1485,6 @@ async function checkVotingPower() {
       return;
     }
 
-    // Group by space and calculate total VP
     const bySpace = {};
     votes.forEach(v => {
       const sp = v.space || 'unknown';
@@ -1246,14 +1498,12 @@ async function checkVotingPower() {
     const totalVotes = votes.length;
     const daoCount = Object.keys(bySpace).length;
 
-    // Stats chips
     let html = `<div class="stats-bar" style="display:flex;margin-top:16px">
       <span class="stat-chip">⚡ <span class="stat-num">${totalVp.toLocaleString(undefined, {maximumFractionDigits:2})}</span> total VP</span>
       <span class="stat-chip">🗳️ <span class="stat-num">${totalVotes}</span> votes cast</span>
       <span class="stat-chip">🏛️ <span class="stat-num">${daoCount}</span> DAOs</span>
     </div>`;
 
-    // Grid of DAOs
     html += '<div class="wallet-grid">';
     const sorted = Object.entries(bySpace).sort((a, b) => b[1].totalVp - a[1].totalVp);
     for (const [sp, data] of sorted) {
@@ -1281,7 +1531,6 @@ async function checkVotingPower() {
 function renderTimeline(proposals) {
   if (!proposals || !proposals.length) return '';
   const sorted = [...proposals].sort((a, b) => (a.end || 0) - (b.end || 0));
-  const now = Date.now() / 1000;
   let html = '<div class="timeline">';
   sorted.forEach(p => {
     const isActive = p.state === 'active';
@@ -1310,7 +1559,6 @@ function renderTimeline(proposals) {
   return html;
 }
 
-// Add timeline button to analyzer stats bar
 function showTimeline() {
   if (!_proposals.length) { toast('Load proposals first'); return; }
   const r = document.getElementById('analysisResult');
@@ -1328,11 +1576,11 @@ function shareAnalysis(p, a) {
 
   const scoreHTML = Object.entries(a.scores).slice(0, 4).map(([k, v]) => {
     const labels = { complexity: 'Complexity', financial: 'Financial', security: 'Security', governance: 'Governance', technical: 'Technical', urgency: 'Urgency', sentiment: 'Sentiment' };
-    const color = v > 70 ? '#ef4444' : v > 40 ? '#eab308' : '#22c55e';
+    const color = v > 70 ? '#f87171' : v > 40 ? '#fbbf24' : '#34d399';
     return `<div class="share-score"><div class="share-score-n" style="color:${color}">${v}</div><div class="share-score-l">${labels[k] || k}</div></div>`;
   }).join('');
 
-  const riskColor = a.risk.level === 'high' ? '#ef4444' : a.risk.level === 'med' ? '#eab308' : '#22c55e';
+  const riskColor = a.risk.level === 'high' ? '#f87171' : a.risk.level === 'med' ? '#fbbf24' : '#34d399';
   const riskLabel = a.risk.level === 'high' ? '⚠️ HIGH RISK' : a.risk.level === 'med' ? '⚡ MODERATE' : '✅ LOW RISK';
 
   const shareHTML = `<div class="share-card" id="shareCard">
@@ -1352,62 +1600,12 @@ function shareAnalysis(p, a) {
     <div class="share-footer">Powered by MiMoDAO · ${new Date().toLocaleDateString()} · ${p.scores_total.toLocaleString()} votes</div>
   </div>`;
 
-  // Append share card after analysis
   const existingShare = document.getElementById('shareCard');
   if (existingShare) existingShare.remove();
   r.querySelector('.card').insertAdjacentHTML('beforeend', shareHTML);
   document.getElementById('shareCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
   toast('Share card generated! Screenshot it 📸');
 }
-
-// Override analyzeProposal to add Timeline + Share buttons
-const _origAnalyze = analyzeProposal;
-analyzeProposal = function(p) {
-  const r = document.getElementById('analysisResult');
-  if (!r) return;
-  r.innerHTML = '<div class="card"><div class="loading"><div class="spinner"></div> Analyzing...</div></div>';
-
-  setTimeout(() => {
-    try {
-      const body = p.body || '';
-      const text = ((p.title || '') + ' ' + body).toLowerCase();
-      const a = smartAnalyze(p, body, text);
-
-      const scoreHTML = Object.entries(a.scores).map(([k, v]) => {
-        const labels = { complexity: 'Complexity', financial: 'Financial', security: 'Security', governance: 'Governance', technical: 'Technical', urgency: 'Urgency', sentiment: 'Sentiment' };
-        const color = v > 70 ? 'var(--red)' : v > 40 ? 'var(--yellow)' : 'var(--green)';
-        return `<div class="score"><div class="score-n" style="color:${color}">${v}</div><div class="score-l">${labels[k] || k}</div></div>`;
-      }).join('');
-
-      const tagsHTML = a.tags.length
-        ? `<div class="tags">${a.tags.map(t => `<span class="tag tag-${t.c}">${esc(t.t)}</span>`).join('')}</div>`
-        : '';
-
-      r.innerHTML = `<div class="card">
-        <div class="card-title">🧠 Analysis: ${esc(p.title)}</div>
-        <div class="scores">${scoreHTML}</div>
-        <div class="a-section">
-          <div class="a-label">⚠️ Risk: ${a.risk.level.toUpperCase()}</div>
-          <div class="risk-bar"><div class="risk-fill risk-${a.risk.level}" style="width:${a.risk.pct}%"></div></div>
-          <div style="font-size:13px;color:var(--text3)">${a.risk.pct}/100</div>
-        </div>
-        ${tagsHTML}
-        <div class="a-box">${a.insight}</div>
-        <div class="btn-group">
-          <button class="btn btn-sm btn-ghost" onclick="copyBox('analysisResult')">📋 Copy</button>
-          <button class="btn btn-sm btn-ghost" onclick="shareAnalysis(_proposals.find(x=>x.id==='${esc(p.id)}'),${JSON.stringify(a).replace(/'/g,"\\'").replace(/"/g,'&quot;')})">🔗 Share Card</button>
-          <button class="btn btn-sm btn-ghost" onclick="showTimeline()">📅 Timeline</button>
-          <button class="btn btn-sm btn-ghost" onclick="closeAnalysis()">✕ Close</button>
-        </div>
-      </div>`;
-      r.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } catch (e) {
-      r.innerHTML = `<div class="card"><div style="color:var(--red)">⚠️ Analysis error: ${esc(e.message)}</div></div>`;
-    }
-  }, 300);
-};
-
-// loadProposals override — now handled inline (fav bar + health + timeline chips)
 </script>
 </body>
 </html>
